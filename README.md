@@ -41,7 +41,9 @@ Alternatively, `eco_demo()` will produce the same output.
 
 ### eco_demo.R
 
-This is just a demo function that executes `eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")`.
+This is just a demo function that executes:
+
+`eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")`
 
 ## Future updates
 
