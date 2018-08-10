@@ -31,7 +31,7 @@ Alternatively, `eco_demo()` will produce the same output.
 
 ## Components
 
-`treeco` has two functions and two datasets: `eco_run.R`, `eco_demo.R`, `eco_data` and `species_data`.
+`treeco` has two available functions and two datasets: `eco_run.R`, `eco_demo.R`, `eco_data` and `species_data`.
 
 ### eco_run.R
 
@@ -48,6 +48,12 @@ This is just a demo function that executes:
 ```
 eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 ```
+
+### eco_interp.R
+
+This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
+
+<p align="center"><a href="http://www.codecogs.com/eqnedit.php?latex=y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" target="_blank"><img src="http://latex.codecogs.com/svg.latex?y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" title="y = \frac{(x - x1)(y2 - y1)}{x2 - x1} + y1" /></a></p>
 
 ## Future updates
 
