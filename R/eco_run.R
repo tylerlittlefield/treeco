@@ -5,7 +5,12 @@ eco_interp <- function(x, x1, y1, x2, y2) {
   return(y)
 
   }
-
+#' Run eco benefits for a tree
+#'
+#' @param species species code, see \code{species_data}
+#' @param dbh dbh value, any positive number
+#' @param region region code, see \code{species_data} or \code{eco_data}
+#'
 #' @export
 eco_run <- function(species, dbh, region) {
 

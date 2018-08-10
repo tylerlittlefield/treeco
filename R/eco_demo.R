@@ -1,3 +1,4 @@
+#' Run eco demo
 #' @export
 eco_demo <- function() {
 

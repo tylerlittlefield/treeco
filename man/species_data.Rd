@@ -7,6 +7,16 @@
 \format{A data frame with 3178 rows and 11 variables:
 \describe{
   \item{species_code}{species code}
+  \item{scientific_name}{scientific name of tree}
+  \item{common_name}{common name of tree}
+  \item{tree_type}{type of tree}
+  \item{spp_value_assignment}{another tree code for linking trees to benefits}
+  \item{species_rating}{to be determined...}
+  \item{basic_price_sq_in}{to be determined...}
+  \item{palm_trunk_cost_ft}{to be determined...}
+  \item{replacement_cost}{to be determined...}
+  \item{t_ar_sq_inches}{to be determined...}
+  \item{species_region}{region of tree}
   ...
 }}
 \source{
