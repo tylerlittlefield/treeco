@@ -27,6 +27,22 @@ eco_run("FICA", 20, "InlEmpCLM")
 
 Alternatively, `eco_demo()` will produce the same output.
 
+## Components
+
+`treeco` has two functions and two datasets: `eco_run.R`, `eco_demo.R`, `eco_data` and `species_data`.
+
+### `eco_run.R`
+
+`eco_run.R` takes and requires 3 arguments.
+
+1. species: the species code found in `species_data`
+2. dbh: the dbh value of a tree, this can be any sensible number (i.e. no negative numbers)
+3. region: the region code, also found in `species_data` as well as `eco_data`
+
+### `eco_demo.R`
+
+This is just a demo function that executes `eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")`.
+
 ## Future updates
 
 * Units column that corresponds with benefit value
