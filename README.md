@@ -52,6 +52,7 @@ eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 ## Future updates
 
 * Units column that corresponds with benefit value
+* Calculate benefits for more than a single tree
 * Choose species by name instead of code
 * Clean up region codes for something more readable
 * Inches/centimeter option for dbh argument
