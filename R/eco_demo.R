@@ -1,3 +1,4 @@
+#' @export
 eco_demo <- function() {
 
   # Interpolation function
