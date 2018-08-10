@@ -15,10 +15,6 @@ eco_run <- function(species, dbh, region) {
     dbh_val = dbh * 2.54 # Need argument for units so we can convert inches to centimeters
   )
 
-  # # Import data
-  # eco_data <- treeco::eco_data
-  # species_data <- treeco::species_data
-
   # Subset data by region
   eco_tbl <- eco_data[eco_data$species_region == region, ]
   species_tbl <- species_data[species_data$species_region == region, ]
