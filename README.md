@@ -1,4 +1,4 @@
-# treeco
+# treeco <img src="inst/figures/treeco.png" align="right" width=150/>
 [![Travis build status](https://travis-ci.org/tyluRp/treeco.svg?branch=master)](https://travis-ci.org/tyluRp/treeco)
 
 Eco benefits in R
