@@ -49,7 +49,7 @@ eco_demo <- function() {
   fig <- fig[order(fig$dbh_diff, decreasing = FALSE), ]
 
   # Grab the first two records grouped by benefit, this will be the lowest dbh_diff values
-  fig <- fig[ave(fig$dbh_diff, fig$benefit, FUN = seq_along) <= 2, ]
+  fig <- fig[stats::ave(fig$dbh_diff, fig$benefit, FUN = seq_along) <= 2, ]
 
   # Order dbh_range in ascending order
   fig <- fig[order(fig$dbh_range, fig$benefit, decreasing = FALSE), ]
@@ -57,8 +57,8 @@ eco_demo <- function() {
   # Set up variables for interpolation function
   fig$x1 <- min(fig$dbh_range)
   fig$x2 <- max(fig$dbh_range)
-  fig$y1 <- fig[ave(fig$benefit_value, fig$benefit, FUN = seq_along) == 1, ][["benefit_value"]]
-  fig$y2 <- fig[ave(fig$benefit_value, fig$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
+  fig$y1 <- fig[stats::ave(fig$benefit_value, fig$benefit, FUN = seq_along) == 1, ][["benefit_value"]]
+  fig$y2 <- fig[stats::ave(fig$benefit_value, fig$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
 
   # Remove duplicate benefits
   fig <- subset(fig, !duplicated(fig$benefit))

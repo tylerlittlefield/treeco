@@ -5,6 +5,7 @@ eco_interp <- function(x, x1, y1, x2, y2) {
   return(y)
 
   }
+
 #' Run eco benefits for a tree
 #'
 #' @param species species code, see \code{species_data}
@@ -51,7 +52,7 @@ eco_run <- function(species, dbh, region) {
   tree_tbl <- tree_tbl[order(tree_tbl$dbh_diff, tree_tbl$benefit, decreasing = FALSE),]
 
   # Grab the first two records grouped by benefit, this will be the lowest dbh_diff values
-  tree_tbl <- tree_tbl[ave(tree_tbl$dbh_diff, tree_tbl$benefit, FUN = seq_along) <= 2, ]
+  tree_tbl <- tree_tbl[stats::ave(tree_tbl$dbh_diff, tree_tbl$benefit, FUN = seq_along) <= 2, ]
 
   # Order dbh_range in ascending order
   tree_tbl <- tree_tbl[order(tree_tbl$dbh_range, tree_tbl$benefit, decreasing = FALSE),]
@@ -59,8 +60,8 @@ eco_run <- function(species, dbh, region) {
   # Set up variables for interpolation function
   tree_tbl$x1 <- min(tree_tbl$dbh_range)
   tree_tbl$x2 <- max(tree_tbl$dbh_range)
-  tree_tbl$y1 <- tree_tbl[ave(tree_tbl$benefit_value, tree_tbl$benefit, FUN = seq_along) == 1, ][["benefit_value"]]
-  tree_tbl$y2 <- tree_tbl[ave(tree_tbl$benefit_value, tree_tbl$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
+  tree_tbl$y1 <- tree_tbl[stats::ave(tree_tbl$benefit_value, tree_tbl$benefit, FUN = seq_along) == 1, ][["benefit_value"]]
+  tree_tbl$y2 <- tree_tbl[stats::ave(tree_tbl$benefit_value, tree_tbl$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
 
   # Remove duplicate benefits
   tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$benefit))
