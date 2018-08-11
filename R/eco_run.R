@@ -15,6 +15,12 @@ eco_interp <- function(x, x1, y1, x2, y2) {
 #' @export
 eco_run <- function(species, dbh, region) {
 
+  # Debugging procedure, make sure datatypes are sound
+  ifelse(is.character(species), species, stop("Species value must be character type."))
+  ifelse(is.numeric(dbh), dbh, stop("DBH value must be numeric type."))
+  ifelse(is.character(region), region, stop("Region value must be character type."))
+  ifelse(dbh > 0, dbh, stop("DBH value must be positive."))
+
   # Construct dataframe
   tree_tbl <- data.frame(
     species_code = species,
