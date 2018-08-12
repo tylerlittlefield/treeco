@@ -57,8 +57,8 @@ This function is nested in `eco_run.R`. It interpolates benefit values (always) 
 
 ## Future updates
 
-* ~~Units column that corresponds with benefit value~~
+* Units column that corresponds with benefit value
 * Calculate benefits for more than a single tree
 * Choose species by name instead of code
-* ~~Clean up region codes for something more readable~~
+* Clean up region codes for something more readable
 * Inches/centimeter option for dbh argument
