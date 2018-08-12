@@ -30,6 +30,9 @@ eco_demo <- function() {
     all.x = FALSE
   )
 
+  # Remove duplicates, this wasn't required before, figure this out
+  fig <- subset(fig, !duplicated(fig$species_code))
+
   # Join fig to eco_tbl
   fig <- merge(
     x = fig,
