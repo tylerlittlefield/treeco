@@ -36,20 +36,20 @@ eco_run <- function(species, dbh, region) {
 
   # Join species_tbl to tree_tbl example data
   tree_tbl <- merge(x = species_tbl,
-               y = tree_tbl,
-               by.x = "species_code",
-               by.y = "species_code",
-               all.x = FALSE)
+                    y = tree_tbl,
+                    by.x = "species_code",
+                    by.y = "species_code",
+                    all.x = FALSE)
 
   # Remove duplicates, this wasn't required before, figure this out
   tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$species_code))
 
   # Join tree_tbl to eco_tbl
   tree_tbl <- merge(x = tree_tbl,
-               y = eco_tbl,
-               by.x = "spp_value_assignment",
-               by.y = "species_code",
-               all.x = TRUE)
+                    y = eco_tbl,
+                    by.x = "spp_value_assignment",
+                    by.y = "species_code",
+                    all.x = TRUE)
 
   # Select variables we need
   tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "dbh_range", "benefit_value", "benefit")]
