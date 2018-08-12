@@ -46,7 +46,7 @@ Alternatively, `eco_demo()` will produce the same output.
 This is just a demo function that executes:
 
 ```
-eco_run(species = "FICA", dbh = 20, region = "Inland Empire")
+eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 ```
 
 ### eco_interp.R
