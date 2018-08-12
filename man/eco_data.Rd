@@ -6,7 +6,7 @@
 \title{Eco data}
 \format{A data frame with 34164 rows and 5 variables:
 \describe{
-  \item{id}{id number}
+  \item{X}{id number}
   \item{species_code}{species code of tree}
   \item{species_region}{region of tree}
   \item{dbh_range}{dbh ranges for tree to fall under}
