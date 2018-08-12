@@ -16,7 +16,7 @@ We can compute 6 eco benefits for a Common fig in the Inland Empire with a 20" d
 
 ```
 library(treeco)
-eco_run("FICA", 20, "Inland Empire")
+eco_run("FICA", 20, "InlEmpCLM")
 
 #   scientific_name  common_name  dbh benefit_value                  benefit
 # 1    Ficus carica Ficus carica 50.8         55.70        co2 avoided [kgs]
