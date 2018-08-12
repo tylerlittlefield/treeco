@@ -16,15 +16,15 @@ We can compute 6 eco benefits for a Common fig in the Inland Empire with a 20" d
 
 ```
 library(treeco)
-eco_run("FICA", 20, "InlEmpCLM")
+eco_run("FICA", 20, "Inland Empire")
 
-#   scientific_name common_name  dbh benefit_value             benefit
-# 1    Ficus carica  Common fig 50.8         55.70         co2 avoided
-# 2    Ficus carica  Common fig 50.8         50.52     co2 sequestered
-# 3    Ficus carica  Common fig 50.8        569.60         co2 storage
-# 4    Ficus carica  Common fig 50.8        189.20         electricity
-# 5    Ficus carica  Common fig 50.8          3.16  hydro interception
-# 6    Ficus carica  Common fig 50.8        -81.40         natural gas
+#   scientific_name  common_name  dbh benefit_value                  benefit
+# 1    Ficus carica Ficus carica 50.8         55.70        co2 avoided [kgs]
+# 2    Ficus carica Ficus carica 50.8         50.52    co2 sequestered [kgs]
+# 3    Ficus carica Ficus carica 50.8        569.60        co2 storage [kgs]
+# 4    Ficus carica Ficus carica 50.8        189.20        electricity [kwh]
+# 5    Ficus carica Ficus carica 50.8          3.16 hydro interception [m^3]
+# 6    Ficus carica Ficus carica 50.8        -81.40      natural gas [kbtus]
 ```
 
 Alternatively, `eco_demo()` will produce the same output.
@@ -46,7 +46,7 @@ Alternatively, `eco_demo()` will produce the same output.
 This is just a demo function that executes:
 
 ```
-eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
+eco_run(species = "FICA", dbh = 20, region = "Inland Empire")
 ```
 
 ### eco_interp.R
@@ -57,8 +57,8 @@ This function is nested in `eco_run.R`. It interpolates benefit values (always) 
 
 ## Future updates
 
-* Units column that corresponds with benefit value
+* ~~Units column that corresponds with benefit value~~
 * Calculate benefits for more than a single tree
 * Choose species by name instead of code
-* Clean up region codes for something more readable
+* ~~Clean up region codes for something more readable~~
 * Inches/centimeter option for dbh argument
