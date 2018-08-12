@@ -15,8 +15,8 @@ eco_demo <- function() {
   )
 
   # Subset data by region
-  eco_tbl <- eco_data[eco_data$species_region == "Inland Empire", ]
-  species_tbl <- species_data[species_data$species_region == "Inland Empire", ]
+  eco_tbl <- eco_data[eco_data$species_region == "InlEmpCLM", ]
+  species_tbl <- species_data[species_data$species_region == "InlEmpCLM", ]
 
   # Select variables we need
   species_tbl <- species_tbl[1:5]
