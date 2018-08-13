@@ -70,7 +70,7 @@ eco_demo <- function() {
   fig$benefit_value <- eco_interp(x = fig$dbh_val, x1 = fig$x1, x2 = fig$x2, y1 = fig$y1, y2 = fig$y2)
 
   # Round benefit values to second second digit
-  fig$benefit_value <- round(fig$benefit_value, digits = 2)
+  fig$benefit_value <- round(fig$benefit_value, digits = 4)
 
   # Select variables we need
   fig <- fig[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
