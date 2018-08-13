@@ -43,7 +43,7 @@ eco_demo <- function() {
   )
 
   # Select variables we need
-  fig <- fig[c("scientific_name", "common_name", "dbh_val", "dbh_range", "benefit_value", "benefit")]
+  fig <- fig[c("scientific_name", "common_name", "dbh_val", "dbh_range", "benefit_value", "benefit", "unit")]
 
   # Calculate absolute value of dbh - dbh_range
   fig$dbh_diff <- abs(fig$dbh_val - fig$dbh_range)
@@ -73,7 +73,7 @@ eco_demo <- function() {
   fig$benefit_value <- round(fig$benefit_value, digits = 2)
 
   # Select variables we need
-  fig <- fig[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit")]
+  fig <- fig[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
 
   # Rename dbh_val to dbh
   names(fig)[names(fig) == "dbh_val"] <- "dbh"

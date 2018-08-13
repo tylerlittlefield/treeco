@@ -52,7 +52,7 @@ eco_run <- function(species, dbh, region) {
                     all.x = TRUE)
 
   # Select variables we need
-  tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "dbh_range", "benefit_value", "benefit")]
+  tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "dbh_range", "benefit_value", "benefit", "unit")]
 
   # Calculate absolute value of dbh - dbh_range
   tree_tbl$dbh_diff <- abs(tree_tbl$dbh_val - tree_tbl$dbh_range)
@@ -82,7 +82,7 @@ eco_run <- function(species, dbh, region) {
   tree_tbl$benefit_value <- round(tree_tbl$benefit_value, digits = 2)
 
   # Select variables we need
-  tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit")]
+  tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
 
   # Rename dbh_val to dbh
   names(tree_tbl)[names(tree_tbl) == 'dbh_val'] <- 'dbh'
