@@ -2,7 +2,7 @@
 #'
 #' A dataset containing the benefits and other attributes.
 #'
-#' @format A data frame with 34164 rows and 5 variables:
+#' @format A data frame with 34164 rows and 6 variables:
 #' \describe{
 #'   \item{species_code}{species code of tree}
 #'   \item{species_region}{region of tree}
