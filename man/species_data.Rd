@@ -4,7 +4,7 @@
 \name{species_data}
 \alias{species_data}
 \title{Species data}
-\format{A data frame with 3178 rows and 11 variables:
+\format{A data frame with 4006 rows and 11 variables:
 \describe{
   \item{species_code}{species code}
   \item{scientific_name}{scientific name of tree}
