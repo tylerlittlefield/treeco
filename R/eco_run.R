@@ -79,7 +79,7 @@ eco_run <- function(species, dbh, region) {
   tree_tbl$benefit_value <- eco_interp(x = tree_tbl$dbh_val, x1 = tree_tbl$x1, x2 = tree_tbl$x2, y1 = tree_tbl$y1, y2 = tree_tbl$y2)
 
   # Round benefit values to second second digit
-  tree_tbl$benefit_value <- round(tree_tbl$benefit_value, digits = 2)
+  tree_tbl$benefit_value <- round(tree_tbl$benefit_value, digits = 4)
 
   # Select variables we need
   tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
