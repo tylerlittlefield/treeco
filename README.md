@@ -63,3 +63,26 @@ eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
 
 <p align="center"><a href="http://www.codecogs.com/eqnedit.php?latex=y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" target="_blank"><img src="http://latex.codecogs.com/svg.latex?y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" title="y = \frac{(x - x1)(y2 - y1)}{x2 - x1} + y1" /></a></p>
+
+## Future plans
+
+I'm hoping to improve the user experience quite a bit. For example, it's a pain to select a tree at the moment because this package relies on the user inputting the species code instead of the common name. For now, the best solution for looking up these codes is to run something like `unique(species_data[c("species_code", "common_name")])` where the first 6 rows would look something like:
+
+```
+#   species_code   common_name
+# 1           AB           Fir
+# 2         ABCO     White fir
+# 3        ACBA2 Bailey acacia
+# 4         ACBU Trident maple
+# 5         ACCA   Hedge maple
+# 6         ACFR Freeman maple
+```
+
+I would suggest using the `View` function in RStudio so you can search for the specific tree by common or scientific name. So something like: `View(unique(species_data[c("species_code", "common_name")]))`
+
+Additionally, I'm also interested in:
+
+* An Imperial/Metric arugment to display units differently depending on what the user wants.
+* Calculating benefits for an entire dataset
+* Better documentation, a vignette
+* Add monetary values to benefits
