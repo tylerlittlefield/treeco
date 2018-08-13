@@ -12,22 +12,31 @@ devtools::install_github("tylurp/treeco")
 
 ## Demo
 
-We can compute 6 eco benefits for a Common fig in the Inland Empire with a 20" dbh using the following:
+We can compute 15 eco benefits for a Common fig in the Inland Empire region with a 20" DBH using the following:
 
 ```
 library(treeco)
 eco_run("FICA", 20, "InlEmpCLM")
 
-#   scientific_name common_name  dbh benefit_value            benefit  unit
-# 1    Ficus carica  Common fig 50.8         55.70        co2 avoided   kgs
-# 2    Ficus carica  Common fig 50.8          4.10    co2 sequestered   kgs
-# 3    Ficus carica  Common fig 50.8        569.60        co2 storage   kgs
-# 4    Ficus carica  Common fig 50.8        189.20        electricity   kwh
-# 5    Ficus carica  Common fig 50.8          3.16 hydro interception   m^3
-# 6    Ficus carica  Common fig 50.8        -81.40        natural gas kbtus
+#    scientific_name common_name  dbh benefit_value            benefit  unit
+# 1     Ficus carica  Common fig 50.8          0.11     aq nox avoided  <NA>
+# 2     Ficus carica  Common fig 50.8          0.12         aq nox dep  <NA>
+# 3     Ficus carica  Common fig 50.8          0.35       aq ozone dep  <NA>
+# 4     Ficus carica  Common fig 50.8          0.03    aq pm10 avoided  <NA>
+# 5     Ficus carica  Common fig 50.8          0.18        aq pm10 dep  <NA>
+# 6     Ficus carica  Common fig 50.8          0.22     aq sox avoided  <NA>
+# 7     Ficus carica  Common fig 50.8          0.02         aq sox dep  <NA>
+# 8     Ficus carica  Common fig 50.8          0.03     aq voc avoided  <NA>
+# 9     Ficus carica  Common fig 50.8          0.00               bvoc  <NA>
+# 10    Ficus carica  Common fig 50.8         55.70        co2 avoided   kgs
+# 11    Ficus carica  Common fig 50.8          4.10    co2 sequestered   kgs
+# 12    Ficus carica  Common fig 50.8        569.60        co2 storage   kgs
+# 13    Ficus carica  Common fig 50.8        189.20        electricity   kwh
+# 14    Ficus carica  Common fig 50.8          3.16 hydro interception   m^3
+# 15    Ficus carica  Common fig 50.8        -81.40        natural gas kbtus
 ```
 
-Alternatively, `eco_demo()` will produce the same output.
+Adding units for the other benefits soon.
 
 ## Components
 
