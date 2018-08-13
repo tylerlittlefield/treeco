@@ -3,6 +3,8 @@
 
 Eco benefits in R
 
+[](inst/figures/common_fig_plot.png)
+
 ## Installation
 
 ```
