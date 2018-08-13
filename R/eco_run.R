@@ -42,7 +42,8 @@ eco_run <- function(species, dbh, region) {
                     all.x = FALSE)
 
   # Remove duplicates, this wasn't required before, figure this out
-  tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$species_code))
+  # tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$species_code))
+  tree_tbl <- tree_tbl[!duplicated(tree_tbl[, "species_code"]),]
 
   # Join tree_tbl to eco_tbl
   tree_tbl <- merge(x = tree_tbl,
@@ -73,7 +74,8 @@ eco_run <- function(species, dbh, region) {
   tree_tbl$y2 <- tree_tbl[stats::ave(tree_tbl$benefit_value, tree_tbl$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
 
   # Remove duplicate benefits
-  tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$benefit))
+  # tree_tbl <- subset(tree_tbl, !duplicated(tree_tbl$benefit))
+  tree_tbl <- tree_tbl[!duplicated(tree_tbl[, "benefit"]),]
 
   # Run interpolation function
   tree_tbl$benefit_value <- eco_interp(x = tree_tbl$dbh_val, x1 = tree_tbl$x1, x2 = tree_tbl$x2, y1 = tree_tbl$y1, y2 = tree_tbl$y2)

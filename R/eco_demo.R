@@ -31,7 +31,8 @@ eco_demo <- function() {
   )
 
   # Remove duplicates, this wasn't required before, figure this out
-  fig <- subset(fig, !duplicated(fig$species_code))
+  # fig <- subset(fig, !duplicated(fig$species_code))
+  fig <- fig[!duplicated(fig[, "species_code"]),]
 
   # Join fig to eco_tbl
   fig <- merge(
@@ -64,7 +65,8 @@ eco_demo <- function() {
   fig$y2 <- fig[stats::ave(fig$benefit_value, fig$benefit, FUN = seq_along) == 2, ][["benefit_value"]]
 
   # Remove duplicate benefits
-  fig <- subset(fig, !duplicated(fig$benefit))
+  # fig <- subset(fig, !duplicated(fig$benefit))
+  fig <- fig[!duplicated(fig[, "benefit"]),]
 
   # Run interpolation function
   fig$benefit_value <- eco_interp(x = fig$dbh_val, x1 = fig$x1, x2 = fig$x2, y1 = fig$y1, y2 = fig$y2)
