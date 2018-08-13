@@ -63,11 +63,3 @@ eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
 
 <p align="center"><a href="http://www.codecogs.com/eqnedit.php?latex=y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" target="_blank"><img src="http://latex.codecogs.com/svg.latex?y&space;=&space;\frac{(x&space;-&space;x1)(y2&space;-&space;y1)}{x2&space;-&space;x1}&space;&plus;&space;y1" title="y = \frac{(x - x1)(y2 - y1)}{x2 - x1} + y1" /></a></p>
-
-## Future updates
-
-* Units column that corresponds with benefit value
-* Calculate benefits for more than a single tree
-* Choose species by name instead of code
-* Clean up region codes for something more readable
-* Inches/centimeter option for dbh argument
