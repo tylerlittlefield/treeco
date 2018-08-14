@@ -1,10 +1,64 @@
+#-------------------------------------------------------------------------------
 # Interpolation function
+#-------------------------------------------------------------------------------
 eco_interp <- function(x, x1, y1, x2, y2) {
 
   y = ((x - x1) * (y2 - y1) / (x2 - x1)) + y1
   return(y)
 
+}
+
+#-------------------------------------------------------------------------------
+# String similarity function
+#-------------------------------------------------------------------------------
+string_dist <- function(str_1, str_2) {
+
+  1 - (utils::adist(str_1, str_2) / pmax(nchar(str_1), nchar(str_2)))
+
+}
+
+#-------------------------------------------------------------------------------
+# Function for guessing the common name
+#-------------------------------------------------------------------------------
+eco_guess <- function(common, region) {
+
+  # Make common input lower case
+  common <- tolower(common)
+
+  # Load species data
+  df <- treeco::species_data
+
+  # Grab variables we need
+  df <- df[c("species_code", "common_name", "species_region")]
+
+  # Filter by region
+  df <- df[df$species_region == region, ]
+
+  # Remove duplicates
+  df <- unique(df)
+
+  # Make common_name variable lower case
+  df$common_name <- tolower(df$common_name)
+
+  # Compute similarity score
+  df$similarity_score <- string_dist(df$common_name, common)
+
+  # Extract max match score (what about cases where two scores == max score??)
+  df <- df[df$similarity_score == max(df$similarity_score), ]
+
+  # If common name given by user matches common name found, no message
+  # else, print message of which species will be used
+  if (df$common_name[1] == common) {
+    invisible(df[["species_code"]][1])
+  } else {
+    message("Entered '", common, "'. Using closest match: '", df$common_name[1], "'.", sep = "")
+    invisible(df[["species_code"]][1])
   }
+}
+
+#-------------------------------------------------------------------------------
+# Function for calculating benefits
+#-------------------------------------------------------------------------------
 
 #' Run eco benefits for a tree
 #'
@@ -20,6 +74,8 @@ eco_run <- function(species, dbh, region) {
   ifelse(is.numeric(dbh), dbh, stop("DBH value must be numeric type."))
   ifelse(is.character(region), region, stop("Region value must be character type."))
   ifelse(dbh > 0, dbh, stop("DBH value must be > 0."))
+
+  species <- eco_guess(species, region)
 
   # Construct dataframe
   tree_tbl <- data.frame(
