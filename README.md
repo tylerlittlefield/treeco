@@ -66,22 +66,7 @@ This function is nested in `eco_run.R`. It interpolates benefit values (always) 
 
 ## Future plans
 
-I'm hoping to improve the user experience quite a bit. For example, it's a pain to select a tree at the moment because this package relies on the user inputting the species code instead of the common name. For now, the best solution for looking up these codes is to run something like `unique(species_data[c("species_code", "common_name")])` where the first 6 rows would look something like:
-
-```
-#   species_code   common_name
-# 1           AB           Fir
-# 2         ABCO     White fir
-# 3        ACBA2 Bailey acacia
-# 4         ACBU Trident maple
-# 5         ACCA   Hedge maple
-# 6         ACFR Freeman maple
-```
-
-I would suggest using the `View` function in RStudio so you can search for the specific tree by common or scientific name. So something like: `View(unique(species_data[c("species_code", "common_name")]))`
-
-Additionally, I'm also interested in:
-
+* Better way of selecting a tree
 * An Imperial/Metric arugment to display units differently depending on what the user wants.
 * Calculating benefits for an entire dataset
 * Better documentation, a vignette
