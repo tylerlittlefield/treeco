@@ -90,7 +90,7 @@ This function calculates the similarity of two strings and allows `eco_guess.R` 
 
 This is just a demo function that executes:
 
-```
+```r
 eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 ```
 
