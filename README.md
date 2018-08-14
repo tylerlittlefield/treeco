@@ -5,7 +5,7 @@ Eco benefits in R
 
 ## Installation
 
-```
+```r
 # install.packages("devtools")
 devtools::install_github("tylurp/treeco")
 ```
@@ -14,7 +14,7 @@ devtools::install_github("tylurp/treeco")
 
 We can compute 15 eco benefits for a Common fig in the Inland Empire region with a 20" DBH using the following:
 
-```
+```r
 library(treeco)
 eco_run("common fig", 20, "InlEmpCLM")
 
@@ -60,7 +60,7 @@ This function is nested in `eco_run.R`. It interpolates benefit values (always) 
 
 This function guesses the user input for the `species` argument when a match isn't found. For example, "comon fig" will be interpreted as "common fig":
 
-```
+```r
 eco_run("comon fig", 20, "InlEmpCLM")
 
 # Entered 'comon fig'. Using closest match: 'common fig'.
