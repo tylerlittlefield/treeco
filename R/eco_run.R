@@ -142,6 +142,9 @@ eco_run <- function(species, dbh, region) {
   # Select variables we need
   tree_tbl <- tree_tbl[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
 
+  # Revert dbh back to inches from centimeters
+  tree_tbl$dbh_val <- dbh
+
   # Rename dbh_val to dbh
   names(tree_tbl)[names(tree_tbl) == 'dbh_val'] <- 'dbh'
 

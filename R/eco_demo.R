@@ -77,6 +77,9 @@ eco_demo <- function() {
   # Select variables we need
   fig <- fig[c("scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
 
+  # Revert dbh back to inches from centimeters
+  fig$dbh_val <- 20
+
   # Rename dbh_val to dbh
   names(fig)[names(fig) == "dbh_val"] <- "dbh"
 
