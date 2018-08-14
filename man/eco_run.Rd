@@ -7,7 +7,7 @@
 eco_run(species, dbh, region)
 }
 \arguments{
-\item{species}{species code, see \code{species_data}}
+\item{species}{species common name, see \code{species_data}}
 
 \item{dbh}{dbh value, any positive number}
 
