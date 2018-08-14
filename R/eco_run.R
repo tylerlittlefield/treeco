@@ -62,7 +62,7 @@ eco_guess <- function(common, region) {
 
 #' Run eco benefits for a tree
 #'
-#' @param species species code, see \code{species_data}
+#' @param species species common name, see \code{species_data}
 #' @param dbh dbh value, any positive number
 #' @param region region code, see \code{species_data} or \code{eco_data}
 #'
