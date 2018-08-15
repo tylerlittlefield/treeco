@@ -63,7 +63,7 @@ This function guesses the user input for the `species` argument when a match isn
 ```r
 eco_run("comon fig", 20, "InlEmpCLM")
 
-# Species given: [comonfig]
+# Species given: [comon fig]
 # Closest match: [common fig]
 # ...
 # Using closest match
