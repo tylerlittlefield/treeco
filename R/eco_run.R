@@ -51,7 +51,7 @@ eco_guess <- function(common, region) {
   if (df$common_name[1] == common) {
     invisible(df[["species_code"]][1])
   } else {
-    message("Entered '", common, "'. Using closest match: '", df$common_name[1], "'.", sep = "")
+    message("Species given: [", common, "]\nClosest match: [", df$common_name[1], "]\n...\nUsing closest match", sep = "")
     invisible(df[["species_code"]][1])
   }
 }
