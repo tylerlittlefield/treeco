@@ -70,18 +70,29 @@ treeco::eco_run_all(
   region = "InlEmpCLM"
 )
 
+# Importing: toy.csv...
+# toy.csv imported.
+# Reconfiguring data...
+# Data reconfigured.
+# Guessing species codes...
+# Species codes gathered.
+# Linking species codes to the data...
+# Species codes linked.
+# Calculating benefits for 400001 trees...
+# Complete.
+# 
 #              id         scientific_name common_name dbh benefit_value            benefit  unit
-#       1:      1           Abies procera   Noble fir   1        0.0013     aq nox avoided  <NA>
-#       2:      1           Abies procera   Noble fir   1       -0.0002         aq nox dep  <NA>
-#       3:      1           Abies procera   Noble fir   1        0.0005       aq ozone dep  <NA>
-#       4:      1           Abies procera   Noble fir   1        0.0003    aq pm10 avoided  <NA>
-#       5:      1           Abies procera   Noble fir   1       -0.0003        aq pm10 dep  <NA>
+#       1:      1           Abies procera   Noble fir   1        0.0024     aq nox avoided  <NA>
+#       2:      1           Abies procera   Noble fir   1        0.0010         aq nox dep  <NA>
+#       3:      1           Abies procera   Noble fir   1        0.0035       aq ozone dep  <NA>
+#       4:      1           Abies procera   Noble fir   1        0.0006    aq pm10 avoided  <NA>
+#       5:      1           Abies procera   Noble fir   1        0.0015        aq pm10 dep  <NA>
 #      ---                                                                                      
-# 5999996: 400000 Liquidambar styraciflua    Sweetgum  40       49.8070    co2 sequestered   kgs
-# 5999997: 400000 Liquidambar styraciflua    Sweetgum  40      906.5399        co2 storage   kgs
-# 5999998: 400000 Liquidambar styraciflua    Sweetgum  40       75.8115        electricity   kwh
-# 5999999: 400000 Liquidambar styraciflua    Sweetgum  40        1.1197 hydro interception   m^3
-# 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -16.3358        natural gas kbtus
+# 5999996: 400000 Liquidambar styraciflua    Sweetgum  40        0.0000    co2 sequestered   kgs
+# 5999997: 400000 Liquidambar styraciflua    Sweetgum  40     5509.8000        co2 storage   kgs
+# 5999998: 400000 Liquidambar styraciflua    Sweetgum  40      219.0000        electricity   kwh
+# 5999999: 400000 Liquidambar styraciflua    Sweetgum  40        4.1400 hydro interception   m^3
+# 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -39.5000        natural gas kbtus
 ```
 
 ### eco_interp.R
