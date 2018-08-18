@@ -19,15 +19,15 @@ library(treeco)
 eco_run("common fig", 20, "InlEmpCLM")
 
 #    scientific_name common_name dbh benefit_value            benefit  unit
-# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided  <NA>
-# 2     Ficus carica  Common fig  20        0.1190         aq nox dep  <NA>
-# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep  <NA>
-# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided  <NA>
-# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep  <NA>
-# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided  <NA>
-# 7     Ficus carica  Common fig  20        0.0160         aq sox dep  <NA>
-# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided  <NA>
-# 9     Ficus carica  Common fig  20        0.0000               bvoc  <NA>
+# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided   kgs
+# 2     Ficus carica  Common fig  20        0.1190         aq nox dep   kgs
+# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep   kgs
+# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided   kgs
+# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep   kgs
+# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided   kgs
+# 7     Ficus carica  Common fig  20        0.0160         aq sox dep   kgs
+# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided   kgs
+# 9     Ficus carica  Common fig  20        0.0000               bvoc   kgs
 # 10    Ficus carica  Common fig  20       55.7000        co2 avoided   kgs
 # 11    Ficus carica  Common fig  20        4.1000    co2 sequestered   kgs
 # 12    Ficus carica  Common fig  20      569.6000        co2 storage   kgs
@@ -35,8 +35,6 @@ eco_run("common fig", 20, "InlEmpCLM")
 # 14    Ficus carica  Common fig  20        3.1600 hydro interception   m^3
 # 15    Ficus carica  Common fig  20      -81.4000        natural gas kbtus
 ```
-
-Adding units for the other benefits soon.
 
 ## Components
 
@@ -82,11 +80,11 @@ treeco::eco_run_all(
 # Complete.
 # 
 #              id         scientific_name common_name dbh benefit_value            benefit  unit
-#       1:      1           Abies procera   Noble fir   1        0.0024     aq nox avoided  <NA>
-#       2:      1           Abies procera   Noble fir   1        0.0010         aq nox dep  <NA>
-#       3:      1           Abies procera   Noble fir   1        0.0035       aq ozone dep  <NA>
-#       4:      1           Abies procera   Noble fir   1        0.0006    aq pm10 avoided  <NA>
-#       5:      1           Abies procera   Noble fir   1        0.0015        aq pm10 dep  <NA>
+#       1:      1           Abies procera   Noble fir   1        0.0024     aq nox avoided   kgs
+#       2:      1           Abies procera   Noble fir   1        0.0010         aq nox dep   kgs
+#       3:      1           Abies procera   Noble fir   1        0.0035       aq ozone dep   kgs
+#       4:      1           Abies procera   Noble fir   1        0.0006    aq pm10 avoided   kgs
+#       5:      1           Abies procera   Noble fir   1        0.0015        aq pm10 dep   kgs
 #      ---                                                                                      
 # 5999996: 400000 Liquidambar styraciflua    Sweetgum  40        0.0000    co2 sequestered   kgs
 # 5999997: 400000 Liquidambar styraciflua    Sweetgum  40     5509.8000        co2 storage   kgs
@@ -113,15 +111,15 @@ eco_run("comon fig", 20, "InlEmpCLM")
 # ...
 # Using closest match
 #    scientific_name common_name dbh benefit_value            benefit  unit
-# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided  <NA>
-# 2     Ficus carica  Common fig  20        0.1190         aq nox dep  <NA>
-# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep  <NA>
-# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided  <NA>
-# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep  <NA>
-# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided  <NA>
-# 7     Ficus carica  Common fig  20        0.0160         aq sox dep  <NA>
-# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided  <NA>
-# 9     Ficus carica  Common fig  20        0.0000               bvoc  <NA>
+# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided   kgs
+# 2     Ficus carica  Common fig  20        0.1190         aq nox dep   kgs
+# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep   kgs
+# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided   kgs
+# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep   kgs
+# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided   kgs
+# 7     Ficus carica  Common fig  20        0.0160         aq sox dep   kgs
+# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided   kgs
+# 9     Ficus carica  Common fig  20        0.0000               bvoc   kgs
 # 10    Ficus carica  Common fig  20       55.7000        co2 avoided   kgs
 # 11    Ficus carica  Common fig  20        4.1000    co2 sequestered   kgs
 # 12    Ficus carica  Common fig  20      569.6000        co2 storage   kgs
