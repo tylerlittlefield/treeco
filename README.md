@@ -145,6 +145,6 @@ eco_run(species = "FICA", dbh = 20, region = "InlEmpCLM")
 ## Future plans
 
 * An Imperial/Metric arugment to display units differently depending on what the user wants.
-* Calculating benefits for an entire dataset
 * Better documentation, a vignette
 * Add monetary values to benefits
+* Suppress messages option
