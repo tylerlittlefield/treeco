@@ -36,3 +36,25 @@
 #' }
 #' @source \url{https://www.itreetools.org}
 "species_data"
+
+#' Currency data
+#'
+#' A dataset containing benefit to currency conversion values
+#'
+#' @format A data frame with 4006 rows and 11 variables:
+#' \describe{
+#'   \item{region_code}{region code}
+#'   \item{region_name}{region name}
+#'   \item{electricity_kwh_to_currency}{electricity in kwh to currency}
+#'   \item{natural_gas_kbtu_to_currency}{natural gas in kbtu to currency}
+#'   \item{h20_gal_to_currency}{h20 in gallons to currency}
+#'   \item{co2_lb_to_currency}{co2 in lbs to currency}
+#'   \item{o3_lb_to_currency}{o3 in lbs to currency}
+#'   \item{nox_lb_to_currency}{nox in lbs to currency}
+#'   \item{pm10_lb_to_currency}{pm10 in lbs to currency}
+#'   \item{sox_lb_to_currency}{sox in lbs to currency}
+#'   \item{voc_lb_to_currency}{voc in lbs to currency}
+#'   ...
+#' }
+#' @source \url{https://www.itreetools.org}
+"currency_data"
