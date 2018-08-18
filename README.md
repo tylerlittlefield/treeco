@@ -46,9 +46,9 @@ Adding units for the other benefits soon.
 
 This function acts like a calculator similiar to [this one](http://www.treebenefits.com/calculator/) but much less content. `eco_run.R` takes and requires 3 arguments.
 
-1. species: the common name of the species, if a match isn't found, the function will make it's best guess
-2. dbh: the dbh value of a tree, this can be any sensible number (i.e. no negative numbers)
-3. region: the region code, also found in `species_data` as well as `eco_data`
+1. `species`: the common name of the species, if a match isn't found, the function will make it's best guess
+2. `dbh`: the dbh value of a tree, this can be any sensible number (i.e. no negative numbers)
+3. `region`: the region code, also found in `species_data` as well as `eco_data`
 
 ### eco_run_all.R
 
