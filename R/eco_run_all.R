@@ -17,7 +17,7 @@ string_dist <- function(str_1, str_2) {
 
 }
 
-#' Run eco benefits for a tree
+#' Run eco benefits for an entire tree inventory
 #'
 #' @param data path to csv file containing tree inventory
 #' @param species_col the name of the column containing common names of species
