@@ -64,7 +64,7 @@ This function calculates eco benefits for an entire tree inventory. `eco_run_all
 
 ```r
 treeco::eco_run_all(
-  data = "/Users/tylerlittlefield/Desktop/toy.csv",
+  data = "data/toy.csv",
   species_col = "common_name",
   dbh_col = "dbh_val",
   region = "InlEmpCLM"
