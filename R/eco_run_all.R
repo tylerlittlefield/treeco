@@ -44,6 +44,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_tbl <- trees_tbl[, c("id", species_col, dbh_col), with = FALSE]
   data.table::setnames(trees_tbl, species_col, "common_name")
   data.table::setnames(trees_tbl, dbh_col, "dbh_val")
+  trees_tbl$dbh_val <- trees_tbl$dbh_val * 2.54
 
   message("Data reconfigured.")
 
