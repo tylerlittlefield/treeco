@@ -40,15 +40,49 @@ Adding units for the other benefits soon.
 
 ## Components
 
-`treeco` has two available functions and two datasets: `eco_run.R`, `eco_demo.R`, `eco_data` and `species_data`.
+`treeco` has three available functions and two datasets: `eco_run.R`, `eco_run_all.R`, `eco_demo.R`, `eco_data` and `species_data`.
 
 ### eco_run.R
 
-`eco_run.R` takes and requires 3 arguments.
+This function acts like a calculator similiar to [this one](http://www.treebenefits.com/calculator/) but much less content. `eco_run.R` takes and requires 3 arguments.
 
 1. species: the common name of the species, if a match isn't found, the function will make it's best guess
 2. dbh: the dbh value of a tree, this can be any sensible number (i.e. no negative numbers)
 3. region: the region code, also found in `species_data` as well as `eco_data`
+
+### eco_run_all.R
+
+_Note: Currently awork in progress, use with caution_
+
+This function calculates eco benefits for an entire tree inventory. `eco_run_all.R` utilizes the popular [`data.table`](https://github.com/Rdatatable/data.table) package for speed. Calculating the eco benefits of 400,000 trees takes ~10-20 seconds. `eco_run_all.R` takes and requires 4 arguments:
+
+1. `data`: the path to a `csv` file containing the tree data
+    * The `csv` must have the following 2 fields: common name for tree species and dbh for dbh values
+2. `species_col`: the name of the common name field, case sensitive (for now).
+3. `dbh_col`: the name of the dbh field, case sensitive (for now).
+4. `region`: the region the trees are located in. For now, not a convient way to figure this field out. You can see a list of the region values in the `eco_data` or `species_data` datasets. I will update this readme with the region codes and what they represent, it isn't very clear at the moment.
+
+```r
+treeco::eco_run_all(
+  data = "/Users/tylerlittlefield/Desktop/toy.csv",
+  species_col = "common_name",
+  dbh_col = "dbh_val",
+  region = "InlEmpCLM"
+)
+
+#              id         scientific_name common_name dbh benefit_value            benefit  unit
+#       1:      1           Abies procera   Noble fir   1        0.0013     aq nox avoided  <NA>
+#       2:      1           Abies procera   Noble fir   1       -0.0002         aq nox dep  <NA>
+#       3:      1           Abies procera   Noble fir   1        0.0005       aq ozone dep  <NA>
+#       4:      1           Abies procera   Noble fir   1        0.0003    aq pm10 avoided  <NA>
+#       5:      1           Abies procera   Noble fir   1       -0.0003        aq pm10 dep  <NA>
+#      ---                                                                                      
+# 5999996: 400000 Liquidambar styraciflua    Sweetgum  40       49.8070    co2 sequestered   kgs
+# 5999997: 400000 Liquidambar styraciflua    Sweetgum  40      906.5399        co2 storage   kgs
+# 5999998: 400000 Liquidambar styraciflua    Sweetgum  40       75.8115        electricity   kwh
+# 5999999: 400000 Liquidambar styraciflua    Sweetgum  40        1.1197 hydro interception   m^3
+# 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -16.3358        natural gas kbtus
+```
 
 ### eco_interp.R
 
