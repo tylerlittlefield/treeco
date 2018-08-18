@@ -3,7 +3,10 @@ Version: 0.0.0.9000
 Title: Calculate Eco Benefits for Trees
 Description: Calculate the eco benefits of trees. This package contains data provided by i-Tree.
 Depends: R (>= 2.10)
-Imports: stats, utils
+Imports: 
+    stats,
+    utils,
+    data.table
 Authors@R: person("Tyler", "Littlefield", , "tylurp1@gmail.com", c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
