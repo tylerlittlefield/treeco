@@ -3,3 +3,4 @@
 export(eco_demo)
 export(eco_run)
 export(eco_run_all)
+import(data.table)

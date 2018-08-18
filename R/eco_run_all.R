@@ -24,6 +24,7 @@ string_dist <- function(str_1, str_2) {
 #' @param dbh_col the name of the column containing dbh values
 #' @param region region code, see \code{species_data} or \code{eco_data}
 #'
+#' @import data.table
 #' @export
 eco_run_all <- function(data, species_col, dbh_col, region) {
 
