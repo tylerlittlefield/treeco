@@ -52,7 +52,7 @@ This function acts like a calculator similiar to [this one](http://www.treebenef
 
 ### eco_run_all.R
 
-_Note: Currently awork in progress, use with caution_
+_Note: Currently a work in progress, use with caution_
 
 This function calculates eco benefits for an entire tree inventory. `eco_run_all.R` utilizes the popular [`data.table`](https://github.com/Rdatatable/data.table) package for speed. Calculating the eco benefits of 400,000 trees takes ~10-20 seconds. `eco_run_all.R` takes and requires 4 arguments:
 
