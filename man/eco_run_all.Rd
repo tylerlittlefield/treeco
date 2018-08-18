@@ -2,7 +2,7 @@
 % Please edit documentation in R/eco_run_all.R
 \name{eco_run_all}
 \alias{eco_run_all}
-\title{Run eco benefits for a tree}
+\title{Run eco benefits for an entire tree inventory}
 \usage{
 eco_run_all(data, species_col, dbh_col, region)
 }
@@ -16,5 +16,5 @@ eco_run_all(data, species_col, dbh_col, region)
 \item{region}{region code, see \code{species_data} or \code{eco_data}}
 }
 \description{
-Run eco benefits for a tree
+Run eco benefits for an entire tree inventory
 }
