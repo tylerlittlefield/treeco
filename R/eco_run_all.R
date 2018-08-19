@@ -62,9 +62,11 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   message("Guessing species codes...")
 
   # Guess and grab species_codes
-  vector <- integer(0)
-  for (i in unique(unique_common_names))
-    vector[i] <- which.max(string_dist(i, species_tbl$common_name))
+  # vector <- integer(0)
+  # for (i in unique(unique_common_names))
+  #   vector[i] <- which.max(string_dist(i, species_tbl$common_name))
+  # trees_tbl$species_code <- species_tbl$species_code[vector]
+  vector <- unlist(lapply(trees_tbl$common_name, function(x) {which.max(string_dist(x, species_tbl$common_name))}))
   trees_tbl$species_code <- species_tbl$species_code[vector]
 
   message("Species codes gathered.")
