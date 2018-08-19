@@ -58,7 +58,7 @@ This function calculates eco benefits for an entire tree inventory. `eco_run_all
     * The `csv` must have the following 2 fields: common name for tree species and dbh for dbh values
 2. `species_col`: the name of the common name field, case sensitive (for now).
 3. `dbh_col`: the name of the dbh field, case sensitive (for now).
-4. `region`: the region the trees are located in. For now, not a convient way to figure this field out. You can see a list of the region values in the `eco_data` or `species_data` datasets. I will update this readme with the region codes and what they represent, it isn't very clear at the moment.
+4. `region`: the region the trees are located in. You can see a list of the region codes and the region name in the `currency_data` dataset.
 
 ```r
 treeco::eco_run_all(
