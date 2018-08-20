@@ -92,8 +92,9 @@ treeco::eco_run_all(
 # 5999999: 400000 Liquidambar styraciflua    Sweetgum  40        4.1400 hydro interception   m^3
 # 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -39.5000        natural gas kbtus
 ```
-
-![](inst/figs/top_10.png)
+<p align="center"> 
+<img src="inst/figures/top_10.png" width=700>
+</p>
 
 ### eco_interp.R
 
