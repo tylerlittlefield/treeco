@@ -121,7 +121,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_tbl[, ("y1") := benefit_value[1], by = c("id", "benefit")]
   trees_tbl[, ("y2") := benefit_value[2], by = c("id", "benefit")]
 
-  trees_tbl <- na.omit(trees_tbl)
+  trees_tbl <- stats::na.omit(trees_tbl)
   trees_tbl <- unique(trees_tbl, by = c("id", "benefit"))
 
   trees_tbl[, benefit_value := ifelse(x1 == x2, y1, eco_interp(x = trees_tbl$dbh_val, x1 = trees_tbl$x1, x2 = trees_tbl$x2, y1 = trees_tbl$y1, y2 = trees_tbl$y2))]
