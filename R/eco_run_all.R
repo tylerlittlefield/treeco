@@ -152,6 +152,9 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   trees_tbl[grepl("kgs", unit)==TRUE, "benefit_value" := benefit_value * 2.20462]
   trees_tbl[grepl("kgs", unit)==TRUE, "unit" := "lbs"]
+  trees_tbl[grepl("[m^3]", unit)==TRUE, "benefit_value" := benefit_value * 264.172052]
+  trees_tbl[grepl("[m^3]", unit)==TRUE, "unit" := "gals"]
+
 
   trees_tbl[grepl("electricity", benefit)==TRUE, "dollars" := benefit_value * electricity_money]
   trees_tbl[grepl("natural gas", benefit)==TRUE, "dollars" := benefit_value * gas_money]
