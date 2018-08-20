@@ -61,36 +61,34 @@ This function calculates eco benefits for an entire tree inventory (slowly, hopi
 4. `region`: the region the trees are located in. You can see a list of the region codes and the region name in the `currency_data` dataset.
 
 ```r
-treeco::eco_run_all(
-  data = "data/toy.csv",
-  species_col = "common_name",
-  dbh_col = "dbh_val",
-  region = "InlEmpCLM"
-)
+treeco::eco_run_all(data = "Desktop/10000_trees.csv", # data directory
+                    species_col = "species",          # name of my common name field
+                    dbh_col = "exact_dbh",            # name of my dbh field
+                    region = "InlEmpCLM")             # region
 
-# Importing: toy.csv...
-# toy.csv imported.
+# Importing: 10000_trees.csv...
+# 10000_trees.csv imported.
 # Reconfiguring data...
 # Data reconfigured.
 # Guessing species codes...
 # Species codes gathered.
 # Linking species codes to the data...
 # Species codes linked.
-# Calculating benefits for 400001 trees...
+# Calculating benefits for 10001 trees...
 # Complete.
 # 
-#              id         scientific_name common_name dbh benefit_value            benefit  unit
-#       1:      1           Abies procera   Noble fir   1        0.0024     aq nox avoided   kgs
-#       2:      1           Abies procera   Noble fir   1        0.0010         aq nox dep   kgs
-#       3:      1           Abies procera   Noble fir   1        0.0035       aq ozone dep   kgs
-#       4:      1           Abies procera   Noble fir   1        0.0006    aq pm10 avoided   kgs
-#       5:      1           Abies procera   Noble fir   1        0.0015        aq pm10 dep   kgs
-#      ---                                                                                      
-# 5999996: 400000 Liquidambar styraciflua    Sweetgum  40        0.0000    co2 sequestered   kgs
-# 5999997: 400000 Liquidambar styraciflua    Sweetgum  40     5509.8000        co2 storage   kgs
-# 5999998: 400000 Liquidambar styraciflua    Sweetgum  40      219.0000        electricity   kwh
-# 5999999: 400000 Liquidambar styraciflua    Sweetgum  40        4.1400 hydro interception   m^3
-# 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -39.5000        natural gas kbtus
+#            id     scientific_name             common_name dbh benefit_value            benefit  unit dollars
+#      1:     1 Phoenix canariensis Canary Island date palm  43        0.1989     aq nox avoided   lbs    0.76
+#      2:     1 Phoenix canariensis Canary Island date palm  43        0.4431         aq nox dep   lbs    1.70
+#      3:     1 Phoenix canariensis Canary Island date palm  43        1.1464       aq ozone dep   lbs    4.40
+#      4:     1 Phoenix canariensis Canary Island date palm  43        0.0485    aq pm10 avoided   lbs    0.22
+#      5:     1 Phoenix canariensis Canary Island date palm  43        0.6393        aq pm10 dep   lbs    2.96
+#     ---                                                                                                     
+# 149996: 10000     Salix matsudana          Weeping willow  17      121.4746    co2 sequestered   lbs    0.41
+# 149997: 10000     Salix matsudana          Weeping willow  17     1669.3383        co2 storage   lbs    5.58
+# 149998: 10000     Salix matsudana          Weeping willow  17      109.6000        electricity   kwh   22.08
+# 149999: 10000     Salix matsudana          Weeping willow  17      393.6164 hydro interception  gals    2.16
+# 150000: 10000     Salix matsudana          Weeping willow  17      -25.5000        natural gas kbtus    0.17
 ```
 <p align="center"> 
 <img src="inst/figures/top_10.png" width=700>
