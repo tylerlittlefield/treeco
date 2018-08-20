@@ -62,10 +62,6 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   message("Guessing species codes...")
 
   # Guess and grab species_codes
-  # vector <- integer(0)
-  # for (i in unique(unique_common_names))
-  #   vector[i] <- which.max(string_dist(i, species_tbl$common_name))
-  # trees_tbl$species_code <- species_tbl$species_code[vector]
   vector <- unlist(lapply(trees_tbl$common_name, function(x) {which.max(string_dist(x, species_tbl$common_name))}))
   trees_tbl$species_code <- species_tbl$species_code[vector]
 
@@ -121,7 +117,10 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_tbl[, ("y1") := benefit_value[1], by = c("id", "benefit")]
   trees_tbl[, ("y2") := benefit_value[2], by = c("id", "benefit")]
 
-  trees_tbl[, ("benefit_value") := eco_interp(x = trees_tbl$dbh_val, x1 = trees_tbl$x1, x2 = trees_tbl$x2, y1 = trees_tbl$y1, y2 = trees_tbl$y2)]
+  trees_tbl <- na.omit(trees_tbl)
+  trees_tbl <- unique(trees_tbl, by = c("id", "benefit"))
+
+  trees_tbl[, benefit_value := ifelse(x1 == x2, y1, eco_interp(x = trees_tbl$dbh_val, x1 = trees_tbl$x1, x2 = trees_tbl$x2, y1 = trees_tbl$y1, y2 = trees_tbl$y2))]
 
   trees_tbl <- trees_tbl[, c("id", "scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
 
@@ -142,3 +141,4 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   return(trees_tbl)
 
 }
+
