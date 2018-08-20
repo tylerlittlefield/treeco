@@ -93,6 +93,8 @@ treeco::eco_run_all(
 # 6000000: 400000 Liquidambar styraciflua    Sweetgum  40      -39.5000        natural gas kbtus
 ```
 
+![](inst/figs/top_10.png)
+
 ### eco_interp.R
 
 This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
