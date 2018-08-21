@@ -60,10 +60,6 @@ This function calculates eco benefits for an entire tree inventory (slowly, hopi
 3. `dbh_col`: the name of the dbh field, case sensitive (for now).
 4. `region`: the region the trees are located in. You can see a list of the region codes and the region name in the `currency_data` dataset.
 
-<p align="center"> 
-<img src="inst/figures/top_10.png" width=700>
-</p>
-
 ### eco_interp.R
 
 This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
