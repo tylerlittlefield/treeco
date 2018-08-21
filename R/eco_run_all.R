@@ -110,6 +110,11 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # see lines 121-122, can't remember...
   trees_tbl <- trees_tbl[species_tbl, allow.cartesian = TRUE]
 
+  trees_tbl[, "similarity" := string_dist(common_name[1], i.common_name[1]), by = "id"]
+  low_match_scores <- length(unique(trees_tbl[trees_tbl$similarity < 0.8][["id"]]))
+  message("Note: Cannot guess ", low_match_scores, " trees, similarity score below 80%")
+  trees_tbl <- trees_tbl[similarity >= 0.8]
+
   # Message: species codes linked
   message("Species codes linked.")
 
@@ -249,7 +254,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   elapsed_time <- end_time - begin_time
   print(elapsed_time)
 
-  # Return the users data
+  # # Return the users data
   return(trees_tbl)
 
 }
