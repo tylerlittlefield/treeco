@@ -70,13 +70,13 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   message("Data reconfigured.")
 
   # Create a vector which stores all unique common names in users tree inventory
-  unique_common_names <- unique(trees_tbl, by = "common_name")[["common_name"]]
+  # unique_common_names <- unique(trees_tbl, by = "common_name")[["common_name"]]
 
   # Filter the master species list to include only the records that include
   # common names from users inventory. On second thought, why is the 'guess and
   # grab species codes' lines needed? The common names from both the master list
   # and the users inventory should be consistent as a result from the filter?
-  species_tbl <- species_tbl[species_tbl$common_name %in% unique_common_names]
+  # species_tbl <- species_tbl[species_tbl$common_name %in% unique_common_names]
 
   # Subset eco benfits and master species list data by region
   eco_tbl     <- eco_tbl[eco_tbl$species_region == region]
@@ -89,7 +89,8 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   message("Guessing species codes...")
 
   # Guess and grab species_codes
-  # Unsure if this is needed. See comments near lines 72-75.
+  # Unsure if this is needed. See comments near lines 72-75. Update, lines 72-75
+  # weren't needed and were actually creating incorrect values.
   vector <- unlist(lapply(trees_tbl$common_name, function(x) {which.max(string_dist(x, species_tbl$common_name))}))
   trees_tbl$species_code <- species_tbl$species_code[vector]
 
@@ -242,6 +243,8 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # Message: complete
   message("Complete.")
 
+  # Grab end time, subtract it from begin time and print the time it took to
+  # run the benefits.
   end_time <- Sys.time()
   elapsed_time <- end_time - begin_time
   print(elapsed_time)
