@@ -32,6 +32,8 @@ string_dist <- function(str_1, str_2) {
 #' @export
 eco_run_all <- function(data, species_col, dbh_col, region) {
 
+  begin_time <- Sys.time()
+
   # Message: importing data
   message("Importing: ", basename(data), "...")
 
@@ -239,6 +241,10 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   # Message: complete
   message("Complete.")
+
+  end_time <- Sys.time()
+  elapsed_time <- end_time - begin_time
+  print(elapsed_time)
 
   # Return the users data
   return(trees_tbl)
