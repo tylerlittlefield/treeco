@@ -56,6 +56,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_tbl <- trees_tbl[, c("id", species_col, dbh_col), with = FALSE] # Arrange columns for consistency
   data.table::setnames(trees_tbl, species_col, "common_name")           # Set name of species variable for consistency
   data.table::setnames(trees_tbl, dbh_col, "dbh_val")                   # Set name of dbh variable for consistency
+  trees_tbl <- trees_tbl[trees_tbl$dbh_val > 0]                         # Data must have dbh > 0
 
   # Convert dbh values to centimeters. Here, we make the assumption that it's
   # always going to be recorded in inches. Will one day need an option to either
