@@ -50,7 +50,7 @@ This function acts like a calculator similiar to [this one](http://www.treebenef
 
 ### eco_run_all.R
 
-This function calculates eco benefits for an entire tree inventory (slowly, hoping to make this faster). Calculating the eco benefits of 10,000 trees takes ~3-5 seconds. Larger inventories with 200,000+ take much longer. `eco_run_all.R` takes and requires 4 arguments:
+This function calculates eco benefits for an entire tree inventory (slowly, hoping to make this faster). Calculating the eco benefits of 10,000 trees takes ~3-5 seconds. Larger inventories with 200,000+ take much longer, typically ~1-2 minutes. `eco_run_all.R` takes and requires 4 arguments:
 
 1. `data`: the path to a `csv` file containing the tree data
     * The `csv` must have the following 2 fields: common name for tree species and dbh for dbh values
