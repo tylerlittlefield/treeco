@@ -58,6 +58,41 @@ This function calculates eco benefits for an entire tree inventory (slowly, hopi
 3. `dbh_col`: the name of the dbh field, case sensitive (for now).
 4. `region`: the region the trees are located in. You can see a list of the region codes and the region name in the `currency_data` dataset.
 
+```r
+treeco::eco_run_all(
+  data = file_dir,             # data directory
+  species_col = "common_name", # name of my common name field
+  dbh_col = "dbh_val",         # name of my dbh field
+  region = "InlEmpCLM"         # region
+)
+
+# Importing: 50000_trees.csv...
+# 50000_trees.csv imported.
+# Reconfiguring data...
+# Data reconfigured.
+# Guessing species codes...
+# Species codes gathered.
+# Linking species codes to the data...
+# Note: Cannot guess 10118 trees, similarity score below 80%
+# Species codes linked.
+# Calculating benefits for 39882 trees...
+# Complete.
+# Time difference of 13.54323 secs
+# 
+#            id scientific_name common_name dbh benefit_value            benefit  unit dollars
+#      1:     4 Punica granatum pomegranate  72        0.2429     aq nox avoided   lbs    0.93
+#      2:     4 Punica granatum pomegranate  72        0.2623         aq nox dep   lbs    1.01
+#      3:     4 Punica granatum pomegranate  72        0.7716       aq ozone dep   lbs    2.96
+#      4:     4 Punica granatum pomegranate  72        0.0602    aq pm10 avoided   lbs    0.28
+#      5:     4 Punica granatum pomegranate  72        0.4079        aq pm10 dep   lbs    1.89
+#     ---                                                                                     
+# 598226: 50000 Maytenus boaria      mayten  20      141.4632    co2 sequestered   lbs    0.47
+# 598227: 50000 Maytenus boaria      mayten  20     3203.2026        co2 storage   lbs   10.70
+# 598228: 50000 Maytenus boaria      mayten  20      184.9333        electricity   kwh   37.26
+# 598229: 50000 Maytenus boaria      mayten  20     3856.9120 hydro interception  gals   21.21
+# 598230: 50000 Maytenus boaria      mayten  20      -66.0167        natural gas kbtus    0.44
+```
+
 ### eco_interp.R
 
 This function is nested in `eco_run.R`. It interpolates benefit values (always) and will eventually interpolate values only when necessary. The following equation is used:
