@@ -143,7 +143,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   trees_tbl[, "similarity" := string_dist(common_name[1], i.common_name[1]), by = "id"]
   low_match_scores <- length(unique(trees_tbl[trees_tbl$similarity < 0.8][["id"]]))
-  message("Note: Cannot guess ", low_match_scores, " trees, similarity score below 80%")
+  message("Note: Cannot guess ", low_match_scores, " trees, similarity score below 90%")
   trees_tbl <- trees_tbl[similarity >= 0.8]
 
   # Message: species codes linked
