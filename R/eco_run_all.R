@@ -214,9 +214,9 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # duplicates since 'x1', 'x2', etc. have been created.
   trees_tbl <- unique(trees_tbl, by = c("id", "benefit"))
 
-  # If 'x1' == 'x2' no need to interpolate benefits over a horizontal. However,
+  # If 'y1' == 'y2' no need to interpolate benefits over a horizontal. However,
   # if they don't equal, interpolate the benefit value.
-  trees_tbl[, benefit_value := ifelse(x1 == x2, y1, eco_interp(x = trees_tbl$dbh_val, x1 = trees_tbl$x1, x2 = trees_tbl$x2, y1 = trees_tbl$y1, y2 = trees_tbl$y2))]
+  trees_tbl[, benefit_value := ifelse(y1 == y2, y1, eco_interp(x = trees_tbl$dbh_val, x1 = trees_tbl$x1, x2 = trees_tbl$x2, y1 = trees_tbl$y1, y2 = trees_tbl$y2))]
 
   # Grab data we need
   trees_tbl <- trees_tbl[, c("id", "scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit")]
