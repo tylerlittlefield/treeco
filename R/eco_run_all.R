@@ -108,8 +108,8 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # save the score as 'sim'
   unique_common_names[, "sim" := string_dist(common_name[1], species_master[1]), by = common_name]
 
-  # Remove any records with a similarity score below 80%
-  unique_common_names <- unique_common_names[sim >= 0.8]
+  # Remove any records with a similarity score below 90%
+  unique_common_names <- unique_common_names[sim >= 0.90]
 
   # Select the variables we need
   unique_common_names <- unique_common_names[, c("common_name", "code")]
@@ -190,6 +190,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   # Sort dbh_diff in ascending order
   data.table::setkey(trees_tbl, "dbh_diff")
+  trees_tbl <- unique(trees_tbl)
 
   # Grab the first two records grouped by benefit and id, this will be the lowest dbh_diff values
   trees_tbl <- trees_tbl[trees_tbl[, .I[1:2], c("benefit", "id")]$V1]
