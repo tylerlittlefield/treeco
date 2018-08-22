@@ -69,15 +69,6 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # Message: data reconfigured
   message("Data reconfigured.")
 
-  # Create a vector which stores all unique common names in users tree inventory
-  # unique_common_names <- unique(trees_tbl, by = "common_name")[["common_name"]]
-
-  # Filter the master species list to include only the records that include
-  # common names from users inventory. On second thought, why is the 'guess and
-  # grab species codes' lines needed? The common names from both the master list
-  # and the users inventory should be consistent as a result from the filter?
-  # species_tbl <- species_tbl[species_tbl$common_name %in% unique_common_names]
-
   # Subset eco benfits and master species list data by region
   eco_tbl     <- eco_tbl[eco_tbl$species_region == region]
   species_tbl <- species_tbl[species_tbl$species_region == region, ]
@@ -88,11 +79,51 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   # Message: guessing species codes
   message("Guessing species codes...")
 
-  # Guess and grab species_codes
-  # Unsure if this is needed. See comments near lines 72-75. Update, lines 72-75
-  # weren't needed and were actually creating incorrect values.
-  vector <- unlist(lapply(trees_tbl$common_name, function(x) {which.max(string_dist(x, species_tbl$common_name))}))
-  trees_tbl$species_code <- species_tbl$species_code[vector]
+  # Grab the unique common names from the users inventory data. We don't want
+  # to calculate the similarity of duplicates records. Instead, we will calculate
+  # the similarity for all unique common names to the species master list and
+  # then join them to the users data.
+  unique_common_names <- unique(trees_tbl[, c("common_name")])
+
+  # Grab indices of the species master list for the most similar matches
+  vec <- unlist(lapply(unique_common_names$common_name, function(x) which.max(string_dist(x, species_tbl$common_name))))
+
+  # Store the species code to the smaller/unique datatable.
+  unique_common_names$code <- species_tbl[vec,][["species_code"]]
+
+  # Grab the common names
+  unique_common_names$species_master <- species_tbl[vec,][["common_name"]]
+
+  # Conver the common names from users data and the species master list to lower
+  # case for better similarity scores
+  unique_common_names$common_name <- tolower(unique_common_names$common_name)
+  unique_common_names$species_master <- tolower(unique_common_names$species)
+
+  # Convert entire inventory to lower case for the join
+  trees_tbl$common_name <- tolower(trees_tbl$common_name)
+
+  # Now that we have paired up the master list to the unique common names from
+  # the users inventory data (keeping in mind that some of these pairs have a
+  # really low score). We run the string_dist function to compare the pairs and
+  # save the score as 'sim'
+  unique_common_names[, "sim" := string_dist(common_name[1], species_master[1]), by = common_name]
+
+  # Remove any records with a similarity score below 80%
+  unique_common_names <- unique_common_names[sim >= 0.8]
+
+  # Select the variables we need
+  unique_common_names <- unique_common_names[, c("common_name", "code")]
+
+  # Set the keys to prepare for the join
+  setkey(unique_common_names, "common_name")
+  setkey(trees_tbl, "common_name")
+
+  # Join the table back to the entire inventory
+  trees_tbl <- trees_tbl[unique_common_names, allow.cartesian=TRUE]
+
+  # Rename 'code' var to 'species_code'. Should probably just change this above
+  # to avoid this unnessary line.
+  data.table::setnames(trees_tbl, "code", "species_code")
 
   # Message: species codes gathered
   message("Species codes gathered.")
@@ -241,7 +272,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_tbl[grepl("aq sox", benefit)==TRUE, "dollars" := benefit_value * sox_money]
   trees_tbl[grepl("voc", benefit)==TRUE, "dollars" := benefit_value * voc_money]
 
-  # Because davey takes values like -0.54 from natural gas and makes it 0.54?
+  # Because davey takes $ values like -0.54 from natural gas and makes it 0.54?
   trees_tbl$dollars <- abs(round(trees_tbl$dollars, 2))
   trees_tbl$benefit_value <- round(trees_tbl$benefit_value, 4)
 
