@@ -4,7 +4,7 @@
 \name{currency_data}
 \alias{currency_data}
 \title{Currency data}
-\format{A data frame with 4006 rows and 11 variables:
+\format{A data frame with 16 rows and 11 variables:
 \describe{
   \item{region_code}{region code}
   \item{region_name}{region name}
