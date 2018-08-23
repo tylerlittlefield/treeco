@@ -12,31 +12,7 @@ devtools::install_github("tylurp/treeco")
 
 ## Demo
 
-Use `eco_run` to calculate benefits for a single tree:
-
-```r
-library(treeco)
-eco_run("common fig", 20, "InlEmpCLM")
-
-#    scientific_name common_name dbh benefit_value            benefit  unit
-# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided   kgs
-# 2     Ficus carica  Common fig  20        0.1190         aq nox dep   kgs
-# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep   kgs
-# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided   kgs
-# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep   kgs
-# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided   kgs
-# 7     Ficus carica  Common fig  20        0.0160         aq sox dep   kgs
-# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided   kgs
-# 9     Ficus carica  Common fig  20        0.0000               bvoc   kgs
-# 10    Ficus carica  Common fig  20       55.7000        co2 avoided   kgs
-# 11    Ficus carica  Common fig  20        4.1000    co2 sequestered   kgs
-# 12    Ficus carica  Common fig  20      569.6000        co2 storage   kgs
-# 13    Ficus carica  Common fig  20      189.2000        electricity   kwh
-# 14    Ficus carica  Common fig  20        3.1600 hydro interception   m^3
-# 15    Ficus carica  Common fig  20      -81.4000        natural gas kbtus
-```
-
-Or use `eco_run_all` to calculate benefits for an entire tree inventory:
+Use `eco_run_all` to calculate benefits for an entire tree inventory:
 
 ```r
 treeco::eco_run_all(
@@ -71,4 +47,28 @@ treeco::eco_run_all(
 # 598228: 50000 Maytenus boaria      mayten  20      184.9333        electricity   kwh   37.26
 # 598229: 50000 Maytenus boaria      mayten  20     3856.9120 hydro interception  gals   21.21
 # 598230: 50000 Maytenus boaria      mayten  20      -66.0167        natural gas kbtus    0.44
+```
+
+Use `eco_run` to calculate benefits for a single tree:
+
+```r
+library(treeco)
+eco_run("common fig", 20, "InlEmpCLM")
+
+#    scientific_name common_name dbh benefit_value            benefit  unit
+# 1     Ficus carica  Common fig  20        0.1102     aq nox avoided   kgs
+# 2     Ficus carica  Common fig  20        0.1190         aq nox dep   kgs
+# 3     Ficus carica  Common fig  20        0.3500       aq ozone dep   kgs
+# 4     Ficus carica  Common fig  20        0.0273    aq pm10 avoided   kgs
+# 5     Ficus carica  Common fig  20        0.1850        aq pm10 dep   kgs
+# 6     Ficus carica  Common fig  20        0.2183     aq sox avoided   kgs
+# 7     Ficus carica  Common fig  20        0.0160         aq sox dep   kgs
+# 8     Ficus carica  Common fig  20        0.0273     aq voc avoided   kgs
+# 9     Ficus carica  Common fig  20        0.0000               bvoc   kgs
+# 10    Ficus carica  Common fig  20       55.7000        co2 avoided   kgs
+# 11    Ficus carica  Common fig  20        4.1000    co2 sequestered   kgs
+# 12    Ficus carica  Common fig  20      569.6000        co2 storage   kgs
+# 13    Ficus carica  Common fig  20      189.2000        electricity   kwh
+# 14    Ficus carica  Common fig  20        3.1600 hydro interception   m^3
+# 15    Ficus carica  Common fig  20      -81.4000        natural gas kbtus
 ```
