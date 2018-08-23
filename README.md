@@ -16,7 +16,7 @@ Use `eco_run_all` to calculate benefits for an entire tree inventory:
 
 ```r
 treeco::eco_run_all(
-  data = data/50000_trees.csv, # data directory
+  data = data/trees.csv,       # data directory
   species_col = "common_name", # name of my common name field
   dbh_col = "dbh_val",         # name of my dbh field
   region = "InlEmpCLM"         # region
