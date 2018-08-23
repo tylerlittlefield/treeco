@@ -255,8 +255,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   sox_money  <- df_money[grepl("sox_lb", df_money$variable)][["value"]]
   voc_money  <- df_money[grepl("voc_lb", df_money$variable)][["value"]]
 
-  # Convert kilograms and cubic meters to lbs and gallons. Not sure if the
-  # `==TRUE` is needed.
+  # Convert kilograms and cubic meters to lbs and gallons
   trees_tbl[grepl("kgs", unit), "benefit_value" := benefit_value * 2.20462]
   trees_tbl[grepl("kgs", unit), "unit" := "lbs"]
   trees_tbl[grepl("[m^3]", unit), "benefit_value" := benefit_value * 264.172052]
