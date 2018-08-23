@@ -100,9 +100,3 @@ treeco::eco_run("comon fig", 20, "InlEmpCLM")
 # 14    Ficus carica  Common fig  20        3.1600 hydro interception   m^3
 # 15    Ficus carica  Common fig  20      -81.4000        natural gas kbtus
 ```
-
-However, any 'match' that has a similarity score below 90% is discarded and you will see a message like:
-
-```r
-Note: Cannot guess 10118 trees, similarity score below 90%
-```
