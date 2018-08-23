@@ -257,21 +257,21 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   # Convert kilograms and cubic meters to lbs and gallons. Not sure if the
   # `==TRUE` is needed.
-  trees_tbl[grepl("kgs", unit)==TRUE, "benefit_value" := benefit_value * 2.20462]
-  trees_tbl[grepl("kgs", unit)==TRUE, "unit" := "lbs"]
-  trees_tbl[grepl("[m^3]", unit)==TRUE, "benefit_value" := benefit_value * 264.172052]
-  trees_tbl[grepl("[m^3]", unit)==TRUE, "unit" := "gals"]
+  trees_tbl[grepl("kgs", unit), "benefit_value" := benefit_value * 2.20462]
+  trees_tbl[grepl("kgs", unit), "unit" := "lbs"]
+  trees_tbl[grepl("[m^3]", unit), "benefit_value" := benefit_value * 264.172052]
+  trees_tbl[grepl("[m^3]", unit), "unit" := "gals"]
 
   # Multiply $ values by the benefit value to get the $ saved
-  trees_tbl[grepl("electricity", benefit)==TRUE, "dollars" := benefit_value * elec_money]
-  trees_tbl[grepl("natural gas", benefit)==TRUE, "dollars" := benefit_value * gas_money]
-  trees_tbl[grepl("hydro interception", benefit)==TRUE, "dollars" := benefit_value * h20_money]
-  trees_tbl[grepl("co2 ", benefit)==TRUE, "dollars" := benefit_value * co2_money]
-  trees_tbl[grepl("aq ozone dep", benefit)==TRUE, "dollars" := benefit_value * o3_money]
-  trees_tbl[grepl("aq nox", benefit)==TRUE, "dollars" := benefit_value * nox_money]
-  trees_tbl[grepl("aq pm10", benefit)==TRUE, "dollars" := benefit_value * pm10_money]
-  trees_tbl[grepl("aq sox", benefit)==TRUE, "dollars" := benefit_value * sox_money]
-  trees_tbl[grepl("voc", benefit)==TRUE, "dollars" := benefit_value * voc_money]
+  trees_tbl[grepl("electricity", benefit), "dollars" := benefit_value * elec_money]
+  trees_tbl[grepl("natural gas", benefit), "dollars" := benefit_value * gas_money]
+  trees_tbl[grepl("hydro interception", benefit), "dollars" := benefit_value * h20_money]
+  trees_tbl[grepl("co2 ", benefit), "dollars" := benefit_value * co2_money]
+  trees_tbl[grepl("aq ozone dep", benefit), "dollars" := benefit_value * o3_money]
+  trees_tbl[grepl("aq nox", benefit), "dollars" := benefit_value * nox_money]
+  trees_tbl[grepl("aq pm10", benefit), "dollars" := benefit_value * pm10_money]
+  trees_tbl[grepl("aq sox", benefit), "dollars" := benefit_value * sox_money]
+  trees_tbl[grepl("voc", benefit), "dollars" := benefit_value * voc_money]
 
   # Because davey takes $ values like -0.54 from natural gas and makes it 0.54?
   trees_tbl$dollars <- abs(round(trees_tbl$dollars, 2))
