@@ -73,9 +73,11 @@ eco_run("common fig", 20, "InlEmpCLM")
 # 15    Ficus carica  Common fig  20      -81.4000        natural gas kbtus
 ```
 
-`treeco` guesses the common name that matches i-Tree's master species list. In this way, we can try to link each tree to it's appropriate `spp_value_assignment` on the fly so that you don't have to grab them yourself, for example:
+`treeco` tries to match the users tree inventory to i-Tree's master species list. In this way, we can link each tree to it's appropriate `spp_value_assignment` on the fly so that you don't have to grab them yourself, for example:
 
 ```r
+treeco::eco_run("comon fig", 20, "InlEmpCLM")
+
 # Species given: [comon fig]
 # Closest match: [common fig]
 # ...
