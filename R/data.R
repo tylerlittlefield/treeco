@@ -1,23 +1,25 @@
 #' Benefits data
 #'
-#' A dataset containing the benefits and other attributes.
+#' A dataset containing benefits, dbh ranges, and other attributes for specific
+#' species using the "spp_value_assignment", i-Tree's way of linking species to
+#' their appropriate benefit values.
 #'
 #' @format A data frame with 7440 rows and 12 variables:
 #' \describe{
-#'   \item{id}{id}
-#'   \item{species_code}{species code}
-#'   \item{x3_81}{dbh range}
-#'   \item{x11_43}{dbh range}
-#'   \item{x22_86}{dbh range}
-#'   \item{x38_10}{dbh range}
-#'   \item{x53_34}{dbh range}
-#'   \item{x68_58}{dbh range}
-#'   \item{x83_82}{dbh range}
-#'   \item{x99_06}{dbh range}
-#'   \item{x114_30}{dbh range}
-#'   \item{species_region}{species region}
-#'   \item{benefit}{benefit type}
-#'   \item{unit}{unit of measurment for benefit}
+#'   \item{id}{id variable.}
+#'   \item{species_code}{This is the "spp_value_assignment" and acts as a key linking trees to their appropriate benefit values.}
+#'   \item{x3_81}{DBH range of 3.81 centimeters.}
+#'   \item{x11_43}{DBH range of 11.43 centimeters.}
+#'   \item{x22_86}{DBH range of 22.86 centimeters.}
+#'   \item{x38_10}{DBH range of 38.10 centimeters.}
+#'   \item{x53_34}{DBH range of 53.34 centimeters.}
+#'   \item{x68_58}{DBH range of 68.58 centimeters.}
+#'   \item{x83_82}{DBH range of 83.82 centimeters.}
+#'   \item{x99_06}{DBH range of 99.06 centimeters.}
+#'   \item{x114_30}{DBH range of 114.30 centimeters.}
+#'   \item{species_region}{The region code representing a specific region. Benefit values change depending on the region.}
+#'   \item{benefit}{The type of benefit.}
+#'   \item{unit}{The unit of measurment for a benefit.}
 #'   ...
 #' }
 #' @source \url{https://www.itreetools.org}
@@ -25,11 +27,11 @@
 
 #' Species data
 #'
-#' A dataset containing species data and other attributes
+#' A dataset containing species data and other attributes.
 #'
 #' @format A data frame with 4006 rows and 11 variables:
 #' \describe{
-#'   \item{id}{id}
+#'   \item{id}{id variable.}
 #'   \item{species_code}{species code}
 #'   \item{scientific_name}{scientific name of tree}
 #'   \item{common_name}{common name of tree}
@@ -48,21 +50,21 @@
 
 #' Money data
 #'
-#' A dataset containing benefit to currency conversion values
+#' A dataset containing benefit to currency conversion values. This dataset is how benefit values get converted to dollar amounts.
 #'
 #' @format A data frame with 16 rows and 11 variables:
 #' \describe{
-#'   \item{region_code}{region code}
-#'   \item{region_name}{region name}
-#'   \item{electricity_kwh_to_currency}{electricity in kwh to currency}
-#'   \item{natural_gas_kbtu_to_currency}{natural gas in kbtu to currency}
-#'   \item{h20_gal_to_currency}{h20 in gallons to currency}
-#'   \item{co2_lb_to_currency}{co2 in lbs to currency}
-#'   \item{o3_lb_to_currency}{o3 in lbs to currency}
-#'   \item{nox_lb_to_currency}{nox in lbs to currency}
-#'   \item{pm10_lb_to_currency}{pm10 in lbs to currency}
-#'   \item{sox_lb_to_currency}{sox in lbs to currency}
-#'   \item{voc_lb_to_currency}{voc in lbs to currency}
+#'   \item{region_code}{The region code.}
+#'   \item{region_name}{The region name, meant to be human readable for users to pick the appropriate region code.}
+#'   \item{electricity_kwh_to_currency}{Electricity in kwh to dollar amount.}
+#'   \item{natural_gas_kbtu_to_currency}{Natural gas in kbtu to dollar amount.}
+#'   \item{h20_gal_to_currency}{H20 in gallons to dollar amount.}
+#'   \item{co2_lb_to_currency}{CO2 in lbs to dollar amount.}
+#'   \item{o3_lb_to_currency}{O3 in lbs to dollar amount.}
+#'   \item{nox_lb_to_currency}{NOX in lbs to dollar amount.}
+#'   \item{pm10_lb_to_currency}{PM10 in lbs to dollar amount.}
+#'   \item{sox_lb_to_currency}{SOX in lbs to dollar amount.}
+#'   \item{voc_lb_to_currency}{VOC in lbs to dollar amount.}
 #'   ...
 #' }
 #' @source \url{https://www.itreetools.org}
