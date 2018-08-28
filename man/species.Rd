@@ -4,9 +4,9 @@
 \name{species}
 \alias{species}
 \title{Species data}
-\format{A data frame with 4006 rows and 11 variables:
+\format{A data frame with 3178 rows and 12 variables:
 \describe{
-  \item{id}{id}
+  \item{id}{id variable.}
   \item{species_code}{species code}
   \item{scientific_name}{scientific name of tree}
   \item{common_name}{common name of tree}
@@ -27,6 +27,6 @@
 species
 }
 \description{
-A dataset containing species data and other attributes
+A dataset containing species data and other attributes.
 }
 \keyword{datasets}

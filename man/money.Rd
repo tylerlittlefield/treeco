@@ -6,17 +6,17 @@
 \title{Money data}
 \format{A data frame with 16 rows and 11 variables:
 \describe{
-  \item{region_code}{region code}
-  \item{region_name}{region name}
-  \item{electricity_kwh_to_currency}{electricity in kwh to currency}
-  \item{natural_gas_kbtu_to_currency}{natural gas in kbtu to currency}
-  \item{h20_gal_to_currency}{h20 in gallons to currency}
-  \item{co2_lb_to_currency}{co2 in lbs to currency}
-  \item{o3_lb_to_currency}{o3 in lbs to currency}
-  \item{nox_lb_to_currency}{nox in lbs to currency}
-  \item{pm10_lb_to_currency}{pm10 in lbs to currency}
-  \item{sox_lb_to_currency}{sox in lbs to currency}
-  \item{voc_lb_to_currency}{voc in lbs to currency}
+  \item{region_code}{The region code.}
+  \item{region_name}{The region name, meant to be human readable for users to pick the appropriate region code.}
+  \item{electricity_kwh_to_currency}{Electricity in kwh to dollar amount.}
+  \item{natural_gas_kbtu_to_currency}{Natural gas in kbtu to dollar amount.}
+  \item{h20_gal_to_currency}{H20 in gallons to dollar amount.}
+  \item{co2_lb_to_currency}{CO2 in lbs to dollar amount.}
+  \item{o3_lb_to_currency}{O3 in lbs to dollar amount.}
+  \item{nox_lb_to_currency}{NOX in lbs to dollar amount.}
+  \item{pm10_lb_to_currency}{PM10 in lbs to dollar amount.}
+  \item{sox_lb_to_currency}{SOX in lbs to dollar amount.}
+  \item{voc_lb_to_currency}{VOC in lbs to dollar amount.}
   ...
 }}
 \source{
@@ -26,6 +26,6 @@
 money
 }
 \description{
-A dataset containing benefit to currency conversion values
+A dataset containing benefit to currency conversion values. This dataset is how benefit values get converted to dollar amounts.
 }
 \keyword{datasets}

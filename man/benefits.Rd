@@ -4,22 +4,22 @@
 \name{benefits}
 \alias{benefits}
 \title{Benefits data}
-\format{A data frame with 7440 rows and 12 variables:
+\format{A data frame with 6975 rows and 14 variables:
 \describe{
-  \item{id}{id}
-  \item{species_code}{species code}
-  \item{x3_81}{dbh range}
-  \item{x11_43}{dbh range}
-  \item{x22_86}{dbh range}
-  \item{x38_10}{dbh range}
-  \item{x53_34}{dbh range}
-  \item{x68_58}{dbh range}
-  \item{x83_82}{dbh range}
-  \item{x99_06}{dbh range}
-  \item{x114_30}{dbh range}
-  \item{species_region}{species region}
-  \item{benefit}{benefit type}
-  \item{unit}{unit of measurment for benefit}
+  \item{id}{id variable.}
+  \item{species_code}{This is the "spp_value_assignment" and acts as a key linking trees to their appropriate benefit values.}
+  \item{x3_81}{DBH range of 3.81 centimeters.}
+  \item{x11_43}{DBH range of 11.43 centimeters.}
+  \item{x22_86}{DBH range of 22.86 centimeters.}
+  \item{x38_10}{DBH range of 38.10 centimeters.}
+  \item{x53_34}{DBH range of 53.34 centimeters.}
+  \item{x68_58}{DBH range of 68.58 centimeters.}
+  \item{x83_82}{DBH range of 83.82 centimeters.}
+  \item{x99_06}{DBH range of 99.06 centimeters.}
+  \item{x114_30}{DBH range of 114.30 centimeters.}
+  \item{species_region}{The region code representing a specific region. Benefit values change depending on the region.}
+  \item{benefit}{The type of benefit.}
+  \item{unit}{The unit of measurment for a benefit.}
   ...
 }}
 \source{
@@ -29,6 +29,8 @@
 benefits
 }
 \description{
-A dataset containing the benefits and other attributes.
+A dataset containing benefits, dbh ranges, and other attributes for specific
+species using the "spp_value_assignment", i-Tree's way of linking species to
+their appropriate benefit values.
 }
 \keyword{datasets}
