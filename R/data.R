@@ -1,19 +1,27 @@
-#' Eco data
+#' Benefits data
 #'
 #' A dataset containing the benefits and other attributes.
 #'
-#' @format A data frame with 62775 rows and 6 variables:
+#' @format A data frame with 7440 rows and 12 variables:
 #' \describe{
-#'   \item{species_code}{species code of tree}
-#'   \item{species_region}{region of tree}
-#'   \item{dbh_range}{dbh ranges for tree to fall under}
-#'   \item{benefit_value}{benefit value associate with each dbh range}
+#'   \item{id}{id}
+#'   \item{species_code}{species code}
+#'   \item{x3_81}{dbh range}
+#'   \item{x11_43}{dbh range}
+#'   \item{x22_86}{dbh range}
+#'   \item{x38_10}{dbh range}
+#'   \item{x53_34}{dbh range}
+#'   \item{x68_58}{dbh range}
+#'   \item{x83_82}{dbh range}
+#'   \item{x99_06}{dbh range}
+#'   \item{x114_30}{dbh range}
+#'   \item{species_region}{species region}
 #'   \item{benefit}{benefit type}
-#'   \item{unit}{measurement unit for each benefit type}
+#'   \item{unit}{unit of measurment for benefit}
 #'   ...
 #' }
 #' @source \url{https://www.itreetools.org}
-"eco_data"
+"benefits"
 
 #' Species data
 #'
@@ -21,12 +29,13 @@
 #'
 #' @format A data frame with 4006 rows and 11 variables:
 #' \describe{
+#'   \item{id}{id}
 #'   \item{species_code}{species code}
 #'   \item{scientific_name}{scientific name of tree}
 #'   \item{common_name}{common name of tree}
 #'   \item{tree_type}{type of tree}
 #'   \item{spp_value_assignment}{another tree code for linking trees to benefits}
-#'   \item{species_rating}{to be determined...}
+#'   \item{species_rating_percent}{to be determined...}
 #'   \item{basic_price_sq_in}{to be determined...}
 #'   \item{palm_trunk_cost_ft}{to be determined...}
 #'   \item{replacement_cost}{to be determined...}
@@ -35,9 +44,9 @@
 #'   ...
 #' }
 #' @source \url{https://www.itreetools.org}
-"species_data"
+"species"
 
-#' Currency data
+#' Money data
 #'
 #' A dataset containing benefit to currency conversion values
 #'
@@ -57,4 +66,4 @@
 #'   ...
 #' }
 #' @source \url{https://www.itreetools.org}
-"currency_data"
+"money"
