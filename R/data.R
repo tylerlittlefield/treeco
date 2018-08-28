@@ -4,7 +4,7 @@
 #' species using the "spp_value_assignment", i-Tree's way of linking species to
 #' their appropriate benefit values.
 #'
-#' @format A data frame with 7440 rows and 12 variables:
+#' @format A data frame with 6975 rows and 14 variables:
 #' \describe{
 #'   \item{id}{id variable.}
 #'   \item{species_code}{This is the "spp_value_assignment" and acts as a key linking trees to their appropriate benefit values.}
@@ -29,7 +29,7 @@
 #'
 #' A dataset containing species data and other attributes.
 #'
-#' @format A data frame with 4006 rows and 11 variables:
+#' @format A data frame with 3178 rows and 12 variables:
 #' \describe{
 #'   \item{id}{id variable.}
 #'   \item{species_code}{species code}
