@@ -130,11 +130,18 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   z <- abs(outer(dbh_values, dbh_ranges, `-`))
 
-  # a function that returns the position of n-th largest
+  # A function that returns the position of n-th largest
   # https://stackoverflow.com/questions/10296866/
-  minn <- function(n) function(x) order(x, decreasing = FALSE)[n]
-  trees_unique$a <- apply(z, 1, minn(1))
-  trees_unique$b <- apply(z, 1, minn(2))
+  # The commented out stuff is a little faster but needs more testing.
+  # minn <- function(n) function(x) order(x, decreasing = FALSE)[n]
+  # minnp <- function(n) function(x) sort(x, partial = 1)[n]
+  trees_unique$a <- apply(z, 1, which.min)
+  z[z==apply(z, 1, min)] <- Inf
+  trees_unique$b <- apply(z, 1, which.min)
+  # message("Creating a var...")
+  # trees_unique$a <- apply(z, 1, minn(1))
+  # message("Creating b var...")
+  # trees_unique$b <- apply(z, 1, minn(2))
   trees_unique$start <- pmin(trees_unique$a, trees_unique$b)
   trees_unique$end <- pmax(trees_unique$a, trees_unique$b)
   trees_unique$x1 <- dbh_ranges[trees_unique$start]
@@ -170,7 +177,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
   trees_unique <- stats::na.omit(trees_unique)
   trees <- stats::na.omit(trees)
 
-  # A bunch of copy/paster (yuck) to grab eco benefit money values so we can
+  # A bunch of copy/paste (yuck) to grab eco benefit money values so we can
   # multiply the benefit by these values to get $ saved. Figure out a more
   # elegant way of doing this. Looks ugly.
   elec_money <- money[grepl("electricity", money$variable)][["value"]]
