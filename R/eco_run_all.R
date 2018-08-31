@@ -26,12 +26,12 @@ extract <- function(data, species_col, dbh_col, region) {
   money    <- data.table::melt(money, id.vars = c("region_code", "region_name")) # Melt the dataset to 'tidy' format
   money    <- money[, c("variable", "value")]                                    # Select the variables we need
 
-  data.table::setnames(trees, species_col, "common_name")                        # Rename species column to stay consistent
-  data.table::setnames(trees, dbh_col, "dbh_val")                                # Rename dbh column to stay consistent
+  data.table::setnames(trees, species_col, "common_name")
+  data.table::setnames(trees, dbh_col, "dbh_val")
 
   trees         <- trees[, .SD, .SDcol = c("common_name", "dbh_val")][trees$dbh_val > 0] # Arrange columns consistently, then extract all records where dbh > 0
-  benefits      <- benefits[grepl(region, species_region)]                            # Extract benefits within user defined region
-  species       <- species[grepl(region, species_region)]                              # Extract species within user defined region
+  benefits      <- benefits[grepl(region, species_region)]                               # Extract benefits within user defined region
+  species       <- species[grepl(region, species_region)]                                # Extract species within user defined region
   trees$dbh_val <- trees$dbh_val * 2.54
 
   output   <- list(trees = trees,
