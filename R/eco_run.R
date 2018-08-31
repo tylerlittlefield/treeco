@@ -49,10 +49,10 @@ eco_guess <- function(common, region) {
   # If common name given by user matches common name found, no message
   # else, print message of which species will be used
   if (df$common_name[1] == common) {
-    invisible(df[["spp_value_assignment"]][1])
+    invisible(df)
   } else {
     message("Species given: [", common, "]\nClosest match: [", df$common_name[1], "]\n...\nUsing closest match", sep = "")
-    invisible(df[["spp_value_assignment"]][1])
+    invisible(df)
   }
 }
 
@@ -69,9 +69,11 @@ eco_guess <- function(common, region) {
 #' @export
 eco_run <- function(common, dbh, region) {
 
-  species_val <- eco_guess(common, region)
+  species_guess <- eco_guess(common, region)
+  species_val <- species_guess$spp_value_assignment
+  species_common_guess <- species_guess$common_name
 
-  tree     <- data.table::data.table(common_name = common,
+  tree     <- data.table::data.table(common_name = species_common_guess,
                                      dbh_val = dbh,
                                      region = region,
                                      stringsAsFactors = FALSE)
@@ -170,6 +172,7 @@ eco_run <- function(common, dbh, region) {
   tree_vars <- c("common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars")
   tree <- tree[, .SD, .SDcols = tree_vars]
   data.table::setnames(tree, "dbh_val", "dbh")
+  tree$common_name <- paste0(toupper(substr(tree$common_name, 1, 1)), substr(tree$common_name, 2, nchar(tree$common_name)))
 
   return(tree)
 
