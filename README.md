@@ -60,7 +60,7 @@ treeco::eco_run("Common fig", 20, "InlEmpCLM")
  8:  Common fig  20        0.0602     aq voc avoided   lb    0.12
  9:  Common fig  20        0.0000               bvoc   lb    0.00
 10:  Common fig  20      122.7973        co2 avoided   lb    0.41
-11:  Common fig  20       54.2337    co2 sequestered   lb    0.18
+11:  Common fig  20        9.0389    co2 sequestered   lb    0.03
 12:  Common fig  20     1255.7516        co2 storage   lb    4.19
 13:  Common fig  20      189.2000        electricity  kwh   38.12
 14:  Common fig  20      834.7837 hydro interception  gal    4.59
