@@ -44,3 +44,52 @@ Time difference of 14.26213 secs
 5275065: 400000 Liquidambar styraciflua    Sweetgum      40      -87.0825        natural gas   lb    0.58
 ```
 
+Use `eco_run` to calculate benefits for a single tree:
+
+```r
+treeco::eco_run("Common fig", 20, "InlEmpCLM")
+
+    common_name dbh benefit_value            benefit unit dollars
+ 1:  Common fig  20        0.2429     aq nox avoided   lb    0.93
+ 2:  Common fig  20        0.2623         aq nox dep   lb    1.01
+ 3:  Common fig  20        0.7716       aq ozone dep   lb    2.96
+ 4:  Common fig  20        0.0602    aq pm10 avoided   lb    0.28
+ 5:  Common fig  20        0.4079        aq pm10 dep   lb    1.89
+ 6:  Common fig  20        0.4813     aq sox avoided   lb    1.17
+ 7:  Common fig  20        0.0353         aq sox dep   lb    0.09
+ 8:  Common fig  20        0.0602     aq voc avoided   lb    0.12
+ 9:  Common fig  20        0.0000               bvoc   lb    0.00
+10:  Common fig  20      122.7973        co2 avoided   lb    0.41
+11:  Common fig  20       54.2337    co2 sequestered   lb    0.18
+12:  Common fig  20     1255.7516        co2 storage   lb    4.19
+13:  Common fig  20      189.2000        electricity  kwh   38.12
+14:  Common fig  20      834.7837 hydro interception  gal    4.59
+15:  Common fig  20     -179.4561        natural gas   lb    1.20
+```
+
+These functions guess the species codes on the fly. For example, if we misspell "Common fig" as "Commn fig":
+
+```r
+treeco::eco_run("Commn fig", 20, "InlEmpCLM")
+
+Species given: [commn fig]
+Closest match: [common fig]
+...
+Using closest match
+    common_name dbh benefit_value            benefit unit dollars
+ 1:   Commn fig  20        0.2429     aq nox avoided   lb    0.93
+ 2:   Commn fig  20        0.2623         aq nox dep   lb    1.01
+ 3:   Commn fig  20        0.7716       aq ozone dep   lb    2.96
+ 4:   Commn fig  20        0.0602    aq pm10 avoided   lb    0.28
+ 5:   Commn fig  20        0.4079        aq pm10 dep   lb    1.89
+ 6:   Commn fig  20        0.4813     aq sox avoided   lb    1.17
+ 7:   Commn fig  20        0.0353         aq sox dep   lb    0.09
+ 8:   Commn fig  20        0.0602     aq voc avoided   lb    0.12
+ 9:   Commn fig  20        0.0000               bvoc   lb    0.00
+10:   Commn fig  20      122.7973        co2 avoided   lb    0.41
+11:   Commn fig  20       54.2337    co2 sequestered   lb    0.18
+12:   Commn fig  20     1255.7516        co2 storage   lb    4.19
+13:   Commn fig  20      189.2000        electricity  kwh   38.12
+14:   Commn fig  20      834.7837 hydro interception  gal    4.59
+15:   Commn fig  20     -179.4561        natural gas   lb    1.20
+```
