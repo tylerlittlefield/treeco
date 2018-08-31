@@ -22,26 +22,25 @@ treeco::eco_run_all(
   region = "InlEmpCLM"         # region
 )
 
-# Importing data...
-# Cleaning data...
-# Guessing species codes...
-# Linking benefits to data...
-# Calculating eco benefits...
-# Calculating $ benefits...
-# Eco benefits complete!
-# Time difference of 20.4605 secs
-# 
-#              id         scientific_name common_name dbh_val benefit_value            benefit unit dollars
-#       1:      1           Abies procera   Noble fir       1        0.0053     aq nox avoided   lb    0.02
-#       2:      1           Abies procera   Noble fir       1        0.0022         aq nox dep   lb    0.01
-#       3:      1           Abies procera   Noble fir       1        0.0077       aq ozone dep   lb    0.03
-#       4:      1           Abies procera   Noble fir       1        0.0013    aq pm10 avoided   lb    0.01
-#       5:      1           Abies procera   Noble fir       1        0.0033        aq pm10 dep   lb    0.02
-#      ---                                                                                                 
-# 5275061: 400000 Liquidambar styraciflua    Sweetgum      40        0.0000    co2 sequestered   lb    0.00
-# 5275062: 400000 Liquidambar styraciflua    Sweetgum      40    12147.0153        co2 storage   lb   40.57
-# 5275063: 400000 Liquidambar styraciflua    Sweetgum      40      219.0000        electricity  kwh   44.12
-# 5275064: 400000 Liquidambar styraciflua    Sweetgum      40     1093.6723 hydro interception  gal    6.02
-# 5275065: 400000 Liquidambar styraciflua    Sweetgum      40      -87.0825        natural gas   lb    0.58
+Importing data...
+Cleaning data...
+Guessing species codes...
+Linking benefits to data...
+Calculating eco benefits...
+Calculating $ benefits...
+Eco benefits complete!
+Time difference of 14.26213 secs
+             id         scientific_name common_name dbh_val benefit_value            benefit unit dollars
+      1:      1           Abies procera   Noble fir       1        0.0053     aq nox avoided   lb    0.02
+      2:      1           Abies procera   Noble fir       1        0.0022         aq nox dep   lb    0.01
+      3:      1           Abies procera   Noble fir       1        0.0077       aq ozone dep   lb    0.03
+      4:      1           Abies procera   Noble fir       1        0.0013    aq pm10 avoided   lb    0.01
+      5:      1           Abies procera   Noble fir       1        0.0033        aq pm10 dep   lb    0.02
+     ---                                                                                                 
+5275061: 400000 Liquidambar styraciflua    Sweetgum      40       86.6416    co2 sequestered   lb    0.29
+5275062: 400000 Liquidambar styraciflua    Sweetgum      40    12147.0153        co2 storage   lb   40.57
+5275063: 400000 Liquidambar styraciflua    Sweetgum      40      219.0000        electricity  kwh   44.12
+5275064: 400000 Liquidambar styraciflua    Sweetgum      40     1093.6723 hydro interception  gal    6.02
+5275065: 400000 Liquidambar styraciflua    Sweetgum      40      -87.0825        natural gas   lb    0.58
 ```
 
