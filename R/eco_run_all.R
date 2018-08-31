@@ -225,6 +225,7 @@ eco_run_all <- function(data, species_col, dbh_col, region) {
 
   # Capitalize first word in common name
   trees_final$common_name <- paste0(toupper(substr(trees_final$common_name, 1, 1)), substr(trees_final$common_name, 2, nchar(trees_final$common_name)))
+  data.table::setnames(trees_final, "dbh_val", "dbh")
 
   message("Eco benefits complete!")
 
