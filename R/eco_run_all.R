@@ -91,9 +91,10 @@ extract_parameters <- function(tree_data) {
 
   z <- abs(outer(dbh_values, dbh_ranges, `-`))
 
-  tree_data$a <- apply(z, 1, which.min)
+  tree_data <- stats::na.omit(tree_data)
+  tree_data$a <- unlist(apply(z, 1, which.min))
   z[z==apply(z, 1, min)] <- Inf
-  tree_data$b <- apply(z, 1, which.min)
+  tree_data$b <- unlist(apply(z, 1, which.min))
   tree_data$start <- pmin(tree_data$a, tree_data$b)
   tree_data$end <- pmax(tree_data$a, tree_data$b)
   tree_data$x1 <- dbh_ranges[tree_data$start]
