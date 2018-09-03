@@ -4,7 +4,7 @@
 \alias{eco_run_all}
 \title{Run eco benefits for an entire tree inventory}
 \usage{
-eco_run_all(data, species_col, dbh_col, region)
+eco_run_all(data, species_col, dbh_col, region, print_time = NULL)
 }
 \arguments{
 \item{data}{path to csv file containing tree inventory}
@@ -14,6 +14,8 @@ eco_run_all(data, species_col, dbh_col, region)
 \item{dbh_col}{the name of the column containing dbh values}
 
 \item{region}{region code, see \code{species} or \code{benefits}}
+
+\item{print_time}{Logical TRUE or FALSE for printing the elapsed time}
 }
 \description{
 Run eco benefits for an entire tree inventory
