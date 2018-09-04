@@ -12,8 +12,6 @@ eco_interp <- function(x, x1, y1, x2, y2) {
     is.numeric(y2)
   )
 
-  message("Interpolating benefits...")
-
   y = ((x - x1) * (y2 - y1) / (x2 - x1)) + y1
   return(y)
 }
@@ -50,18 +48,18 @@ extract_data <- function(data, species_col, dbh_col, region) {
   data.table::setnames(trees, species_col, "common_name")
   data.table::setnames(trees, dbh_col, "dbh_val")
 
-  trees         <- trees[, .SD, .SDcol = c("common_name", "dbh_val")][trees$dbh_val > 0]
-  benefits      <- benefits[grepl(region, species_region)]
-  species       <- species[grepl(region, species_region)]
-  trees$dbh_val <- trees$dbh_val * 2.54
-
   # Assert that the common_name is character, the dbh column is numeric, and
-  # the region parameters exists.
+  # the region parameter exists.
   stopifnot(
     is.character(trees$common_name),
     is.numeric(trees$dbh_val),
     region %in% unique(treeco::money$region_code)
   )
+
+  trees         <- trees[, .SD, .SDcol = c("common_name", "dbh_val")][trees$dbh_val > 0]
+  benefits      <- benefits[grepl(region, species_region)]
+  species       <- species[grepl(region, species_region)]
+  trees$dbh_val <- trees$dbh_val * 2.54
 
   output <- list(trees = trees,
                  benefits = benefits,
@@ -247,6 +245,8 @@ eco_run_all <- function(data, species_col, dbh_col, region, print_time = NULL) {
   # Select the variables we need
   tree_vars <- c("id", "scientific_name", "common_name", "dbh_val", "x1", "x2", "y1", "y2", "benefit", "unit")
   trees_unique <- trees_unique[, .SD, .SDcols = tree_vars]
+
+  message("Interpolating benefits...")
 
   # Extract the benefit values given the x, x1, x2, y1, y2 values we just gathered
   trees_unique <- extract_benefits(trees_unique)
