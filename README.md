@@ -16,28 +16,31 @@ Use `eco_run_all` to calculate benefits for an entire tree inventory:
 
 ```r
 treeco::eco_run_all(
-  data = "data/trees.csv",     # data directory
-  species_col = "common_name", # name of my common name field
-  dbh_col = "dbh_val",         # name of my dbh field
-  region = "InlEmpCLM"         # region
-)
+  data = "inventory_data/trees.csv, # Path to csv file
+  common_col = "common_name",       # Common field
+  botanical_col = "botanical_name", # Botanical field
+  dbh_col = "dbh_in",               # DBH column
+  region = "InlEmpCLM",             # Tree region
+  print_time = TRUE                 # Optional, print the elapsed time
+  )
 
 Importing trees.csv...
 Gathering species matches...
 Gathering interpolation parameters...
 Interpolating benefits...
-             id         scientific_name common_name dbh_val benefit_value            benefit unit dollars
-      1:      1           Abies procera   Noble fir       1        0.0053     aq nox avoided   lb    0.02
-      2:      1           Abies procera   Noble fir       1        0.0022         aq nox dep   lb    0.01
-      3:      1           Abies procera   Noble fir       1        0.0077       aq ozone dep   lb    0.03
-      4:      1           Abies procera   Noble fir       1        0.0013    aq pm10 avoided   lb    0.01
-      5:      1           Abies procera   Noble fir       1        0.0033        aq pm10 dep   lb    0.02
-     ---                                                                                                 
-5275061: 400000 Liquidambar styraciflua    Sweetgum      40       86.6416    co2 sequestered   lb    0.29
-5275062: 400000 Liquidambar styraciflua    Sweetgum      40    12147.0153        co2 storage   lb   40.57
-5275063: 400000 Liquidambar styraciflua    Sweetgum      40      219.0000        electricity  kwh   44.12
-5275064: 400000 Liquidambar styraciflua    Sweetgum      40     1093.6723 hydro interception  gal    6.02
-5275065: 400000 Liquidambar styraciflua    Sweetgum      40      -87.0825        natural gas   lb    0.58
+Time difference of 0.3816578 secs
+         id           botanical             common dbh benefit_value            benefit unit dollars
+    1:    1         Acer rubrum          Red maple  14        0.1314     aq nox avoided   lb    0.50
+    2:    1         Acer rubrum          Red maple  14        0.1548         aq nox dep   lb    0.59
+    3:    1         Acer rubrum          Red maple  14        0.4736       aq ozone dep   lb    1.82
+    4:    1         Acer rubrum          Red maple  14        0.0322    aq pm10 avoided   lb    0.15
+    5:    1         Acer rubrum          Red maple  14        0.2487        aq pm10 dep   lb    1.15
+   ---                                                                                              
+44261: 2951 Celtis occidentalis Northern hackberry   7       46.8358    co2 sequestered   lb    0.16
+44262: 2951 Celtis occidentalis Northern hackberry   7      281.8975        co2 storage   lb    0.94
+44263: 2951 Celtis occidentalis Northern hackberry   7       40.9333        electricity  kwh    8.25
+44264: 2951 Celtis occidentalis Northern hackberry   7      127.9649 hydro interception  gal    0.70
+44265: 2951 Celtis occidentalis Northern hackberry   7      -25.8430        natural gas   lb    0.17
 ```
 
 Use `eco_run` to calculate benefits for a single tree:
