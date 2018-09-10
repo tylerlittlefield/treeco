@@ -33,11 +33,12 @@ string_dist <- function(str_1, str_2) {
 # ------------------------------------------------------------------------------
 # Data extract function
 # ------------------------------------------------------------------------------
-extract_data <- function(data, species_col, dbh_col, region) {
+extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
 
   message("Importing ", basename(data), "...")
 
-  trees    <- data.table::fread(data)
+  trees    <- data.table::fread(data) # or...
+  # trees    <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
   benefits <- data.table::as.data.table(treeco::benefits)
   species  <- data.table::as.data.table(treeco::species)
   money    <- data.table::as.data.table(treeco::money)
@@ -45,18 +46,22 @@ extract_data <- function(data, species_col, dbh_col, region) {
   money    <- data.table::melt(money, id.vars = c("region_code", "region_name"))
   money    <- money[, c("variable", "value")]
 
-  data.table::setnames(trees, species_col, "common_name")
+  data.table::setnames(trees, botanical_col, "botanical_name")
+  data.table::setnames(trees, common_col, "common_name")
   data.table::setnames(trees, dbh_col, "dbh_val")
+
+  trees$dbh_val <- as.numeric(trees$dbh_val)
 
   # Assert that the common_name is character, the dbh column is numeric, and
   # the region parameter exists.
   stopifnot(
+    is.character(trees$botanical_name),
     is.character(trees$common_name),
     is.numeric(trees$dbh_val),
     region %in% unique(treeco::money$region_code)
   )
 
-  trees         <- trees[, .SD, .SDcol = c("common_name", "dbh_val")][trees$dbh_val > 0]
+  trees         <- trees[, .SD, .SDcol = c("common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
   benefits      <- benefits[grepl(region, species_region)]
   species       <- species[grepl(region, species_region)]
   trees$dbh_val <- trees$dbh_val * 2.54
@@ -128,12 +133,12 @@ extract_parameters <- function(tree_data) {
   # https://stackoverflow.com/questions/20617371/
   tbl_rows        <- seq_along(tree_data$id)
   tbl_indicies_y1 <- tree_data$start
-  tbl_mat         <- as.matrix(tree_data[,7:15]) # careful with this
+  tbl_mat         <- as.matrix(tree_data[,6:14]) # careful with this
   tree_data$y1    <- tbl_mat[cbind(tbl_rows, tbl_indicies_y1)]
 
   tbl_rows        <- seq_along(tree_data$id)
   tbl_indicies_y2 <- tree_data$end
-  tbl_mat         <- as.matrix(tree_data[,7:15]) # careful with this, easy to fuck up
+  tbl_mat         <- as.matrix(tree_data[,6:14]) # careful with this, easy to fuck up
   tree_data$y2    <- tbl_mat[cbind(tbl_rows, tbl_indicies_y2)]
 
   return(tree_data)
@@ -146,32 +151,78 @@ extract_matches <- function(tree_data, species_data) {
 
   message("Gathering species matches...")
 
-  trees_unique <- unique(tree_data, by = c("common_name", "dbh_val"))
-  unique_common_names <- unique(tree_data[, c("common_name")])
+  trees <- tree_data
+  species <- species_data
 
-  tree_data[, ("id") := 1:nrow(tree_data)]
-  trees_unique[, ("id") := 1:nrow(trees_unique)]
+  '%nin%' <- Negate('%in%')
 
-  vec <- unlist(lapply(unique_common_names$common_name, function(x) which.max(string_dist(x, species_data$common_name))))
-  unique_common_names$spp_value <- species_data[vec,][["spp_value_assignment"]]
-  unique_common_names$common_master <- tolower(species_data[vec,][["common_name"]])
-  unique_common_names$scientific_name <- species_data[vec,][["scientific_name"]]
-  unique_common_names$common_name <- tolower(unique_common_names$common_name)
-  trees_unique$common_name <- tolower(trees_unique$common_name)
-  tree_data$common_name <- tolower(tree_data$common_name)
-  unique_common_names[, "sim" := string_dist(common_name[1], common_master[1]), by = common_name]
-  unique_common_names <- unique_common_names[sim >= 0.90]
-  unique_common_names <- unique_common_names[, c("scientific_name", "common_name", "spp_value")]
-  tree_data <- tree_data[tree_data$common_name %in% unique_common_names$common_name]
-  trees_unique <- trees_unique[trees_unique$common_name %in% unique_common_names$common_name]
+  # Extract unique common names, convert to lower case, remove punctuation
+  unique_commons <- unique(trees[, "common_name"])
+  unique_commons <- stats::na.omit(unique_commons)
+  unique_commons$common_name <- tolower(unique_commons$common_name)
+  unique_commons$common_name <- gsub('[[:punct:]]+', '', unique_commons$common_name)
+  unique_commons$common_name <- trimws(unique_commons$common_name, "both") # Save for end?
 
-  data.table::setkey(unique_common_names, "common_name")
-  data.table::setkey(trees_unique, "common_name")
-  data.table::setkey(tree_data, "common_name")
-  trees_unique <- trees_unique[unique_common_names, allow.cartesian=TRUE]
-  tree_data <- tree_data[unique_common_names, allow.cartesian=TRUE]
-  tree_data <- unique(tree_data, by = "id") # Why is this needed? Something wrong here...
-  output <- list(trees = tree_data, trees_unique = trees_unique)
+  # Extract unique botanical names, conver to lower case, remove punctuation
+  unique_botanicals <- unique(trees[, "botanical_name"])
+  unique_botanicals <- stats::na.omit(unique_botanicals)
+  unique_botanicals$botanical_name <- tolower(unique_botanicals$botanical_name)
+  unique_botanicals$botanical_name <- gsub('[[:punct:]]+', '', unique_botanicals$botanical_name)
+  unique_botanicals$botanical_name <- trimws(unique_botanicals$botanical_name, "both") # Save for end?
+
+  species$common_name_m <- tolower(species$common_name)
+  species$common_name_m <- gsub('[[:punct:]]+', '', species$common_name_m)
+  species$common_name_m <- trimws(species$common_name_m, "both") # Save for end?
+
+  species$botanical_name_m <- tolower(species$scientific_name)
+  species$botanical_name_m <- gsub('[[:punct:]]+', '', species$botanical_name_m)
+  species$botanical_name_m <- trimws(species$botanical_name_m, "both") # Save for end?
+
+  vec <- unlist(lapply(unique_commons$common_name, function(x) which.max(string_dist(x, species$common_name_m))))
+
+  unique_commons$common_name_m <- species[vec,][["common_name_m"]]
+  unique_commons$botanical_name_m <- species[vec,][["botanical_name_m"]]
+  unique_commons$spp_value_assignment <- species[vec,][["spp_value_assignment"]]
+  unique_commons[, "sim" := string_dist(common_name[1], common_name_m[1]), by = common_name]
+  unique_commons_1 <- unique_commons[sim >= 0.80]
+
+  species <- species[species$common_name_m %nin% unique_commons_1$common_name_m, ]
+
+  vec <- unlist(lapply(unique_botanicals$botanical_name, function(x) which.max(string_dist(x, species$botanical_name_m))))
+
+  unique_botanicals$botanical_name_m <- species[vec,][["botanical_name_m"]]
+  unique_botanicals$common_name_m <- species[vec,][["common_name_m"]]
+  unique_botanicals$spp_value_assignment <- species[vec,][["spp_value_assignment"]]
+  unique_botanicals[, "sim" := string_dist(botanical_name[1], botanical_name_m[1]), by = botanical_name]
+  unique_botanicals_1 <- unique_botanicals[sim >= 0.80]
+
+  trees$common_name <- tolower(trees$common_name)
+  trees$common_name <- gsub('[[:punct:]]+', '', trees$common_name)
+  trees$common_name <- trimws(trees$common_name, "both") # Save for end?
+
+  trees$botanical_name <- tolower(trees$botanical_name)
+  trees$botanical_name <- gsub('[[:punct:]]+', '', trees$botanical_name)
+  trees$botanical_name <- trimws(trees$botanical_name, "both") # Save for end?
+
+  trees_common <- trees[unique_commons_1, on = "common_name"]
+  trees_botanical <- trees[unique_botanicals_1, on = "botanical_name"]
+
+  trees <- rbind(trees_common, trees_botanical)
+
+  tree_vars <- c("common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
+  trees <- trees[, .SD, .SDcols = tree_vars]
+  trees <- trees[, ("id") := 1:nrow(trees)]
+
+  tree_vars <- c("common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
+  trees_unique <- trees[, .SD, .SDcols = tree_vars]
+  trees_unique <- unique(trees_unique, by = c("common_name_m", "dbh_val"))
+
+  data.table::setnames(trees, "common_name_m", "common_name")
+  data.table::setnames(trees, "botanical_name_m", "botanical_name")
+  data.table::setnames(trees_unique, "common_name_m", "common_name")
+  data.table::setnames(trees_unique, "botanical_name_m", "botanical_name")
+
+  output <- list(trees = trees, trees_unique = trees_unique)
   return(output)
 }
 
@@ -187,10 +238,10 @@ extract_benefits <- function(tree_data) {
 #-------------------------------------------------------------------------------
 # Capitalize first word function
 #-------------------------------------------------------------------------------
-capitalize <- function(tree_data) {
+capitalize <- function(tree_data, var) {
   var <- paste0(
-    toupper(substr(tree_data$common_name, 1, 1)),
-    substr(tree_data$common_name, 2, nchar(tree_data$common_name))
+    toupper(substr(tree_data[[var]], 1, 1)),
+    substr(tree_data[[var]], 2, nchar(tree_data[[var]]))
   )
 
   return(var)
@@ -203,19 +254,20 @@ capitalize <- function(tree_data) {
 #' Run eco benefits for an entire tree inventory
 #'
 #' @param data path to csv file containing tree inventory
-#' @param species_col the name of the column containing common names of species
+#' @param common_col the name of the column containing common names
+#' @param botanical_col the name of the column containing botanical names
 #' @param dbh_col the name of the column containing dbh values
 #' @param region region code, see \code{species} or \code{benefits}
 #' @param print_time Logical TRUE or FALSE for printing the elapsed time
 #'
 #' @import data.table
 #' @export
-eco_run_all <- function(data, species_col, dbh_col, region, print_time = NULL) {
+eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_time = NULL) {
 
   start_time <- Sys.time()
 
   # Extract and reshape the input data
-  tree_data <- extract_data(data, species_col, dbh_col, region)
+  tree_data <- extract_data(data, common_col, botanical_col, dbh_col, region)
 
   # Output is store in a list, assign each list element to an object
   trees <- tree_data$trees
@@ -231,9 +283,9 @@ eco_run_all <- function(data, species_col, dbh_col, region, print_time = NULL) {
   trees_unique <- matches$trees_unique
 
   # Set keys to join data to benefit data
-  data.table::setkey(trees_unique, "spp_value")
+  data.table::setkey(trees_unique, "spp_value_assignment")
   data.table::setkey(benefits, "species_code")
-  data.table::setkey(trees, "spp_value")
+  data.table::setkey(trees, "spp_value_assignment")
 
   # Join the data
   trees_unique <- trees_unique[benefits, allow.cartesian=TRUE]
@@ -243,7 +295,7 @@ eco_run_all <- function(data, species_col, dbh_col, region, print_time = NULL) {
   trees_unique <- extract_parameters(trees_unique)
 
   # Select the variables we need
-  tree_vars <- c("id", "scientific_name", "common_name", "dbh_val", "x1", "x2", "y1", "y2", "benefit", "unit")
+  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "x1", "x2", "y1", "y2", "benefit", "unit")
   trees_unique <- trees_unique[, .SD, .SDcols = tree_vars]
 
   message("Interpolating benefits...")
@@ -277,14 +329,17 @@ eco_run_all <- function(data, species_col, dbh_col, region, print_time = NULL) {
   data.table::setkey(trees_final, "id")
 
   # Grab the variables we need
-  tree_vars <- c("id", "scientific_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars")
+  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars")
   trees_final <- trees_final[, .SD, .SDcols = tree_vars]
 
   # Capitalize the first word of common name
-  trees_final$common_name <- capitalize(trees_final)
+  trees_final$common_name <- capitalize(trees_final, "common_name")
+  trees_final$botanical_name <- capitalize(trees_final, "botanical_name")
 
   # Rename the 'dbh_val' var to just 'dbh'
   data.table::setnames(trees_final, "dbh_val", "dbh")
+  data.table::setnames(trees_final, "common_name", "common")
+  data.table::setnames(trees_final, "botanical_name", "botanical")
 
   end_time <- Sys.time()
   elapsed_time <- end_time - start_time

@@ -4,12 +4,15 @@
 \alias{eco_run_all}
 \title{Run eco benefits for an entire tree inventory}
 \usage{
-eco_run_all(data, species_col, dbh_col, region, print_time = NULL)
+eco_run_all(data, common_col, botanical_col, dbh_col, region,
+  print_time = NULL)
 }
 \arguments{
 \item{data}{path to csv file containing tree inventory}
 
-\item{species_col}{the name of the column containing common names of species}
+\item{common_col}{the name of the column containing common names}
+
+\item{botanical_col}{the name of the column containing botanical names}
 
 \item{dbh_col}{the name of the column containing dbh values}
 
