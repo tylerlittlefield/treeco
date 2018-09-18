@@ -20,7 +20,7 @@ string_dist <- function(str_1, str_2) {
 #-------------------------------------------------------------------------------
 # Function for guessing the common name
 #-------------------------------------------------------------------------------
-eco_guess <- function(common, region) {
+guess_common <- function(common, region) {
 
   # Make common input lower case
   common <- tolower(common)
@@ -69,7 +69,7 @@ eco_guess <- function(common, region) {
 #' @export
 eco_run <- function(common, dbh, region) {
 
-  species_guess <- eco_guess(common, region)
+  species_guess <- guess_common(common, region)
   species_val <- species_guess$spp_value_assignment
   species_common_guess <- species_guess$common_name
 
