@@ -92,3 +92,23 @@ Using closest match
 14:  Common fig  20      834.7837 hydro interception  gal    4.59
 15:  Common fig  20     -179.4561        natural gas   lb    1.20
 ```
+
+If you are missing a field, you can use `eco_guess` to try and find it:
+
+```r
+# Toy data
+df <- data.frame(
+  botanical_name = c("Ficus carica", NA, "Cedrus deodara ", "Ficus carica")
+  )
+
+# Run
+treeco::eco_guess(
+  data = df,
+  have = "botanical_name",
+  guess = "common"
+  )
+  
+        original  field_guess
+1   ficus carica   Common fig
+2 cedrus deodara Deodar cedare
+```
