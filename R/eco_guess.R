@@ -42,23 +42,11 @@ eco_guess <- function(data, have, guess) {
 
   # Store as data.frame
   tree_df <- data.frame(
-    original = tree_vec,
+    original = data[[have]],
+    modified = tree_vec,
     field_guess = field_vec
   )
 
   return(tree_df)
 
 }
-
-# # Toy data
-# df <- data.frame(
-#   common_name = c("Common fig", "Common fig", "Deodar' Cedar", NA),
-#   botanical_name = c("Ficus carica", NA, "Cedrus deodara ", "Ficus carica")
-#   )
-#
-# # Run
-# eco_guess(
-#   data = df,
-#   have = "botanical_name",
-#   guess = "common"
-#   )
