@@ -35,9 +35,12 @@ string_dist <- function(str_1, str_2) {
 # ------------------------------------------------------------------------------
 extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
 
-  message("Importing ", basename(data), "...")
+  ifelse(
+    test = is.object(data),
+    yes = trees <- data.table::as.data.table(data),
+    no = trees <- data.table::fread(data)
+    )
 
-  trees    <- data.table::fread(data) # or...
   # trees    <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
   benefits <- data.table::as.data.table(treeco::benefits)
   species  <- data.table::as.data.table(treeco::species)
@@ -49,6 +52,9 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
   data.table::setnames(trees, botanical_col, "botanical_name")
   data.table::setnames(trees, common_col, "common_name")
   data.table::setnames(trees, dbh_col, "dbh_val")
+
+  trees$botanical_name <- as.character(trees$botanical_name)
+  trees$common_name <- as.character(trees$common_name)
 
   trees$dbh_val <- as.numeric(trees$dbh_val)
 
