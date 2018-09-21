@@ -112,3 +112,73 @@ treeco::eco_guess(
 1   ficus carica   Common fig
 2 cedrus deodara Deodar cedare
 ```
+
+## A reproducible example:
+
+```r
+library(dplyr)
+
+# Grab a random sample of 15,000 botanical names. We can do this two ways, using 
+# this one liner:
+rep(sample(unique(treeco::species$scientific_name), size = 50), length.out=15000)
+
+# Or...
+species <- treeco::species
+unique_species <- unique(species$scientific_name)
+unique_species_sample <- sample(unique_species, size = 50)
+species <- rep(unique_species_sample, length.out = 15000)
+
+# Then construct a dataframe.
+df_species <- data.frame(botanical_name = species)
+
+# In this scenario, we only have the botanical names, we can use eco_guess to
+# guess the common names given the botanical names in our inventory. The data 
+# I'm using is from i-Tree's master species list. I still won't have 100% 
+# matches because there are only so many types of trees in certain regions.
+common_guess <- eco_guess(
+  data = df_species, 
+  have = "botanical_name", 
+  guess = "common"
+)
+
+# Select required variables
+my_inventory <- common_guess[c("original", "field_guess")]
+
+# Add a DBH column
+my_inventory$dbh <- rep(sample(2:45), length.out = 15000)
+
+names(my_inventory)[1] <- "botanical"
+names(my_inventory)[2] <- "common"
+
+eco_run_all(
+  data = my_inventory,
+  common_col = "common",
+  botanical_col = "botanical",
+  dbh_col = "dbh",
+  region = "InlEmpCLM",
+  print_time = TRUE
+) %>% as_tibble()
+```
+
+Returns:
+
+```r
+Gathering species matches...
+Gathering interpolation parameters...
+Interpolating benefits...
+Time difference of 0.7438769 secs
+# A tibble: 126,000 x 8
+      id botanical     common      dbh benefit_value benefit    unit  dollars
+   <int> <chr>         <chr>     <dbl>         <dbl> <chr>      <chr>   <dbl>
+ 1     1 Acacia baile… Bailey a…    37        0.336  aq nox av… lb       1.29
+ 2     1 Acacia baile… Bailey a…    37        0.732  aq nox dep lb       2.81
+ 3     1 Acacia baile… Bailey a…    37        1.89   aq ozone … lb       7.26
+ 4     1 Acacia baile… Bailey a…    37        0.0829 aq pm10 a… lb       0.38
+ 5     1 Acacia baile… Bailey a…    37        1.06   aq pm10 d… lb       4.89
+ 6     1 Acacia baile… Bailey a…    37        0.662  aq sox av… lb       1.61
+ 7     1 Acacia baile… Bailey a…    37        0.0705 aq sox dep lb       0.17
+ 8     1 Acacia baile… Bailey a…    37        0.0829 aq voc av… lb       0.16
+ 9     1 Acacia baile… Bailey a…    37      -11.4    bvoc       lb      21.8 
+10     1 Acacia baile… Bailey a…    37      169.     co2 avoid… lb       0.56
+# ... with 125,990 more rows
+```
