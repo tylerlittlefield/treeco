@@ -133,9 +133,9 @@ df_species <- data.frame(botanical_name = species)
 
 # In this scenario, we only have the botanical names, we can use eco_guess to
 # guess the common names given the botanical names in our inventory. The data 
-# I'm using is from i-Tree's master species list. I still won't have 100% 
-# matches because there are only so many types of trees in certain regions.
-common_guess <- eco_guess(
+# I'm using is from i-Tree's species master list so I will have 100% matches,
+# this isn't usually the case for real data.
+common_guess <- treeco::eco_guess(
   data = df_species, 
   have = "botanical_name", 
   guess = "common"
@@ -150,7 +150,7 @@ my_inventory$dbh <- rep(sample(2:45), length.out = 15000)
 names(my_inventory)[1] <- "botanical"
 names(my_inventory)[2] <- "common"
 
-eco_run_all(
+treeco::eco_run_all(
   data = my_inventory,
   common_col = "common",
   botanical_col = "botanical",
