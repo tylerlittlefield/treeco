@@ -105,14 +105,9 @@ eco_run <- function(common, dbh, region) {
 
   # A function that returns the position of n-th largest
   # https://stackoverflow.com/questions/10296866/
-  # The commented out stuff is a little faster but needs more testing.
   tree$a <- apply(z, 1, which.min)
   z[z==apply(z, 1, min)] <- Inf
   tree$b <- apply(z, 1, which.min)
-  # message("Creating a var...")
-  # tree$a <- apply(z, 1, minn(1))
-  # message("Creating b var...")
-  # tree$b <- apply(z, 1, minn(2))
   tree$start <- pmin(tree$a, tree$b)
   tree$end <- pmax(tree$a, tree$b)
   tree$x1 <- dbh_ranges[tree$start]
