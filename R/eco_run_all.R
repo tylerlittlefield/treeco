@@ -350,7 +350,11 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_
   end_time <- Sys.time()
   elapsed_time <- end_time - start_time
 
-  if(isTRUE(print_time)) {print(elapsed_time)}
+  if(isTRUE(print_time)) {
+    et <- utils::capture.output(elapsed_time);
+    message(et);
+    attr(trees_final, "elapsed_time") <- elapsed_time
+    }
 
   return(trees_final)
 }
