@@ -37,6 +37,6 @@ test_that("eco_run_all works", {
   expect_equal(dim(output)[2], 8)
 
   # Test that the print statement works, eco_run_all stores the elapsed
-  # time as an attribute "elasped_time".
+  # time as an attribute "elapsed_time".
   expect_equal(is.null(attributes(output)$elapsed_time), FALSE)
 })
