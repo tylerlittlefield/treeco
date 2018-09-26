@@ -4,6 +4,8 @@ The goal of `treeco` is to provide R users a tool for calculating the eco benefi
 
 ## Installation
 
+`treeco` isn't available on CRAN but you can install it directly from github using [`devtools`](https://github.com/r-lib/devtools):
+
 ```r
 # install.packages("devtools")
 devtools::install_github("tylurp/treeco")
