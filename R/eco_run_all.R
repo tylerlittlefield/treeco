@@ -1,7 +1,3 @@
-#-------------------------------------------------------------------------------
-# Eco benefits function
-#-------------------------------------------------------------------------------
-
 #' Run eco benefits for an entire tree inventory
 #'
 #' @param data path to csv file containing tree inventory
@@ -20,7 +16,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_
   # Extract and reshape the input data
   tree_data <- extract_data(data, common_col, botanical_col, dbh_col, region)
 
-  # Output is store in a list, assign each list element to an object
+  # Output is stored in a list, assign each list element to an object
   trees <- tree_data$trees
   benefits <- tree_data$benefits
   species <- tree_data$species
@@ -29,7 +25,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_
   # Extract the species matches with a similarity score > 90%
   matches <- extract_matches(tree_data = trees, species_data = species)
 
-  # Output is (again) store as a list, assign each list element to an object
+  # Output is (again) stored as a list, assign each list element to an object
   trees <- matches$trees
   trees_unique <- matches$trees_unique
 
