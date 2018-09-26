@@ -1,7 +1,8 @@
-capitalize <- function(tree_data, var) {
+capitalize <- function(x) {
+
   var <- paste0(
-    toupper(substr(tree_data[[var]], 1, 1)),
-    substr(tree_data[[var]], 2, nchar(tree_data[[var]]))
+    toupper(substr(x, 1, 1)),
+    substr(x, 2, nchar(x))
   )
 
   return(var)
