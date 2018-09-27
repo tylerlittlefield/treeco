@@ -6,7 +6,7 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
     no = trees <- data.table::fread(data)
   )
 
-  # trees    <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
+  # trees  <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
   benefits <- data.table::as.data.table(treeco::benefits)
   species  <- data.table::as.data.table(treeco::species)
   money    <- data.table::as.data.table(treeco::money)
@@ -32,15 +32,17 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
     region %in% unique(treeco::money$region_code)
   )
 
-  trees         <- trees[, .SD, .SDcol = c("common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
-  benefits      <- benefits[grepl(region, species_region)]
-  species       <- species[grepl(region, species_region)]
+  trees <- trees[, .SD, .SDcol = c("common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
+  benefits <- benefits[grepl(region, species_region)]
+  species <- species[grepl(region, species_region)]
   trees$dbh_val <- trees$dbh_val * 2.54
 
-  output <- list(trees = trees,
-                 benefits = benefits,
-                 species = species,
-                 money = money)
+  output <- list(
+    trees = trees,
+    benefits = benefits,
+    species = species,
+    money = money
+    )
 
   return(output)
 }
