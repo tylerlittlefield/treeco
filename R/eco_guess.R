@@ -10,43 +10,44 @@
 #' @param guess The missing field, either "common" or "botanical".
 #'
 #' @export
-eco_guess <- function(data, have, guess) {
+eco_guess <- function(x, guess) {
 
-  # Which field is it? Common or botanical?
-  if(guess == "common") {species <- treeco::species$scientific_name}
-  if(guess %in% c("botanical", "scientific")) {species <- treeco::species$common_name}
+  species <- unique(treeco::species[c("common_name", "scientific_name")])
 
   # Lower case for user data and species master list in hopes it improve the
   # guessing.
-  tree_vec <- unique(tolower(as.character(data[[have]])))
-  field_vec <- unique(tolower(species))
+  tree_vec <- unique(tolower(as.character(x)))
+  species$common_name <- tolower(species$common_name)
+  species$scientific_name <- tolower(species$scientific_name)
 
   # Remove NA's from them both.
   tree_vec <- tree_vec[!is.na(tree_vec)]
-  field_vec <- field_vec[!is.na(field_vec)]
+  species <- species[complete.cases(species), ]
 
   # Remove punctuation.
   tree_vec <- gsub('[[:punct:]]+', '', tree_vec)
-  field_vec <- gsub('[[:punct:]]+', '', field_vec)
+  species$common_name <- gsub('[[:punct:]]+', '', species$common_name)
+  species$scientific_name <- gsub('[[:punct:]]+', '', species$scientific_name)
 
   # Trim any white space.
   tree_vec <- trimws(tree_vec, "both")
-  field_vec <- trimws(field_vec, "both")
+  species$common_name <- trimws(species$common_name, "both")
+  species$scientific_name <- trimws(species$scientific_name, "both")
 
   # Grab the index of the highest match for each unique tree
-  field_idx <- unlist(lapply(tree_vec, function(x) which.max(string_dist(x, field_vec))))
+
+  ifelse(
+    test = guess == "common",
+    yes = field_idx <- unlist(lapply(tree_vec, function(x) which.max(string_dist(x, species$scientific_name)))),
+    no = field_idx <- unlist(lapply(tree_vec, function(x) which.max(string_dist(x, species$common_name))))
+    )
 
   # Grab the guessed species
-  if(guess == "common") {field_vec <- treeco::species$common_name[field_idx]}
-  if(guess == "botanical") {field_vec <- treeco::species$scientific_name[field_idx]}
+  if(guess == "common") {output <- species$common_name[field_idx]}
+  if(guess == "botanical") {output <- species$scientific_name[field_idx]}
 
-  # Store as data.frame
-  tree_df <- data.frame(
-    original = data[[have]],
-    modified = tree_vec,
-    field_guess = field_vec
-  )
+  output <- capitalize(output)
 
-  return(tree_df)
+  return(output)
 
 }
