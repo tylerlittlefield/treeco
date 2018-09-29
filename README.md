@@ -11,38 +11,47 @@ The goal of `treeco` is to provide R users a tool for calculating the eco benefi
 devtools::install_github("tylurp/treeco")
 ```
 
-## Demo
+## A reproducible example:
 
-Use `eco_run_all` to calculate benefits for an entire tree inventory:
+We can use the [`trees`](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset to demonstrate how `eco_guess` and `eco_run_all` works:
 
 ```r
-treeco::eco_run_all(
-  data = "inventory_data/trees.csv, # Path to csv file
-  common_col = "common_name",       # Common field
-  botanical_col = "botanical_name", # Botanical field
-  dbh_col = "dbh_in",               # DBH column
-  region = "InlEmpCLM",             # Tree region
-  print_time = TRUE                 # Optional, print the elapsed time
-  )
+library(dplyr)
+library(treeco)
 
-Importing trees.csv...
-Gathering species matches...
-Gathering interpolation parameters...
-Interpolating benefits...
-Time difference of 0.3816578 secs
-         id           botanical             common dbh benefit_value            benefit unit dollars
-    1:    1         Acer rubrum          Red maple  14        0.1314     aq nox avoided   lb    0.50
-    2:    1         Acer rubrum          Red maple  14        0.1548         aq nox dep   lb    0.59
-    3:    1         Acer rubrum          Red maple  14        0.4736       aq ozone dep   lb    1.82
-    4:    1         Acer rubrum          Red maple  14        0.0322    aq pm10 avoided   lb    0.15
-    5:    1         Acer rubrum          Red maple  14        0.2487        aq pm10 dep   lb    1.15
-   ---                                                                                              
-44261: 2951 Celtis occidentalis Northern hackberry   7       46.8358    co2 sequestered   lb    0.16
-44262: 2951 Celtis occidentalis Northern hackberry   7      281.8975        co2 storage   lb    0.94
-44263: 2951 Celtis occidentalis Northern hackberry   7       40.9333        electricity  kwh    8.25
-44264: 2951 Celtis occidentalis Northern hackberry   7      127.9649 hydro interception  gal    0.70
-44265: 2951 Celtis occidentalis Northern hackberry   7      -25.8430        natural gas   lb    0.17
+df_trees <- trees %>% 
+  mutate(common_name = "Black cherry") %>% 
+  select(common_name, Girth) %>% 
+  mutate(botanical_name = eco_guess(.$common_name, "botanical"))
+
+eco_run_all(
+  data = df_trees, 
+  common_col = "common_name", 
+  botanical_col = "botanical_name", 
+  dbh_col = "Girth", 
+  region = "PiedmtCLT", 
+  print_time = TRUE
+  )
 ```
+
+Returns:
+
+```r
+     id       botanical       common  dbh benefit_value            benefit unit dollars
+  1:  1 Prunus serotina Black cherry  8.3        0.0776     aq nox avoided   lb    0.51
+  2:  1 Prunus serotina Black cherry  8.3        0.0260         aq nox dep   lb    0.17
+  3:  1 Prunus serotina Black cherry  8.3        0.0556       aq ozone dep   lb    0.36
+  4:  1 Prunus serotina Black cherry  8.3        0.0150    aq pm10 avoided   lb    0.04
+  5:  1 Prunus serotina Black cherry  8.3        0.0633        aq pm10 dep   lb    0.16
+ ---                                                                                   
+461: 31 Prunus serotina Black cherry 20.6      606.2412    co2 sequestered   lb    4.55
+462: 31 Prunus serotina Black cherry 20.6     7909.7504        co2 storage   lb   59.32
+463: 31 Prunus serotina Black cherry 20.6      144.7267        electricity  kwh   10.98
+464: 31 Prunus serotina Black cherry 20.6     5476.4716 hydro interception  gal   54.22
+465: 31 Prunus serotina Black cherry 20.6     1194.6395        natural gas   lb   12.50
+```
+
+## More examples:
 
 Use `eco_run` to calculate benefits for a single tree:
 
@@ -114,44 +123,4 @@ treeco::eco_guess(
         original  field_guess
 1   ficus carica   Common fig
 2 cedrus deodara Deodar cedare
-```
-
-## A reproducible example:
-
-We can use the [`trees`](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset to demonstrate how `eco_guess` and `eco_run_all` works:
-
-```r
-library(dplyr)
-library(treeco)
-
-df_trees <- trees %>% 
-  mutate(common_name = "Black cherry") %>% 
-  select(common_name, Girth) %>% 
-  mutate(botanical_name = eco_guess(.$common_name, "botanical"))
-
-eco_run_all(
-  data = df_trees, 
-  common_col = "common_name", 
-  botanical_col = "botanical_name", 
-  dbh_col = "Girth", 
-  region = "PiedmtCLT", 
-  print_time = TRUE
-  )
-```
-
-Returns:
-
-```r
-     id       botanical       common  dbh benefit_value            benefit unit dollars
-  1:  1 Prunus serotina Black cherry  8.3        0.0776     aq nox avoided   lb    0.51
-  2:  1 Prunus serotina Black cherry  8.3        0.0260         aq nox dep   lb    0.17
-  3:  1 Prunus serotina Black cherry  8.3        0.0556       aq ozone dep   lb    0.36
-  4:  1 Prunus serotina Black cherry  8.3        0.0150    aq pm10 avoided   lb    0.04
-  5:  1 Prunus serotina Black cherry  8.3        0.0633        aq pm10 dep   lb    0.16
- ---                                                                                   
-461: 31 Prunus serotina Black cherry 20.6      606.2412    co2 sequestered   lb    4.55
-462: 31 Prunus serotina Black cherry 20.6     7909.7504        co2 storage   lb   59.32
-463: 31 Prunus serotina Black cherry 20.6      144.7267        electricity  kwh   10.98
-464: 31 Prunus serotina Black cherry 20.6     5476.4716 hydro interception  gal   54.22
-465: 31 Prunus serotina Black cherry 20.6     1194.6395        natural gas   lb   12.50
 ```
