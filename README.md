@@ -29,8 +29,7 @@ eco_run_all(
   common_col = "common_name", 
   botanical_col = "botanical_name", 
   dbh_col = "Girth", 
-  region = "PiedmtCLT", 
-  print_time = TRUE
+  region = "PiedmtCLT"
   )
 ```
 
