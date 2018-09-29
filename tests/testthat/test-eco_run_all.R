@@ -7,25 +7,15 @@ species <- rep(unique_species_sample, length.out = 10)
 
 df_species <- data.frame(botanical_name = species)
 
-common_guess <- treeco::eco_guess(
-  data = df_species,
-  have = "botanical_name",
-  guess = "common"
-)
-
-# Select required variables
-my_inventory <- common_guess[c("original", "field_guess")]
+df_species$common_name <- eco_guess(df_species$botanical_name, "common")
 
 # Add a DBH column
-my_inventory$dbh <- rep(sample(2:45), length.out = 10)
-
-names(my_inventory)[1] <- "botanical"
-names(my_inventory)[2] <- "common"
+df_species$dbh <- rep(sample(2:45), length.out = 10)
 
 output <- eco_run_all(
-  data = my_inventory,
-  common_col = "common",
-  botanical_col = "botanical",
+  data = df_species,
+  common_col = "common_name",
+  botanical_col = "botanical_name",
   dbh_col = "dbh",
   region = "InlEmpCLM",
   print_time = TRUE
