@@ -5,8 +5,7 @@
 #' attempts to find matches in both common and botanical, running this can
 #' increase the number of records you can grab to run eco benefits.
 #'
-#' @param data A vector containing "common" or "botanical" names.
-#' @param have The name of the existing field.
+#' @param x A vector containing "common" or "botanical" names.
 #' @param guess The missing field, either "common" or "botanical".
 #'
 #' @export
@@ -22,7 +21,7 @@ eco_guess <- function(x, guess) {
 
   # Remove NA's from them both.
   tree_vec <- tree_vec[!is.na(tree_vec)]
-  species <- species[complete.cases(species), ]
+  species <- species[stats::complete.cases(species), ]
 
   # Remove punctuation.
   tree_vec <- gsub('[[:punct:]]+', '', tree_vec)

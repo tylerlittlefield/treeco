@@ -4,12 +4,10 @@
 \alias{eco_guess}
 \title{Guess common or botanical names}
 \usage{
-eco_guess(data, have, guess)
+eco_guess(x, guess)
 }
 \arguments{
-\item{data}{A vector containing "common" or "botanical" names.}
-
-\item{have}{The name of the existing field.}
+\item{x}{A vector containing "common" or "botanical" names.}
 
 \item{guess}{The missing field, either "common" or "botanical".}
 }
