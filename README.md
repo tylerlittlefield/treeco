@@ -118,70 +118,40 @@ treeco::eco_guess(
 
 ## A reproducible example:
 
+We can use the [`trees`](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset to demonstrate how `eco_guess` and `eco_run_all` works:
+
 ```r
 library(dplyr)
+library(treeco)
 
-# Grab a random sample of 15,000 botanical names. We can do this two ways, using 
-# this one liner:
-rep(sample(unique(treeco::species$scientific_name), size = 50), length.out=15000)
+df_trees <- trees %>% 
+  mutate(common_name = "Black cherry") %>% 
+  select(common_name, Girth) %>% 
+  mutate(botanical_name = eco_guess(.$common_name, "botanical"))
 
-# Or...
-species <- treeco::species
-unique_species <- unique(species$scientific_name)
-unique_species_sample <- sample(unique_species, size = 50)
-species <- rep(unique_species_sample, length.out = 15000)
-
-# Then construct a dataframe.
-df_species <- data.frame(botanical_name = species)
-
-# In this scenario, we only have the botanical names, we can use eco_guess to
-# guess the common names given the botanical names in our inventory. The data 
-# I'm using is from i-Tree's species master list so I will have 100% matches,
-# this isn't usually the case for real data.
-common_guess <- treeco::eco_guess(
-  data = df_species, 
-  have = "botanical_name", 
-  guess = "common"
-)
-
-# Select required variables
-my_inventory <- common_guess[c("original", "field_guess")]
-
-# Add a DBH column
-my_inventory$dbh <- rep(sample(2:45), length.out = 15000)
-
-names(my_inventory)[1] <- "botanical"
-names(my_inventory)[2] <- "common"
-
-treeco::eco_run_all(
-  data = my_inventory,
-  common_col = "common",
-  botanical_col = "botanical",
-  dbh_col = "dbh",
-  region = "InlEmpCLM",
+eco_run_all(
+  data = df_trees, 
+  common_col = "common_name", 
+  botanical_col = "botanical_name", 
+  dbh_col = "Girth", 
+  region = "PiedmtCLT", 
   print_time = TRUE
-) %>% as_tibble()
+  )
 ```
 
 Returns:
 
 ```r
-Gathering species matches...
-Gathering interpolation parameters...
-Interpolating benefits...
-Time difference of 0.7438769 secs
-# A tibble: 126,000 x 8
-      id botanical     common      dbh benefit_value benefit    unit  dollars
-   <int> <chr>         <chr>     <dbl>         <dbl> <chr>      <chr>   <dbl>
- 1     1 Acacia baile… Bailey a…    37        0.336  aq nox av… lb       1.29
- 2     1 Acacia baile… Bailey a…    37        0.732  aq nox dep lb       2.81
- 3     1 Acacia baile… Bailey a…    37        1.89   aq ozone … lb       7.26
- 4     1 Acacia baile… Bailey a…    37        0.0829 aq pm10 a… lb       0.38
- 5     1 Acacia baile… Bailey a…    37        1.06   aq pm10 d… lb       4.89
- 6     1 Acacia baile… Bailey a…    37        0.662  aq sox av… lb       1.61
- 7     1 Acacia baile… Bailey a…    37        0.0705 aq sox dep lb       0.17
- 8     1 Acacia baile… Bailey a…    37        0.0829 aq voc av… lb       0.16
- 9     1 Acacia baile… Bailey a…    37      -11.4    bvoc       lb      21.8 
-10     1 Acacia baile… Bailey a…    37      169.     co2 avoid… lb       0.56
-# ... with 125,990 more rows
+     id       botanical       common  dbh benefit_value            benefit unit dollars
+  1:  1 Prunus serotina Black cherry  8.3        0.0776     aq nox avoided   lb    0.51
+  2:  1 Prunus serotina Black cherry  8.3        0.0260         aq nox dep   lb    0.17
+  3:  1 Prunus serotina Black cherry  8.3        0.0556       aq ozone dep   lb    0.36
+  4:  1 Prunus serotina Black cherry  8.3        0.0150    aq pm10 avoided   lb    0.04
+  5:  1 Prunus serotina Black cherry  8.3        0.0633        aq pm10 dep   lb    0.16
+ ---                                                                                   
+461: 31 Prunus serotina Black cherry 20.6      606.2412    co2 sequestered   lb    4.55
+462: 31 Prunus serotina Black cherry 20.6     7909.7504        co2 storage   lb   59.32
+463: 31 Prunus serotina Black cherry 20.6      144.7267        electricity  kwh   10.98
+464: 31 Prunus serotina Black cherry 20.6     5476.4716 hydro interception  gal   54.22
+465: 31 Prunus serotina Black cherry 20.6     1194.6395        natural gas   lb   12.50
 ```
