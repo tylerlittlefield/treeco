@@ -11,6 +11,14 @@
 #' @export
 eco_guess <- function(x, guess) {
 
+  '%nin%' <- Negate('%in%')
+
+  if(is.factor(x))
+    {message("Note: x is factor, converting to character."); x <- as.character(x)}
+
+  if(guess %nin% c("common", "botanical"))
+    {stop("Guess arg isn't 'common' or 'botanical'.")}
+
   species <- unique(treeco::species[c("common_name", "scientific_name")])
 
   # Lower case for user data and species master list in hopes it improve the
