@@ -12,8 +12,8 @@ eco_guess(x, guess)
 \item{guess}{The missing field, either "common" or "botanical".}
 }
 \description{
-This function tries to guess the botanical or common name of
-tree for users with only one of these fields, not both. Since \code{eco_run}
-attempts to find matches in both common and botanical, running this can
-increase the number of records you can grab to run eco benefits.
+This function tries to guess the botanical or common names of
+trees for users with only one of these fields, not both. Since
+\code{eco_run_all} attempts to find matches in both common and botanical,
+running this is required for users that are missing one of these fields.
 }
