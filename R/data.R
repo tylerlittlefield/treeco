@@ -1,4 +1,4 @@
-#' Benefits data
+#' Benefits dataset
 #'
 #' A dataset containing benefits, dbh ranges, and other attributes for specific
 #' species using the "spp_value_assignment", i-Tree's way of linking species to
@@ -25,7 +25,7 @@
 #' @source \url{https://www.itreetools.org}
 "benefits"
 
-#' Species data
+#' Species dataset
 #'
 #' A dataset containing species data and other attributes.
 #'
@@ -48,7 +48,7 @@
 #' @source \url{https://www.itreetools.org}
 "species"
 
-#' Money data
+#' Money dataset
 #'
 #' A dataset containing benefit to currency conversion values. This dataset is how benefit values get converted to dollar amounts.
 #'

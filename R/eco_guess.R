@@ -8,6 +8,10 @@
 #' @param x A vector containing "common" or "botanical" names.
 #' @param guess The missing field, either "common" or "botanical".
 #'
+#' @examples
+#' eco_guess("common fig", "botanical")
+#' eco_guess("pinus eldarica", "common")
+#'
 #' @export
 eco_guess <- function(x, guess) {
 

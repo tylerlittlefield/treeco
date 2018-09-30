@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run eco benefits for a single tree — eco_run • treeco</title>
+<title>Eco benefits calculator — eco_run • treeco</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Run eco benefits for a single tree — eco_run" />
+<meta property="og:title" content="Eco benefits calculator — eco_run" />
 
-<meta property="og:description" content="Run eco benefits for a single tree" />
+<meta property="og:description" content="Run the eco benefits for a single tree. This function acts like
+a benefits calculator in that you give a common name and it calculates the
+benefits. Similar to Davey Tree's benefits calculator." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,14 +105,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run eco benefits for a single tree</h1>
+    <h1>Eco benefits calculator</h1>
     <small class="dont-index">Source: <a href='https://github.com/tyluRp/treeco/blob/master/R/eco_run.R'><code>R/eco_run.R</code></a></small>
     <div class="hidden name"><code>eco_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Run eco benefits for a single tree</p>
+    <p>Run the eco benefits for a single tree. This function acts like
+a benefits calculator in that you give a common name and it calculates the
+benefits. Similar to Davey Tree's benefits calculator.</p>
     
     </div>
 
@@ -134,12 +138,47 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>eco_run</span>(<span class='st'>"common fig"</span>, <span class='fl'>20</span>, <span class='st'>"InlEmpCLM"</span>)</div><div class='output co'>#&gt;     common_name dbh benefit_value            benefit unit dollars
+#&gt;  1:  Common fig  20        0.2429     aq nox avoided   lb    0.93
+#&gt;  2:  Common fig  20        0.2623         aq nox dep   lb    1.01
+#&gt;  3:  Common fig  20        0.7716       aq ozone dep   lb    2.96
+#&gt;  4:  Common fig  20        0.0602    aq pm10 avoided   lb    0.28
+#&gt;  5:  Common fig  20        0.4079        aq pm10 dep   lb    1.89
+#&gt;  6:  Common fig  20        0.4813     aq sox avoided   lb    1.17
+#&gt;  7:  Common fig  20        0.0353         aq sox dep   lb    0.09
+#&gt;  8:  Common fig  20        0.0602     aq voc avoided   lb    0.12
+#&gt;  9:  Common fig  20        0.0000               bvoc   lb    0.00
+#&gt; 10:  Common fig  20      122.7973        co2 avoided   lb    0.41
+#&gt; 11:  Common fig  20        9.0389    co2 sequestered   lb    0.03
+#&gt; 12:  Common fig  20     1255.7516        co2 storage   lb    4.19
+#&gt; 13:  Common fig  20      189.2000        electricity  kwh   38.12
+#&gt; 14:  Common fig  20      834.7837 hydro interception  gal    4.59
+#&gt; 15:  Common fig  20     -179.4561        natural gas   lb    1.20</div><div class='input'><span class='fu'>eco_run</span>(<span class='st'>"red maple"</span>, <span class='fl'>15</span>, <span class='st'>"PacfNWLOG"</span>)</div><div class='output co'>#&gt;     common_name dbh benefit_value            benefit unit dollars
+#&gt;  1:   Red maple  15        1.9815     aq nox avoided   lb    1.86
+#&gt;  2:   Red maple  15        0.1257         aq nox dep   lb    0.12
+#&gt;  3:   Red maple  15        0.3836       aq ozone dep   lb    0.36
+#&gt;  4:   Red maple  15        0.0520    aq pm10 avoided   lb    0.09
+#&gt;  5:   Red maple  15        0.1742        aq pm10 dep   lb    0.29
+#&gt;  6:   Red maple  15        0.3082     aq sox avoided   lb    0.58
+#&gt;  7:   Red maple  15        0.0287         aq sox dep   lb    0.05
+#&gt;  8:   Red maple  15        0.0487     aq voc avoided   lb    0.02
+#&gt;  9:   Red maple  15       -0.2557               bvoc   lb    0.09
+#&gt; 10:   Red maple  15      139.7729        co2 avoided   lb    0.47
+#&gt; 11:   Red maple  15      223.9894    co2 sequestered   lb    0.75
+#&gt; 12:   Red maple  15     2398.1856        co2 storage   lb    8.01
+#&gt; 13:   Red maple  15       69.3000        electricity  kwh    3.55
+#&gt; 14:   Red maple  15     1254.8172 hydro interception  gal   34.87
+#&gt; 15:   Red maple  15      590.6177        natural gas   lb    6.77</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

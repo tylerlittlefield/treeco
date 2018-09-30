@@ -3,7 +3,7 @@
 \docType{data}
 \name{benefits}
 \alias{benefits}
-\title{Benefits data}
+\title{Benefits dataset}
 \format{A data frame with 6975 rows and 14 variables:
 \describe{
   \item{id}{id variable.}

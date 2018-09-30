@@ -2,7 +2,7 @@
 % Please edit documentation in R/eco_run.R
 \name{eco_run}
 \alias{eco_run}
-\title{Run eco benefits for a single tree}
+\title{Eco benefits calculator}
 \usage{
 eco_run(common, dbh, region)
 }
@@ -14,5 +14,12 @@ eco_run(common, dbh, region)
 \item{region}{region code, see \code{money} dataset for region codes}
 }
 \description{
-Run eco benefits for a single tree
+Run the eco benefits for a single tree. This function acts like
+a benefits calculator in that you give a common name and it calculates the
+benefits. Similar to Davey Tree's benefits calculator.
+}
+\examples{
+eco_run("common fig", 20, "InlEmpCLM")
+eco_run("red maple", 15, "PacfNWLOG")
+
 }

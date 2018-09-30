@@ -2,7 +2,7 @@
 % Please edit documentation in R/eco_run_all.R
 \name{eco_run_all}
 \alias{eco_run_all}
-\title{Run eco benefits for an entire tree inventory}
+\title{Eco benefits for multiple trees}
 \usage{
 eco_run_all(data, common_col, botanical_col, dbh_col, region,
   print_time = NULL)
@@ -21,5 +21,10 @@ eco_run_all(data, common_col, botanical_col, dbh_col, region,
 \item{print_time}{Logical TRUE or FALSE for printing the elapsed time}
 }
 \description{
-Run eco benefits for an entire tree inventory
+This function calculates the benefits for an entire dataset,
+sometimes called a tree inventory. This works similar to i-Trees Eco software
+where the user supplies data, the common name field, the botanical name
+field, the dbh field, and the region. All calculations are done on unique
+species/dbh pairs to avoid redundant computation and speed up the
+calculation.
 }

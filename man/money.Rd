@@ -3,7 +3,7 @@
 \docType{data}
 \name{money}
 \alias{money}
-\title{Money data}
+\title{Money dataset}
 \format{A data frame with 16 rows and 11 variables:
 \describe{
   \item{region_code}{The region code.}

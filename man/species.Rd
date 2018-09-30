@@ -3,7 +3,7 @@
 \docType{data}
 \name{species}
 \alias{species}
-\title{Species data}
+\title{Species dataset}
 \format{A data frame with 3178 rows and 12 variables:
 \describe{
   \item{id}{id variable.}

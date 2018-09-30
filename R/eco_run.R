@@ -1,8 +1,16 @@
-#' Run eco benefits for a single tree
+#' Eco benefits calculator
+#'
+#' @description Run the eco benefits for a single tree. This function acts like
+#' a benefits calculator in that you give a common name and it calculates the
+#' benefits. Similar to Davey Tree's benefits calculator.
 #'
 #' @param common the common name of the tree
 #' @param dbh the dbh value in inches
 #' @param region region code, see \code{money} dataset for region codes
+#'
+#' @examples
+#' eco_run("common fig", 20, "InlEmpCLM")
+#' eco_run("red maple", 15, "PacfNWLOG")
 #'
 #' @import data.table
 #' @export

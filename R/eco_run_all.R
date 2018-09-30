@@ -1,4 +1,11 @@
-#' Run eco benefits for an entire tree inventory
+#' Eco benefits for multiple trees
+#'
+#' @description This function calculates the benefits for an entire dataset,
+#' sometimes called a tree inventory. This works similar to i-Trees Eco software
+#' where the user supplies data, the common name field, the botanical name
+#' field, the dbh field, and the region. All calculations are done on unique
+#' species/dbh pairs to avoid redundant computation and speed up the
+#' calculation.
 #'
 #' @param data path to csv file containing tree inventory
 #' @param common_col the name of the column containing common names

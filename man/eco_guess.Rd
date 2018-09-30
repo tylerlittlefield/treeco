@@ -17,3 +17,8 @@ trees for users with only one of these fields, not both. Since
 \code{eco_run_all} attempts to find matches in both common and botanical,
 running this is required for users that are missing one of these fields.
 }
+\examples{
+eco_guess("common fig", "botanical")
+eco_guess("pinus eldarica", "common")
+
+}
