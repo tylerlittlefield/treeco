@@ -20,6 +20,7 @@ benefits. Similar to Davey Tree's benefits calculator.
 }
 \examples{
 eco_run("common fig", 20, "InlEmpCLM")
+
 eco_run("red maple", 15, "PacfNWLOG")
 
 }
