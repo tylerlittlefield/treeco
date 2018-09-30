@@ -10,6 +10,7 @@
 #'
 #' @examples
 #' eco_guess("common fig", "botanical")
+#'
 #' eco_guess("pinus eldarica", "common")
 #'
 #' @export

@@ -19,6 +19,7 @@ running this is required for users that are missing one of these fields.
 }
 \examples{
 eco_guess("common fig", "botanical")
+
 eco_guess("pinus eldarica", "common")
 
 }
