@@ -13,7 +13,7 @@ The goal of `treeco` is to provide R users a tool for calculating the eco benefi
 devtools::install_github("tylurp/treeco")
 ```
 
-## A reproducible example:
+## A reproducible example
 
 We can use the [`trees`](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset to demonstrate how `eco_guess` and `eco_run_all` works:
 
@@ -52,7 +52,7 @@ Returns:
 465: 31 Prunus serotina Black cherry 20.6     1194.6395        natural gas   lb   12.50
 ```
 
-## More examples:
+## More examples
 
 Use `eco_run` to calculate benefits for a single tree:
 
