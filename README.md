@@ -107,19 +107,9 @@ Using closest match
 If you are missing a field, you can use `eco_guess` to try and find it:
 
 ```r
-# Toy data
-df <- data.frame(
-  botanical_name = c("Ficus carica", NA, "Cedrus deodara ", "Ficus carica")
-  )
+x <- c("common fig", "red maple", "fir")
 
-# Run
-treeco::eco_guess(
-  data = df,
-  have = "botanical_name",
-  guess = "common"
-  )
+treeco::eco_guess(x, "botanical")
   
-        original  field_guess
-1   ficus carica   Common fig
-2 cedrus deodara Deodar cedare
+[1] "Ficus carica" "Acer rubrum"  "Abies spp"  
 ```
