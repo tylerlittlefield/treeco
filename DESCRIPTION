@@ -9,6 +9,8 @@ Imports:
     data.table
 Authors@R: person("Tyler", "Littlefield", , "tylurp1@gmail.com", c("aut", "cre"))
 License: MIT + file LICENSE
+URL: https://treeco.netlify.com/, https://github.com/tyluRp/treeco
+BugReports: https://github.com/tyluRp/treeco/issues
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
