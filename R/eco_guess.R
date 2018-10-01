@@ -28,7 +28,7 @@ eco_guess <- function(x, guess) {
 
   # Lower case for user data and species master list in hopes it improve the
   # guessing.
-  tree_vec <- unique(tolower(as.character(x)))
+  tree_vec <- tolower(as.character(x))
   species$common_name <- tolower(species$common_name)
   species$scientific_name <- tolower(species$scientific_name)
 

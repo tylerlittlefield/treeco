@@ -8,6 +8,9 @@ test_that("eco_guess works", {
   # Test that eco guess can guess the common names
   expect_equal(eco_guess("pinus elderica", "common"), "Afghan pine")
 
+  # Test that eco guess guesses duplicates
+  expect_equal(eco_guess(c("pinus elderica", "pinus elderica"), "common"), c("Afghan pine", "Afghan pine"))
+
   # Test that eco guess converts factor to character
   expect_equal(is.character(eco_guess(as.factor("Common fig"), "botanical")), TRUE)
 
