@@ -12,13 +12,23 @@
 #' @param botanical_col the name of the column containing botanical names
 #' @param dbh_col the name of the column containing dbh values
 #' @param region region code, see \code{species} or \code{benefits}
+#' @param n guessing threshold from 0.0 to 1.0, defaults at 0.8
 #' @param print_time Logical TRUE or FALSE for printing the elapsed time
 #'
 #' @import data.table
 #' @export
-eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_time = NULL) {
+eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.8, print_time = NULL) {
 
   start_time <- Sys.time()
+
+  if(n > 1){
+    warning("n > 1, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
+    n <- 0.8
+  }
+  if(n < 0){
+    warning("n < 0, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
+    n <- 0.8
+  }
 
   # Extract and reshape the input data
   tree_data <- extract_data(data, common_col, botanical_col, dbh_col, region)
@@ -29,8 +39,8 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, print_
   species <- tree_data$species
   money <- tree_data$money
 
-  # Extract the species matches with a similarity score > 90%
-  matches <- extract_matches(tree_data = trees, species_data = species)
+  # Extract the species matches with a similarity score > 80% by default
+  matches <- extract_matches(tree_data = trees, species_data = species, n = n)
 
   # Output is (again) stored as a list, assign each list element to an object
   trees <- matches$trees

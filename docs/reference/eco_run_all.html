@@ -124,7 +124,7 @@ calculation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>eco_run_all</span>(<span class='no'>data</span>, <span class='no'>common_col</span>, <span class='no'>botanical_col</span>, <span class='no'>dbh_col</span>, <span class='no'>region</span>,
+    <pre class="usage"><span class='fu'>eco_run_all</span>(<span class='no'>data</span>, <span class='no'>common_col</span>, <span class='no'>botanical_col</span>, <span class='no'>dbh_col</span>, <span class='no'>region</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
   <span class='kw'>print_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -149,6 +149,10 @@ calculation.</p>
     <tr>
       <th>region</th>
       <td><p>region code, see <code>species</code> or <code>benefits</code></p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>guessing threshold from 0.0 to 1.0, defaults at 0.8</p></td>
     </tr>
     <tr>
       <th>print_time</th>

@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Extract matches function
 #-------------------------------------------------------------------------------
-extract_matches <- function(tree_data, species_data) {
+extract_matches <- function(tree_data, species_data, n) {
 
   message("Gathering species matches...")
 
@@ -38,7 +38,7 @@ extract_matches <- function(tree_data, species_data) {
   unique_commons$botanical_name_m <- species[vec,][["botanical_name_m"]]
   unique_commons$spp_value_assignment <- species[vec,][["spp_value_assignment"]]
   unique_commons[, "sim" := string_dist(common_name[1], common_name_m[1]), by = common_name]
-  unique_commons_1 <- unique_commons[sim >= 0.80]
+  unique_commons_1 <- unique_commons[sim >= n]
 
   species <- species[species$common_name_m %nin% unique_commons_1$common_name_m, ]
 
@@ -48,7 +48,7 @@ extract_matches <- function(tree_data, species_data) {
   unique_botanicals$common_name_m <- species[vec,][["common_name_m"]]
   unique_botanicals$spp_value_assignment <- species[vec,][["spp_value_assignment"]]
   unique_botanicals[, "sim" := string_dist(botanical_name[1], botanical_name_m[1]), by = botanical_name]
-  unique_botanicals_1 <- unique_botanicals[sim >= 0.80]
+  unique_botanicals_1 <- unique_botanicals[sim >= n]
 
   trees$common_name <- tolower(trees$common_name)
   trees$common_name <- gsub('[[:punct:]]+', '', trees$common_name)

@@ -33,8 +33,8 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
   )
 
   trees <- trees[, .SD, .SDcol = c("common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
-  benefits <- benefits[grepl(region, species_region)]
-  species <- species[grepl(region, species_region)]
+  benefits <- benefits[benefits$species_region == region]
+  species <- species[species$species_region == region]
   trees$dbh_val <- trees$dbh_val * 2.54
 
   output <- list(

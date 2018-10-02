@@ -19,7 +19,7 @@ eco_guess <- function(x, guess) {
   '%nin%' <- Negate('%in%')
 
   if(is.factor(x))
-    {message("Note: x is factor, converting to character."); x <- as.character(x)}
+    {warning("Note: x is factor, converting to character.", call. = FALSE); x <- as.character(x)}
 
   if(guess %nin% c("common", "botanical"))
     {stop("Guess arg isn't 'common' or 'botanical'.")}

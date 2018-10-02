@@ -32,14 +32,14 @@ eco_run <- function(common, dbh, region) {
   money    <- data.table::melt(money, id.vars = c("region_code", "region_name")) # Melt the dataset to 'tidy' format
   money    <- money[, c("variable", "value")]                                    # Select the variables we need
 
-  benefits <- benefits[grepl(region, species_region)]                            # Extract benefits within user defined region
-  species <- species[grepl(region, species_region)]                              # Extract species within user defined region
+  benefits <- benefits[benefits$species_region == region]                        # Extract benefits within user defined region
+  species <- species[species$species_region == region]                            # Extract species within user defined region
 
   tree$dbh_val <- tree$dbh_val * 2.54
 
   tree$spp_value <- species_val
 
-  benefits <- benefits[grepl(species_val, species_code)]
+  benefits <- benefits[benefits$species_code == species_val]
 
   data.table::setkey(tree, "spp_value")
   data.table::setkey(benefits, "species_code")
@@ -73,7 +73,7 @@ eco_run <- function(common, dbh, region) {
   tbl_mat <- as.matrix(tree[,6:14]) # careful with this, easy to fuck up
   tree$y2 <- tbl_mat[cbind(tbl_rows, tbl_indicies_y2)]
 
-  tree[, benefit_value := ifelse(y1 == y2, y1, eco_interp(x = tree$dbh_val, x1 = tree$x1, x2 = tree$x2, y1 = tree$y1, y2 = tree$y2))]
+  tree[, "benefit_value" := ifelse(tree$y1 == tree$y2, tree$y1, eco_interp(x = tree$dbh_val, x1 = tree$x1, x2 = tree$x2, y1 = tree$y1, y2 = tree$y2))]
   tree$benefit_value <- round(tree$benefit_value, 4)
 
   # A bunch of copy/paste (yuck) to grab eco benefit money values so we can

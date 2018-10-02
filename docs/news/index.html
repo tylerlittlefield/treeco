@@ -111,6 +111,10 @@
 <ul>
 <li>Added <code>pkgdown</code> support.</li>
 <li>Fixes bug where <code>eco_guess</code> only guessed unique values of <code>x</code>, this meant a user with duplicates would have issues assigning <code>x</code> to a <code>data.frame</code> as their lengths would differ.</li>
+<li>Added threshold for guessing in <code>eco_run_all</code>, 0.8 is the default value.</li>
+<li>Converted <code>message</code> to <code>warning</code> in <code>eco_guess</code> when <code>x</code> vector is coerced from <code>factor</code> to <code>character</code>.</li>
+<li>Added warnings to <code>eco_run_all</code> for cases where <code>n</code> &gt; 1 or <code>n</code> &lt; 0. If this happens, <code>n</code> defaults to 0.8.</li>
+<li>Added tests for warnings where threshold doesn’t make sense and where factors converted to character.</li>
 </ul>
 </div>
     <div id="treeco-0-0-0-9000" class="section level1">

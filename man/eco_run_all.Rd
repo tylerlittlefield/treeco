@@ -4,7 +4,7 @@
 \alias{eco_run_all}
 \title{Eco benefits for multiple trees}
 \usage{
-eco_run_all(data, common_col, botanical_col, dbh_col, region,
+eco_run_all(data, common_col, botanical_col, dbh_col, region, n = 0.8,
   print_time = NULL)
 }
 \arguments{
@@ -17,6 +17,8 @@ eco_run_all(data, common_col, botanical_col, dbh_col, region,
 \item{dbh_col}{the name of the column containing dbh values}
 
 \item{region}{region code, see \code{species} or \code{benefits}}
+
+\item{n}{guessing threshold from 0.0 to 1.0, defaults at 0.8}
 
 \item{print_time}{Logical TRUE or FALSE for printing the elapsed time}
 }
