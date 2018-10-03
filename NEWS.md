@@ -7,6 +7,7 @@ user with duplicates would have issues assigning `x` to a `data.frame` as their 
 * Converted `message` to `warning` in `eco_guess` when `x` vector is coerced from `factor` to `character`.
 * Added warnings to `eco_run_all` for cases where `n` > 1 or `n` < 0. If this happens, `n` defaults to 0.8.
 * Added tests for warnings where threshold doesn't make sense and where factors converted to character.
+* Modified `eco_guess` to make it faster. This function takes a vector, converts it to a `data.table`, and does all the matching on unique values only. Then joins the missing field to the original (non unique) `data.table` and returns a vector containing values for the missing field.
 
 # treeco 0.0.0.9000
 
