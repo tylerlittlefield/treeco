@@ -65,12 +65,12 @@ eco_guess <- function(x, guess) {
   # Grab the guessed species
   if(guess == "common") {
     x_unique$common_name <- species$common_name[field_idx]
-    output <- x_unique[x, on = "key_var"]
+    output <- x_unique[x, on = "key_var", allow.cartesian = TRUE]
     output <- output$common_name
     }
   if(guess == "botanical") {
     x_unique$botanical_name <- species$scientific_name[field_idx]
-    output <- x_unique[x, on = "key_var"]
+    output <- x_unique[x, on = "key_var", allow.cartesian = TRUE]
     output <- output$botanical_name
     }
 
