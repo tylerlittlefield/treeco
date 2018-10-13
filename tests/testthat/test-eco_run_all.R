@@ -23,8 +23,8 @@ output <- eco_run_all(
 
 test_that("eco_run_all works", {
 
-  # Test that there are 8 variables returned
-  expect_equal(dim(output)[2], 8)
+  # Test that there are 9 variables returned
+  expect_equal(dim(output)[2], 9)
 
   # Test that the print statement works, eco_run_all stores the elapsed
   # time as an attribute "elapsed_time"

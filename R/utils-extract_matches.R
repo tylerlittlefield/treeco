@@ -63,11 +63,11 @@ extract_matches <- function(tree_data, species_data, n) {
 
   trees <- rbind(trees_common, trees_botanical)
 
-  tree_vars <- c("common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
+  tree_vars <- c("rn", "common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
   trees <- trees[, .SD, .SDcols = tree_vars]
   trees <- trees[, ("id") := 1:nrow(trees)]
 
-  tree_vars <- c("common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
+  tree_vars <- c("rn", "common_name_m", "botanical_name_m", "dbh_val", "spp_value_assignment")
   trees_unique <- trees[, .SD, .SDcols = tree_vars]
   trees_unique <- unique(trees_unique, by = c("common_name_m", "dbh_val"))
 

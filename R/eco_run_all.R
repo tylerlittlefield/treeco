@@ -59,7 +59,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_unique <- extract_parameters(trees_unique)
 
   # Select the variables we need
-  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "x1", "x2", "y1", "y2", "benefit", "unit")
+  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "x1", "x2", "y1", "y2", "benefit", "unit", "rn")
   trees_unique <- trees_unique[, .SD, .SDcols = tree_vars]
 
   message("Interpolating benefits...")
@@ -68,7 +68,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_unique <- extract_benefits(trees_unique)
 
   # Select variables we need
-  tree_vars <- c("id", "common_name", "dbh_val", "benefit")
+  tree_vars <- c("id", "rn", "common_name", "dbh_val", "benefit")
   trees <- trees[, .SD, .SDcols = tree_vars]
 
   # Remove any NA values
@@ -93,7 +93,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   data.table::setkey(trees_final, "id")
 
   # Grab the variables we need
-  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars")
+  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars", "rn")
   trees_final <- trees_final[, .SD, .SDcols = tree_vars]
 
   # Capitalize the first word of common name

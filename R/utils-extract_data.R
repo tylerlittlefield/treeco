@@ -2,7 +2,7 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
 
   ifelse(
     test = is.object(data),
-    yes = trees <- data.table::as.data.table(data),
+    yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
     no = trees <- data.table::fread(data)
   )
 
@@ -32,7 +32,7 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
     region %in% unique(treeco::money$region_code)
   )
 
-  trees <- trees[, .SD, .SDcol = c("common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
+  trees <- trees[, .SD, .SDcol = c("rn", "common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
   benefits <- benefits[benefits$species_region == region]
   species <- species[species$species_region == region]
   trees$dbh_val <- trees$dbh_val * 2.54
@@ -42,7 +42,7 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
     benefits = benefits,
     species = species,
     money = money
-    )
+  )
 
   return(output)
 }
