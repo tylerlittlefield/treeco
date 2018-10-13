@@ -116,6 +116,7 @@
 <li>Added warnings to <code>eco_run_all</code> for cases where <code>n</code> &gt; 1 or <code>n</code> &lt; 0. If this happens, <code>n</code> defaults to 0.8.</li>
 <li>Added tests for warnings where threshold doesn’t make sense and where factors converted to character.</li>
 <li>Modified <code>eco_guess</code> to make it faster. This function takes a vector, converts it to a <code>data.table</code>, and does all the matching on unique values only. Then joins the missing field to the original (non unique) <code>data.table</code> and returns a vector containing values for the missing field.</li>
+<li>The utility function <code>extract_data</code> now preserves the original rownames as a column <code>rn</code> using the <code>keep.rownames = TRUE</code> argument in <code>as.data.table</code>. This allowa users to join additional variables back to the benefits dataframe. Especially important given this type of data is usually spatial. There is still the issue of reading data as the <code>fread</code> function isn’t preserving rownames. Will come back to that at some point.</li>
 </ul>
 </div>
     <div id="treeco-0-0-0-9000" class="section level1">
