@@ -2,6 +2,8 @@
 
 [![Travis build status](https://travis-ci.org/tyluRp/treeco.svg?branch=master)](https://travis-ci.org/tyluRp/treeco) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tyluRp/treeco?branch=master&svg=true)](https://ci.appveyor.com/project/tyluRp/treeco) [![Coverage status](https://codecov.io/gh/tyluRp/treeco/branch/master/graph/badge.svg)](https://codecov.io/github/tyluRp/treeco?branch=master) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+<img src="man/figures/co2_plot.png" align="center"/>
+
 The goal of `treeco` is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from [OpenStreetMaps ecoservice repository](https://github.com/OpenTreeMap/otm-ecoservice) which was (probably) ripped from [i-Tree](https://www.itreetools.org/)'s Eco or Streets software. The output returned is "[tidy](https://www.jstatsoft.org/article/view/v059i10)" and as a result, 1 record is represented by 15 rows as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, `treeco` utilizes the [`data.table`](https://github.com/Rdatatable/data.table) package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation. 
 
 ## Installation
