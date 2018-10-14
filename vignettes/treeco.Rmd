@@ -1,0 +1,130 @@
+---
+title: "Introduction to treeco"
+author: "Tyler Littlefield"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The goal of treeco is to make it easy for R users to extract ecosystem and economic benefits of trees. This package is currently labeled as [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental), users should expect breaking changes. One example being that `eco_run_all` requires both the common name and botanical name fields where it once only required the former field. I'm doing my best to only make these changes when it makes sense and improves treeco significantly. My goal is to eventually change that label to stable. If that hasn't scared you away, please keeping reading on!
+
+## Getting started
+
+I'm going to use the [trees](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset provided in base R. There are only 31 trees provided but we will increase that later on to show off the speed. For now, lets take a look at what we got:
+
+```{r}
+str(trees)
+```
+
+We have 3 variables and 31 observations. The first thing to look at is the variables. We have:
+
+1. Girth: This is the trees diameter in inches, often referred to as [Diameter at breast height](https://en.wikipedia.org/wiki/Diameter_at_breast_height) or DBH for short.
+2. Height: The height of the tree in feet.
+3. Volume: The volume of timber in cubic feet.
+
+We are missing three important and required bits of information:
+
+1. Common name: The common name given to the tree.
+2. Botanical name: The botanical or scientific name given to the tree.
+3. Region: The region these trees belong to.
+
+Those three fields along with DBH are required to extract eco benefits. Below is an explanation of why:
+
+1. DBH: This values is part of the interpolation equation used to interpolate benefits. The bigger the tree, the higher the benefit values. 
+2. Common name: The benefits of a tree differ depending on the species.
+3. Botanical name: Same reasoning as mentioned in common name but there is an additional layer. The reason treeco requires both of these fields is to maximize the number of records treeco can match. More on this later.
+4. Region: The benefits of an identical tree in two different regions will often differ. For example, palm tree in California might not be as valuable as a palm tree on the east coast.
+
+## Guessing a missing name field
+
+Given the data we have, we can't extract the benefits, we're missing too many fields. Fortunately, there is some info we can use in the docs, type `?trees` in the R console to take a look. We see that these are Black Cherry trees. Upon further investigation (google), I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I'm going to add the common name as a field _common_ and add a row number field _rn_. More on why _rn_ is added later.
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tibble)
+
+trees <- trees %>% 
+  mutate(common = "black cherry tree") %>% 
+  rownames_to_column("rn") %>% 
+  as_tibble() %>% 
+  print()
+```
+
+Now all that's left is to identify the botanical name for a Black Cherry tree. This is required because all benefits rely on a 3000+ _master species list_ created by [i-Tree](https://www.itreetools.org/). 
+
+Since R is very strict, the value "black common tree" will not match i-Tree's "Black cherry tree" because of the capitol "B". Even worse, i-Tree might call it "Black cherry" and omit the word "tree" which makes the link between the two that much more difficult to identify. The best treeco can do is quantify the similarity between the users data and that master species list and then link the most similar record found in i-Tree. It first does this for common name and then the botanical and this is why both fields are required, to maximize the number of matches. This is where `eco_guess` plays a role, for example:
+
+```{r}
+library(treeco)
+
+x <- c("common fig", "Commn FIG", "RED MAPLE")
+eco_guess(x, "botanical")
+```
+
+And for our dataset, I can do something like:
+
+```{r}
+trees <- trees %>% 
+  mutate(botanical = eco_guess(.$common, "botanical")) %>% 
+  print()
+```
+
+And finally, we need to figure our the region code for Pennsylvania. I don't have a great way of doing this. Adding a function for identifying the region code via zipcode, state, city, etc. is on my list. For now, you can use Davey Tree's [tree benefit calculator](http://www.treebenefits.com/calculator/) to figure out the region and then take a look at the money dataset for the code:
+
+```{r}
+money %>% 
+  as_tibble() %>% 
+  filter(region_name == "Northeast") %>% 
+  select(region_code)
+```
+
+## Calculating the benefits
+
+Now we calculate the benefits!
+
+```{r}
+my_trees <- eco_run_all(
+  data = trees, 
+  common_col = "common", 
+  botanical_col = "botanical", 
+  dbh_col = "Girth", 
+  region = "NoEastXXX"
+  ) %>% 
+  as_tibble() %>% 
+  print()
+```
+
+Notice that the _height_ and _volume_ fields are missing. This is because `eco_run_all` strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, `eco_run_all` took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is.
+
+This is why I add a field _rn_ at the beginning, to preserve the row number and link it to the benefits dataset `my_trees`:
+
+```{r}
+trees %>% 
+  select(rn, Height, Volume) %>% 
+  right_join(my_trees) %>% 
+  glimpse()
+```
+
+This is especially useful given that most tree data is spatial and includes coordinates. Whether or not the approach (stripping data, then joining at the end) is a good idea is certainly up for debate and is another reminder of why this package is experimental.
+
+## Future plans
+
+I have a couple ideas for the future of treeco:
+
+1. Add reporting features similar to i-Tree by utilizing Rmarkdown.
+2. A more verbose `eco_run_all` to tell the user how many records were matched.
+3. Utilize the `sf` package for mapping and other applications like guessing the users region.
+4. Add additional benefits. I'm leaning towards adding an arugment `expanded` to include additional benefits.
+5. Warn the user if the benefits will take more time than expected to calculate the benefits.
+
+Any criticism, issues, enhancements are encouraged and can be filed [here](https://github.com/tyluRp/treeco/issues).

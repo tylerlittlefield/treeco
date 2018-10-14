@@ -9,6 +9,8 @@ user with duplicates would have issues assigning `x` to a `data.frame` as their 
 * Added tests for warnings where threshold doesn't make sense and where factors converted to character.
 * Modified `eco_guess` to make it faster. This function takes a vector, converts it to a `data.table`, and does all the matching on unique values only. Then joins the missing field to the original (non unique) `data.table` and returns a vector containing values for the missing field.
 * The utility function `extract_data` now preserves the original rownames as a column `rn` using the `keep.rownames = TRUE` argument in `as.data.table`. This allows users to join additional variables back to the benefits dataframe. Especially important given this type of data is usually spatial. There is still the issue of reading data as the `fread` function isn't preserving rownames. Will come back to that at some point. 
+* Added [`Vignettes`](http://r-pkgs.had.co.nz/vignettes.html).
+* Added first vignette, getting started article.
 
 # treeco 0.0.0.9000
 
