@@ -12,6 +12,7 @@ The goal of `treeco` is to provide R users a tool for calculating the eco benefi
 
 ```r
 # install.packages("devtools")
+# devtools::install_github("tylurp/treeco", build_vignettes = TRUE)
 devtools::install_github("tylurp/treeco")
 ```
 
