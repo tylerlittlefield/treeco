@@ -108,10 +108,10 @@
 </ol>
 <p>Those three fields along with DBH are required to extract eco benefits. Below is an explanation of why:</p>
 <ol style="list-style-type: decimal">
-<li>DBH: This values is part of the interpolation equation used to interpolate benefits. The bigger the tree, the higher the benefit values.</li>
+<li>DBH: This value is part of the interpolation equation used to interpolate benefits.</li>
 <li>Common name: The benefits of a tree differ depending on the species.</li>
 <li>Botanical name: Same reasoning as mentioned in common name but there is an additional layer. The reason treeco requires both of these fields is to maximize the number of records treeco can match. More on this later.</li>
-<li>Region: The benefits of an identical tree in two different regions will often differ. For example, palm tree in California might not be as valuable as a palm tree on the east coast.</li>
+<li>Region: The benefits of an identical tree in two different regions will often differ. For example, a palm tree in California might not be as valuable as a palm tree on the east coast.</li>
 </ol>
 </div>
 <div id="guessing-a-missing-name-field" class="section level2">
@@ -140,8 +140,8 @@
 <a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  9 9      11.1     80   22.6 black cherry tree</span></a>
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; 10 10     11.2     75   19.9 black cherry tree</span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; # ... with 21 more rows</span></a></code></pre></div>
-<p>Now all that’s left is to identify the botanical name for a Black Cherry tree. This is required because all benefits rely on a 3000+ <em>master species list</em> created by <a href="https://www.itreetools.org/">i-Tree</a>.</p>
-<p>Since R is very strict, the value “black common tree” will not match i-Tree’s “Black cherry tree” because of the capitol “B”. Even worse, i-Tree might call it “Black cherry” and omit the word “tree” which makes the link between the two that much more difficult to identify. The best treeco can do is quantify the similarity between the users data and that master species list and then link the most similar record found in i-Tree. It first does this for common name and then the botanical and this is why both fields are required, to maximize the number of matches. This is where <code>eco_guess</code> plays a role, for example:</p>
+<p>Now all that’s left is to identify the botanical name for a Black Cherry tree. This is required because all benefits rely on a 3,000+ <em>master species list</em> created by <a href="https://www.itreetools.org/">i-Tree</a>.</p>
+<p>Since R is very strict, the value “black common tree” will not match i-Tree’s “Black cherry tree” because of the capital “B”. Even worse, i-Tree might call it “Black cherry” and omit the word “tree” which makes the link between the two that much more difficult to identify. The best treeco can do is quantify the similarity between the users data and that master species list and then link the most similar record found in i-Tree. It first does this for the common name field and then the botanical and this is why both fields are required, to maximize the number of matches. This is where <code>eco_guess</code> plays a role, for example:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(treeco)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"common fig"</span>, <span class="st">"Commn FIG"</span>, <span class="st">"RED MAPLE"</span>)</a>
@@ -165,7 +165,7 @@
 <a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt;  9 9      11.1     80   22.6 black cherry tree Prunus serotina</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 10 10     11.2     75   19.9 black cherry tree Prunus serotina</span></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; # ... with 21 more rows</span></a></code></pre></div>
-<p>And finally, we need to figure our the region code for Pennsylvania. I don’t have a great way of doing this. Adding a function for identifying the region code via zipcode, state, city, etc. is on my list. For now, you can use Davey Tree’s <a href="http://www.treebenefits.com/calculator/">tree benefit calculator</a> to figure out the region and then take a look at the money dataset for the code:</p>
+<p>Finally, we need to identify the region code for Pennsylvania. I don’t have a great way of doing this. Adding a function for identifying the region code via zipcode, state, city, etc. is on my list. For now, you can use Davey Tree’s <a href="http://www.treebenefits.com/calculator/">tree benefit calculator</a> to figure out the region and then take a look at the money dataset for the code:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">money <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(region_name <span class="op">==</span><span class="st"> "Northeast"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -205,8 +205,7 @@
 <a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt;  9     1 Prunus se… Black…   8.3        0      bvoc    lb       0    1    </span></a>
 <a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; 10     1 Prunus se… Black…   8.3       84.4    co2 av… lb       0.28 1    </span></a>
 <a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
-<p>Notice that the <em>height</em> and <em>volume</em> fields are missing. This is because <code>eco_run_all</code> strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, <code>eco_run_all</code> took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is.</p>
-<p>This is why I add a field <em>rn</em> at the beginning, to preserve the row number and link it to the benefits dataset <code>my_trees</code>:</p>
+<p>Notice that the <em>height</em> and <em>volume</em> fields are missing. This is because <code>eco_run_all</code> strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, <code>eco_run_all</code> took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is. The removal of unneeded data is why I add a field <em>rn</em> at the beginning, to preserve the row number and link it to the benefits dataset <code>my_trees</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">trees <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(rn, Height, Volume) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">right_join</a></span>(my_trees) <span class="op">%&gt;%</span><span class="st"> </span></a>
