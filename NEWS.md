@@ -11,6 +11,7 @@ user with duplicates would have issues assigning `x` to a `data.frame` as their 
 * The utility function `extract_data` now preserves the original rownames as a column `rn` using the `keep.rownames = TRUE` argument in `as.data.table`. This allows users to join additional variables back to the benefits dataframe. Especially important given this type of data is usually spatial. There is still the issue of reading data as the `fread` function isn't preserving rownames. Will come back to that at some point. 
 * Added [`Vignettes`](http://r-pkgs.had.co.nz/vignettes.html).
 * Added first vignette, getting started article.
+* Using RMarkdown to generate README.md
 
 # treeco 0.0.0.9000
 
