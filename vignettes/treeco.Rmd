@@ -75,7 +75,7 @@ And for our dataset, I can do something like:
 
 ```{r}
 trees <- trees %>% 
-  mutate(botanical = eco_guess(.$common, "botanical")) %>% 
+  mutate(botanical = eco_guess(common, "botanical")) %>% 
   print()
 ```
 

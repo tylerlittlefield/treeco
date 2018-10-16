@@ -53,7 +53,7 @@ library(treeco)
 df_trees <- trees %>% 
   mutate(common_name = "Black cherry") %>% 
   select(common_name, Girth) %>% 
-  mutate(botanical_name = eco_guess(.$common_name, "botanical"))
+  mutate(botanical_name = eco_guess(common_name, "botanical"))
 
 eco_run_all(
   data = df_trees,                  # dataset or path to CSV

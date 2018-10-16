@@ -149,7 +149,7 @@
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [1] "Ficus carica" "Ficus carica" "Acer rubrum"</span></a></code></pre></div>
 <p>And for our dataset, I can do something like:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">trees &lt;-<span class="st"> </span>trees <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">botanical =</span> <span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(.<span class="op">$</span>common, <span class="st">"botanical"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">botanical =</span> <span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(common, <span class="st">"botanical"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">print</span>()</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; # A tibble: 31 x 6</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    rn    Girth Height Volume common            botanical      </span></a>
