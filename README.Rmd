@@ -5,6 +5,8 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Travis build status](https://travis-ci.org/tyluRp/treeco.svg?branch=master)](https://travis-ci.org/tyluRp/treeco) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tyluRp/treeco?branch=master&svg=true)](https://ci.appveyor.com/project/tyluRp/treeco) [![Coverage status](https://codecov.io/gh/tyluRp/treeco/branch/master/graph/badge.svg)](https://codecov.io/github/tyluRp/treeco?branch=master) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -14,8 +16,6 @@ knitr::opts_chunk$set(
 ```
 
 <img src="man/figures/logo.png" align="right" width=130 height=150/>
-
-[![Travis build status](https://travis-ci.org/tyluRp/treeco.svg?branch=master)](https://travis-ci.org/tyluRp/treeco) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tyluRp/treeco?branch=master&svg=true)](https://ci.appveyor.com/project/tyluRp/treeco) [![Coverage status](https://codecov.io/gh/tyluRp/treeco/branch/master/graph/badge.svg)](https://codecov.io/github/tyluRp/treeco?branch=master) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 <img src="man/figures/co2_plot.png" align="center"/>
 
