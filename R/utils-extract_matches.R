@@ -3,6 +3,14 @@
 #-------------------------------------------------------------------------------
 extract_matches <- function(tree_data, species_data, n) {
 
+  # To avoid notes about global variables
+  # See: https://github.com/Rdatatable/data.table/issues/850
+  common_name = NULL
+  common_name_m = NULL
+  sim = NULL
+  botanical_name = NULL
+  botanical_name_m = NULL
+
   message("Gathering species matches...")
 
   trees <- tree_data

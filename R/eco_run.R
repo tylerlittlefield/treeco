@@ -17,6 +17,12 @@
 #' @export
 eco_run <- function(common, dbh, region) {
 
+  # To avoid notes about global variables
+  # See: https://github.com/Rdatatable/data.table/issues/850
+  benefit_value = NULL
+  unit = NULL
+  benefit = NULL
+
   species_guess <- guess_common(common, region)
   species_val <- species_guess$spp_value_assignment
   species_common_guess <- species_guess$common_name

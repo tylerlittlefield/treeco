@@ -1,5 +1,11 @@
 extract_money <- function(tree_data, money_data) {
 
+  # To avoid notes about global variables
+  # See: https://github.com/Rdatatable/data.table/issues/850
+  unit = NULL
+  benefit = NULL
+  benefit_value = NULL
+
   elec_money <- money_data[grepl("electricity", money_data$variable)][["value"]]
   gas_money  <- money_data[grepl("natural_gas", money_data$variable)][["value"]]
   h20_money  <- money_data[grepl("h20_gal", money_data$variable)][["value"]]
