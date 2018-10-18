@@ -16,11 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of treeco is to make it easy for R users to extract ecosystem and economic benefits of trees. This package is currently labeled as [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental), users should expect breaking changes. One example being that `eco_run_all` requires both the common name and botanical name fields where it once only required the former field. I'm doing my best to only make these changes when it makes sense and improves treeco significantly. My goal is to eventually change that label to stable. If that hasn't scared you away, please keeping reading on!
+The goal of treeco is to make it easy for R users to extract ecosystem and economic benefits of trees. Similar tools like i-Tree, Davey Tree Calculator, and OpenTreeMap are also available and I would encourage you to check them out. These tools heavily influenced treeco.
+
+Note that this package is currently labeled as [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental). Users should expect breaking changes. One example being that `eco_run_all` requires both the common name and botanical name fields where it once only required the former field. I'm doing my best to only make these changes when it makes sense and improves treeco significantly. My goal is to eventually change that label to stable. If that hasn't scared you away, please keeping reading on!
 
 ## Getting started
 
-I'm going to use the [trees](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset provided in base R. There are only 31 trees provided but we will increase that later on to show off the speed. For now, lets take a look at what we got:
+I'm going to use the [trees](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html) dataset provided in base R:
 
 ```{r}
 str(trees)
@@ -47,7 +49,7 @@ Those three fields along with DBH are required to extract eco benefits. Below is
 
 ## Guessing a missing name field
 
-Given the data we have, we can't extract the benefits, we're missing too many fields. Fortunately, there is some info we can use in the docs, type `?trees` in the R console to take a look. We see that these are Black Cherry trees. Upon further investigation (google), I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I'm going to add the common name as a field _common_ and add a row number field _rn_. More on why _rn_ is added later.
+Given the data we have, we can't extract the benefits, we're missing too many fields. Fortunately, there is some info we can use in the docs, type `?trees` in the R console to take a look. We see that these are Black Cherry trees. After some googling, I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I'm going to add the common name as a field _common_ and add a row number field _rn_. More on why _rn_ is added later.
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -71,7 +73,7 @@ x <- c("common fig", "Commn FIG", "RED MAPLE")
 eco_guess(x, "botanical")
 ```
 
-And for our dataset, I can do something like:
+And for the trees dataset, I can do something like:
 
 ```{r}
 trees <- trees %>% 
@@ -90,7 +92,11 @@ money %>%
 
 ## Calculating the benefits
 
-Now we calculate the benefits!
+Before we calculate the benefits, it should be noted that most of the steps above won't be necessary, they're only there to construct and describe a dataframe that `eco_run_all` needs. In most cases, the typical workflow will be:
+
+1. Import the data
+2. Guess the common/botanical field if either is missing
+3. Calculate the benefits
 
 ```{r}
 my_trees <- eco_run_all(
@@ -104,7 +110,7 @@ my_trees <- eco_run_all(
   print()
 ```
 
-Notice that the _height_ and _volume_ fields are missing. This is because `eco_run_all` strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, `eco_run_all` took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is. The removal of unneeded data is why I add a field _rn_ at the beginning, to preserve the row number and link it to the benefits dataset `my_trees`:
+Notice that the _height_ and _volume_ fields are missing. This is because `eco_run_all` strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, `eco_run_all` took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is. The removal of unneeded data is why I add a field *rn* at the beginning, to preserve the row number and link it to the benefits dataset `my_trees`:
 
 ```{r}
 trees %>% 

@@ -90,11 +90,12 @@
 
     
     
-<p>The goal of treeco is to make it easy for R users to extract ecosystem and economic benefits of trees. This package is currently labeled as <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a>, users should expect breaking changes. One example being that <code>eco_run_all</code> requires both the common name and botanical name fields where it once only required the former field. I’m doing my best to only make these changes when it makes sense and improves treeco significantly. My goal is to eventually change that label to stable. If that hasn’t scared you away, please keeping reading on!</p>
+<p>The goal of treeco is to make it easy for R users to extract ecosystem and economic benefits of trees. Similar tools like i-Tree, Davey Tree Calculator, and OpenTreeMap are also available and I would encourage you to check them out. These tools heavily influenced treeco.</p>
+<p>Note that this package is currently labeled as <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a>. Users should expect breaking changes. One example being that <code>eco_run_all</code> requires both the common name and botanical name fields where it once only required the former field. I’m doing my best to only make these changes when it makes sense and improves treeco significantly. My goal is to eventually change that label to stable. If that hasn’t scared you away, please keeping reading on!</p>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
-<p>I’m going to use the <a href="https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html">trees</a> dataset provided in base R. There are only 31 trees provided but we will increase that later on to show off the speed. For now, lets take a look at what we got:</p>
+<p>I’m going to use the <a href="https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/trees.html">trees</a> dataset provided in base R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">str</span>(trees)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; 'data.frame':    31 obs. of  3 variables:</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt;  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...</span></a>
@@ -123,7 +124,7 @@
 <div id="guessing-a-missing-name-field" class="section level2">
 <h2 class="hasAnchor">
 <a href="#guessing-a-missing-name-field" class="anchor"></a>Guessing a missing name field</h2>
-<p>Given the data we have, we can’t extract the benefits, we’re missing too many fields. Fortunately, there is some info we can use in the docs, type <code>?trees</code> in the R console to take a look. We see that these are Black Cherry trees. Upon further investigation (google), I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I’m going to add the common name as a field <em>common</em> and add a row number field <em>rn</em>. More on why <em>rn</em> is added later.</p>
+<p>Given the data we have, we can’t extract the benefits, we’re missing too many fields. Fortunately, there is some info we can use in the docs, type <code>?trees</code> in the R console to take a look. We see that these are Black Cherry trees. After some googling, I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I’m going to add the common name as a field <em>common</em> and add a row number field <em>rn</em>. More on why <em>rn</em> is added later.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
@@ -153,7 +154,7 @@
 <a class="sourceLine" id="cb3-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"common fig"</span>, <span class="st">"Commn FIG"</span>, <span class="st">"RED MAPLE"</span>)</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(x, <span class="st">"botanical"</span>)</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [1] "Ficus carica" "Ficus carica" "Acer rubrum"</span></a></code></pre></div>
-<p>And for our dataset, I can do something like:</p>
+<p>And for the trees dataset, I can do something like:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">trees &lt;-<span class="st"> </span>trees <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">botanical =</span> <span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(common, <span class="st">"botanical"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">print</span>()</a>
@@ -184,7 +185,12 @@
 <div id="calculating-the-benefits" class="section level2">
 <h2 class="hasAnchor">
 <a href="#calculating-the-benefits" class="anchor"></a>Calculating the benefits</h2>
-<p>Now we calculate the benefits!</p>
+<p>Before we calculate the benefits, it should be noted that most of the steps above won’t be necessary, they’re only there to construct and describe a dataframe that <code>eco_run_all</code> needs. In most cases, the typical workflow will be:</p>
+<ol style="list-style-type: decimal">
+<li>Import the data</li>
+<li>Guess the common/botanical field if either is missing</li>
+<li>Calculate the benefits</li>
+</ol>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">my_trees &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eco_run_all.html">eco_run_all</a></span>(</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">data =</span> trees, </a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">common_col =</span> <span class="st">"common"</span>, </a>
