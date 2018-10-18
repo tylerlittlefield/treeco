@@ -7,19 +7,30 @@
 #' species/dbh pairs to avoid redundant computation and speed up the
 #' calculation.
 #'
-#' @param data path to csv file containing tree inventory
-#' @param common_col the name of the column containing common names
-#' @param botanical_col the name of the column containing botanical names
-#' @param dbh_col the name of the column containing dbh values
-#' @param region region code, see \code{species} or \code{benefits}
-#' @param n guessing threshold from 0.0 to 1.0, defaults at 0.8
-#' @param print_time Logical TRUE or FALSE for printing the elapsed time
+#' @param data Path to csv file containing tree inventory.
+#' @param common_col The name of the column containing common names.
+#' @param botanical_col The name of the column containing botanical names.
+#' @param dbh_col The name of the column containing dbh values.
+#' @param region Region code, see \code{species} or \code{benefits}.
+#' @param n Guessing threshold from 0.0 to 1.0, defaults at 0.8.
+#' @param unit The unit of measurement for DBH, either "in" for inches or "cm" for centimeters. Defaults to inches.
+#' @param print_time Logical TRUE or FALSE for printing the elapsed time.
+#'
+#' @examples
+#' # Add common name (typically not needed for a real inventory)
+#' trees$common_name <- "black cherry"
+#' # Guess the botanical name based on the common names
+#' trees$botanical_name <- eco_guess(trees$common_name, "botanical")
+#' # Run the benefits
+#' eco_run_all(trees, "common_name", "botanical_name", "Girth", "PiedmtCLT")
 #'
 #' @import data.table
 #' @export
-eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.8, print_time = NULL) {
+eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.8, unit = "in", print_time = NULL) {
 
   start_time <- Sys.time()
+
+  '%nin%' <- Negate('%in%')
 
   if(n > 1){
     warning("n > 1, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
@@ -29,9 +40,11 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
     warning("n < 0, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
     n <- 0.8
   }
+  if(unit %nin% c("in", "cm"))
+    stop("Incorrect value given to unit parameter. Please use 'in' or 'cm'.")
 
   # Extract and reshape the input data
-  tree_data <- extract_data(data, common_col, botanical_col, dbh_col, region)
+  tree_data <- extract_data(data, common_col, botanical_col, dbh_col, region, unit)
 
   # Output is stored in a list, assign each list element to an object
   trees <- tree_data$trees
@@ -87,7 +100,11 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_final <- trees[trees_unique, allow.cartesian=TRUE]
 
   # i-Tree requires centimeters so converting back to inches
-  trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2)
+  ifelse(
+    test = unit == "in",
+    yes = trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2),
+    no = trees
+    )
 
   # Set key as 'id' to get the data sorted by 'id'
   data.table::setkey(trees_final, "id")

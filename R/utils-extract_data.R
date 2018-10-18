@@ -1,4 +1,4 @@
-extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
+extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit) {
 
   # Might need to remove NA's first? Given the keep.rownames=TRUE?
   ifelse(
@@ -36,7 +36,12 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region) {
   trees <- trees[, .SD, .SDcol = c("rn", "common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
   benefits <- benefits[benefits$species_region == region]
   species <- species[species$species_region == region]
-  trees$dbh_val <- trees$dbh_val * 2.54
+
+  ifelse(
+    test = unit == "in",
+    yes = trees$dbh_val <- trees$dbh_val * 2.54,
+    no = trees
+    )
 
   output <- list(
     trees = trees,

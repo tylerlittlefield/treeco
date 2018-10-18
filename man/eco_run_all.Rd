@@ -5,22 +5,24 @@
 \title{Eco benefits for multiple trees}
 \usage{
 eco_run_all(data, common_col, botanical_col, dbh_col, region, n = 0.8,
-  print_time = NULL)
+  unit = "in", print_time = NULL)
 }
 \arguments{
-\item{data}{path to csv file containing tree inventory}
+\item{data}{Path to csv file containing tree inventory.}
 
-\item{common_col}{the name of the column containing common names}
+\item{common_col}{The name of the column containing common names.}
 
-\item{botanical_col}{the name of the column containing botanical names}
+\item{botanical_col}{The name of the column containing botanical names.}
 
-\item{dbh_col}{the name of the column containing dbh values}
+\item{dbh_col}{The name of the column containing dbh values.}
 
-\item{region}{region code, see \code{species} or \code{benefits}}
+\item{region}{Region code, see \code{species} or \code{benefits}.}
 
-\item{n}{guessing threshold from 0.0 to 1.0, defaults at 0.8}
+\item{n}{Guessing threshold from 0.0 to 1.0, defaults at 0.8.}
 
-\item{print_time}{Logical TRUE or FALSE for printing the elapsed time}
+\item{unit}{The unit of measurement for DBH, either "in" for inches or "cm" for centimeters. Defaults to inches.}
+
+\item{print_time}{Logical TRUE or FALSE for printing the elapsed time.}
 }
 \description{
 This function calculates the benefits for an entire dataset,
@@ -29,4 +31,13 @@ where the user supplies data, the common name field, the botanical name
 field, the dbh field, and the region. All calculations are done on unique
 species/dbh pairs to avoid redundant computation and speed up the
 calculation.
+}
+\examples{
+# Add common name (typically not needed for a real inventory)
+trees$common_name <- "black cherry"
+# Guess the botanical name based on the common names
+trees$botanical_name <- eco_guess(trees$common_name, "botanical")
+# Run the benefits
+eco_run_all(trees, "common_name", "botanical_name", "Girth", "PiedmtCLT")
+
 }

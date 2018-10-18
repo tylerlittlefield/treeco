@@ -12,6 +12,7 @@ user with duplicates would have issues assigning `x` to a `data.frame` as their 
 * Added [`Vignettes`](http://r-pkgs.had.co.nz/vignettes.html).
 * Added first vignette, getting started article.
 * Using RMarkdown to generate README.md
+* Added unit parameter for rare cases where user data measures DBH in centimeters instead of inches.
 
 # treeco 0.0.0.9000
 

@@ -138,48 +138,85 @@ calculation.</p>
     </div>
 
     <pre class="usage"><span class='fu'>eco_run_all</span>(<span class='no'>data</span>, <span class='no'>common_col</span>, <span class='no'>botanical_col</span>, <span class='no'>dbh_col</span>, <span class='no'>region</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>print_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"in"</span>, <span class='kw'>print_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>path to csv file containing tree inventory</p></td>
+      <td><p>Path to csv file containing tree inventory.</p></td>
     </tr>
     <tr>
       <th>common_col</th>
-      <td><p>the name of the column containing common names</p></td>
+      <td><p>The name of the column containing common names.</p></td>
     </tr>
     <tr>
       <th>botanical_col</th>
-      <td><p>the name of the column containing botanical names</p></td>
+      <td><p>The name of the column containing botanical names.</p></td>
     </tr>
     <tr>
       <th>dbh_col</th>
-      <td><p>the name of the column containing dbh values</p></td>
+      <td><p>The name of the column containing dbh values.</p></td>
     </tr>
     <tr>
       <th>region</th>
-      <td><p>region code, see <code>species</code> or <code>benefits</code></p></td>
+      <td><p>Region code, see <code>species</code> or <code>benefits</code>.</p></td>
     </tr>
     <tr>
       <th>n</th>
-      <td><p>guessing threshold from 0.0 to 1.0, defaults at 0.8</p></td>
+      <td><p>Guessing threshold from 0.0 to 1.0, defaults at 0.8.</p></td>
+    </tr>
+    <tr>
+      <th>unit</th>
+      <td><p>The unit of measurement for DBH, either "in" for inches or "cm" for centimeters. Defaults to inches.</p></td>
     </tr>
     <tr>
       <th>print_time</th>
-      <td><p>Logical TRUE or FALSE for printing the elapsed time</p></td>
+      <td><p>Logical TRUE or FALSE for printing the elapsed time.</p></td>
     </tr>
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Add common name (typically not needed for a real inventory)</span>
+<span class='no'>trees</span>$<span class='no'>common_name</span> <span class='kw'>&lt;-</span> <span class='st'>"black cherry"</span>
+<span class='co'># Guess the botanical name based on the common names</span>
+<span class='no'>trees</span>$<span class='no'>botanical_name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='eco_guess.html'>eco_guess</a></span>(<span class='no'>trees</span>$<span class='no'>common_name</span>, <span class='st'>"botanical"</span>)
+<span class='co'># Run the benefits</span>
+<span class='fu'>eco_run_all</span>(<span class='no'>trees</span>, <span class='st'>"common_name"</span>, <span class='st'>"botanical_name"</span>, <span class='st'>"Girth"</span>, <span class='st'>"PiedmtCLT"</span>)</div><div class='output co'>#&gt; <span class='message'>Gathering species matches...</span></div><div class='output co'>#&gt; <span class='message'>Gathering interpolation parameters...</span></div><div class='output co'>#&gt; <span class='message'>Interpolating benefits...</span></div><div class='output co'>#&gt;      id       botanical       common  dbh benefit_value            benefit unit
+#&gt;   1:  1 Prunus serotina Black cherry  8.3        0.0776     aq nox avoided   lb
+#&gt;   2:  1 Prunus serotina Black cherry  8.3        0.0260         aq nox dep   lb
+#&gt;   3:  1 Prunus serotina Black cherry  8.3        0.0556       aq ozone dep   lb
+#&gt;   4:  1 Prunus serotina Black cherry  8.3        0.0150    aq pm10 avoided   lb
+#&gt;   5:  1 Prunus serotina Black cherry  8.3        0.0633        aq pm10 dep   lb
+#&gt;  ---                                                                           
+#&gt; 461: 31 Prunus serotina Black cherry 20.6      606.2412    co2 sequestered   lb
+#&gt; 462: 31 Prunus serotina Black cherry 20.6     7909.7504        co2 storage   lb
+#&gt; 463: 31 Prunus serotina Black cherry 20.6      144.7267        electricity  kwh
+#&gt; 464: 31 Prunus serotina Black cherry 20.6     5476.4716 hydro interception  gal
+#&gt; 465: 31 Prunus serotina Black cherry 20.6     1194.6395        natural gas   lb
+#&gt;      dollars rn
+#&gt;   1:    0.51  1
+#&gt;   2:    0.17  1
+#&gt;   3:    0.36  1
+#&gt;   4:    0.04  1
+#&gt;   5:    0.16  1
+#&gt;  ---           
+#&gt; 461:    4.55 31
+#&gt; 462:   59.32 31
+#&gt; 463:   10.98 31
+#&gt; 464:   54.22 31
+#&gt; 465:   12.50 31</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
