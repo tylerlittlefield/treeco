@@ -49,5 +49,15 @@ test_that("eco_run_all works", {
     n = -0.1,
     print_time = TRUE
   ))
+  expect_error(eco_run_all(
+    data = df_species,
+    common_col = "common_name",
+    botanical_col = "botanical_name",
+    dbh_col = "dbh",
+    region = "InlEmpCLM",
+    n = 0.9,
+    unit = "IN",
+    print_time = TRUE
+  ))
 
 })
