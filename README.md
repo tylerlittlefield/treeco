@@ -1,9 +1,6 @@
-treeco
-================
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/logo.png" align="right" width=130 height=150/>
+# treeco <img src="man/figures/logo.png" align="right" width=130 height=150/>
 
 [![Travis build
 status](https://travis-ci.org/tyluRp/treeco.svg?branch=master)](https://travis-ci.org/tyluRp/treeco)
