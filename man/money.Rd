@@ -6,8 +6,8 @@
 \title{Money dataset}
 \format{A data frame with 16 rows and 11 variables:
 \describe{
-  \item{region_code}{The region code.}
-  \item{region_name}{The region name, meant to be human readable for users to pick the appropriate region code.}
+  \item{region_code}{Region code.}
+  \item{region_name}{Region name associated with region code. This is meant to be human readable for users to pick the appropriate region code.}
   \item{electricity_kwh_to_currency}{Electricity in kwh to dollar amount.}
   \item{natural_gas_kbtu_to_currency}{Natural gas in kbtu to dollar amount.}
   \item{h20_gal_to_currency}{H20 in gallons to dollar amount.}

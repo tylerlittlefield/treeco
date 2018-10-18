@@ -6,18 +6,18 @@
 \title{Species dataset}
 \format{A data frame with 3178 rows and 12 variables:
 \describe{
-  \item{id}{id variable.}
-  \item{species_code}{species code}
-  \item{scientific_name}{scientific name of tree}
-  \item{common_name}{common name of tree}
-  \item{tree_type}{type of tree}
-  \item{spp_value_assignment}{another tree code for linking trees to benefits}
+  \item{id}{An id variable.}
+  \item{species_code}{Species codes.}
+  \item{scientific_name}{Scientific tree names.}
+  \item{common_name}{Common tree names.}
+  \item{tree_type}{Tree types.}
+  \item{spp_value_assignment}{Another tree code for linking trees to benefits.}
   \item{species_rating_percent}{to be determined...}
   \item{basic_price_sq_in}{to be determined...}
   \item{palm_trunk_cost_ft}{to be determined...}
   \item{replacement_cost}{to be determined...}
   \item{t_ar_sq_inches}{to be determined...}
-  \item{species_region}{region of tree}
+  \item{species_region}{Tree region.}
   ...
 }}
 \source{

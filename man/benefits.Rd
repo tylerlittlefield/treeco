@@ -6,20 +6,20 @@
 \title{Benefits dataset}
 \format{A data frame with 6975 rows and 14 variables:
 \describe{
-  \item{id}{id variable.}
+  \item{id}{An id variable.}
   \item{species_code}{This is the "spp_value_assignment" and acts as a key linking trees to their appropriate benefit values.}
-  \item{x3_81}{DBH range of 3.81 centimeters.}
-  \item{x11_43}{DBH range of 11.43 centimeters.}
-  \item{x22_86}{DBH range of 22.86 centimeters.}
-  \item{x38_10}{DBH range of 38.10 centimeters.}
-  \item{x53_34}{DBH range of 53.34 centimeters.}
-  \item{x68_58}{DBH range of 68.58 centimeters.}
-  \item{x83_82}{DBH range of 83.82 centimeters.}
-  \item{x99_06}{DBH range of 99.06 centimeters.}
-  \item{x114_30}{DBH range of 114.30 centimeters.}
+  \item{x3_81}{Benefit values associated with a DBH range of 3.81 centimeters.}
+  \item{x11_43}{Benefit values associated with a DBH range of 11.43 centimeters.}
+  \item{x22_86}{Benefit values associated with a DBH range of 22.86 centimeters.}
+  \item{x38_10}{Benefit values associated with a DBH range of 38.10 centimeters.}
+  \item{x53_34}{Benefit values associated with a DBH range of 53.34 centimeters.}
+  \item{x68_58}{Benefit values associated with a DBH range of 68.58 centimeters.}
+  \item{x83_82}{Benefit values associated with a DBH range of 83.82 centimeters.}
+  \item{x99_06}{Benefit values associated with a DBH range of 99.06 centimeters.}
+  \item{x114_30}{Benefit values associated with a DBH range of 114.30 centimeters.}
   \item{species_region}{The region code representing a specific region. Benefit values change depending on the region.}
   \item{benefit}{The type of benefit.}
-  \item{unit}{The unit of measurment for a benefit.}
+  \item{unit}{The unit of measurement for a benefit type.}
   ...
 }}
 \source{
