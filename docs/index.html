@@ -83,8 +83,11 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<div id="treeco" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#treeco" class="anchor"></a>treeco <img src="reference/figures/logo.png" align="right" width="130" height="150/">
+</h1></div>
 
-<p><img src="reference/figures/logo.png" align="right" width="130" height="150/"></p>
 <p><img src="reference/figures/co2_plot.png" align="center"></p>
 <p>The goal of <code>treeco</code> is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from OpenStreetMaps <a href="https://github.com/OpenTreeMap/otm-ecoservice"><code>otm-ecoservice</code></a> repository which was (probably) ripped from <a href="https://www.itreetools.org/">i-Tree</a>’s Eco or Streets software. A single tree is represented by 15 rows and 9 columns as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, <code>treeco</code> utilizes the <a href="https://github.com/Rdatatable/data.table"><code>data.table</code></a> package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation.</p>
 <div id="installation" class="section level2">
@@ -178,6 +181,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"common fig"</span>, <span class="st">"red maple"</span>, <span class="st">"fir"</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">treeco<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/treeco/topics/eco_guess">eco_guess</a></span>(x, <span class="st">"botanical"</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1] "Ficus carica" "Acer rubrum"  "Abies spp"</span></a></code></pre></div>
+</div>
 </div>
   </div>
 
