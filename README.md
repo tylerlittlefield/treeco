@@ -35,7 +35,6 @@ github using [`devtools`](https://github.com/r-lib/devtools):
 
 ``` r
 # install.packages("devtools")
-# devtools::install_github("tylurp/treeco", build_vignettes = TRUE)
 devtools::install_github("tylurp/treeco")
 ```
 
