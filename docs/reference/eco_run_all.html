@@ -181,8 +181,10 @@ calculation.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Add common name (typically not needed for a real inventory)</span>
 <span class='no'>trees</span>$<span class='no'>common_name</span> <span class='kw'>&lt;-</span> <span class='st'>"black cherry"</span>
+
 <span class='co'># Guess the botanical name based on the common names</span>
 <span class='no'>trees</span>$<span class='no'>botanical_name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='eco_guess.html'>eco_guess</a></span>(<span class='no'>trees</span>$<span class='no'>common_name</span>, <span class='st'>"botanical"</span>)
+
 <span class='co'># Run the benefits</span>
 <span class='fu'>eco_run_all</span>(<span class='no'>trees</span>, <span class='st'>"common_name"</span>, <span class='st'>"botanical_name"</span>, <span class='st'>"Girth"</span>, <span class='st'>"PiedmtCLT"</span>)</div><div class='output co'>#&gt; <span class='message'>Gathering species matches...</span></div><div class='output co'>#&gt; <span class='message'>Gathering interpolation parameters...</span></div><div class='output co'>#&gt; <span class='message'>Interpolating benefits...</span></div><div class='output co'>#&gt;      id       botanical       common  dbh benefit_value            benefit unit
 #&gt;   1:  1 Prunus serotina Black cherry  8.3        0.0776     aq nox avoided   lb

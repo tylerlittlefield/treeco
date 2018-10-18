@@ -35,8 +35,10 @@ calculation.
 \examples{
 # Add common name (typically not needed for a real inventory)
 trees$common_name <- "black cherry"
+
 # Guess the botanical name based on the common names
 trees$botanical_name <- eco_guess(trees$common_name, "botanical")
+
 # Run the benefits
 eco_run_all(trees, "common_name", "botanical_name", "Girth", "PiedmtCLT")
 
