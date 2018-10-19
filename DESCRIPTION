@@ -26,7 +26,8 @@ Suggests:
     dplyr,
     tibble,
     sf,
-    janitor
+    janitor,
+    tidyr
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

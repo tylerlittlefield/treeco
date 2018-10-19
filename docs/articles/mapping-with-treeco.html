@@ -165,7 +165,7 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; Gathering species matches...</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; Gathering interpolation parameters...</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; Interpolating benefits...</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; Time difference of 0.5123911 secs</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; Time difference of 0.478729 secs</span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>(tree_benefits)</a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; # A tibble: 9,420 x 9</span></a>
@@ -203,11 +203,19 @@
 <h2 class="hasAnchor">
 <a href="#start-mapping" class="anchor"></a>Start mapping</h2>
 <p>So far we have: imported the data, calculated the benefits, and joined those benefits back to the original dataset. Now the fun begins, we can start visualizing the results.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">street_trees <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span>(rn, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(common, dbh, mem_tree, overhead_wires, solar_rating, ownership, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/plot">plot</a></span>(<span class="dt">pch =</span> <span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">street_trees <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(rn, common, benefit, benefit_value, geometry) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(<span class="dt">key =</span> benefit, <span class="dt">value =</span> benefit_value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">c</span>(rn, common)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/plot">plot</a></span>(<span class="dt">max.plot =</span> <span class="dv">15</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</a></code></pre></div>
 <p><img src="mapping-with-treeco_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">street_trees <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span>(rn, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(common, dbh, mem_tree, overhead_wires, solar_rating, ownership, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/plot">plot</a></span>(<span class="dt">pch =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="mapping-with-treeco_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
   </div>
 

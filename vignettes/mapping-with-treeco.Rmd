@@ -101,6 +101,16 @@ Note that some of the lines aren't necessary. You don't need to convert the vari
 So far we have: imported the data, calculated the benefits, and joined those benefits back to the original dataset. Now the fun begins, we can start visualizing the results.
 
 ```{r}
+library(tidyr)
+
+street_trees %>% 
+  select(rn, common, benefit, benefit_value, geometry) %>%
+  spread(key = benefit, value = benefit_value) %>% 
+  select(-c(rn, common)) %>% 
+  plot(max.plot = 15, pch = 20)
+```
+
+```{r}
 street_trees %>% 
   distinct(rn, .keep_all = TRUE) %>% 
   select(common, dbh, mem_tree, overhead_wires, solar_rating, ownership, geometry) %>% 
