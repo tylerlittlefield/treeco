@@ -24,10 +24,7 @@ Suggests:
     knitr,
     rmarkdown,
     dplyr,
-    tibble,
-    sf,
-    janitor,
-    tidyr
+    tibble
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
