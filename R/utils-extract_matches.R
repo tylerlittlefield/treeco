@@ -84,6 +84,9 @@ extract_matches <- function(tree_data, species_data, n) {
   data.table::setnames(trees_unique, "common_name_m", "common_name")
   data.table::setnames(trees_unique, "botanical_name_m", "botanical_name")
 
+  trees <- trees[!duplicated(trees$rn), ] # fix this, shouldn't have to do this
+  trees_unique <- trees_unique[!duplicated(trees_unique$rn), ] # fix this, shouldn't have to do this
+
   output <- list(trees = trees, trees_unique = trees_unique)
   return(output)
 }

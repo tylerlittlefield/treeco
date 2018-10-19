@@ -24,7 +24,9 @@ Suggests:
     knitr,
     rmarkdown,
     dplyr,
-    tibble
+    tibble,
+    sf,
+    janitor
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

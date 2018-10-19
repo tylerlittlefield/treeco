@@ -7,6 +7,16 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
     no = trees <- data.table::fread(data)
   )
 
+  # Remove NA's if an in common or botanical col
+  # discarded_records <- dim(trees)[1] - dim(trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ])[1]
+  #
+  # warning_message <- paste0(discarded_records, " records were discarded due to missing common or botanical names. Please use eco_guess to resolve these missing values.")
+  #
+  # if(discarded_records > 0)
+  #   warning(warning_message, call. = FALSE)
+
+  trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
+
   # trees  <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
   benefits <- data.table::as.data.table(treeco::benefits)
   species  <- data.table::as.data.table(treeco::species)
