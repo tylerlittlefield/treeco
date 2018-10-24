@@ -31,7 +31,6 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
 
   trees$botanical_name <- as.character(trees$botanical_name)
   trees$common_name <- as.character(trees$common_name)
-
   trees$dbh_val <- as.numeric(trees$dbh_val)
 
   # Assert that the common_name is character, the dbh column is numeric, and
