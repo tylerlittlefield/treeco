@@ -34,14 +34,7 @@ Above is a very broad, high level model of how `eco_run_all` works. There is sti
 Takes the following form:
 
 ```r
-extract_data(
-  data = tree_data, # or a path to a CSV
-  common_col = "common_field_name", 
-  botanical_col = "botanical_field_name", 
-  dbh_col = "dbh_field_name", 
-  region = "region_code", 
-  unit "in" # or cm for centimeters
-  )
+extract_data(data, common_col, botanical_col, dbh_col, region, unit)
 ```
 
 The first thing it checks is whether or not `data` is a `data.frame` using `inherits` (i.e. is `data.frame` a class which `data` inherits?). If it is, it's converted to a `data.table` and if it's not, it's assumed to be a CSV and imported with `fread`:
@@ -128,5 +121,19 @@ return(output)
 ```
 
 **Unfinished, to be continued...**
+
+## `extract_matches`
+
+### `string_dist`
+
+## `extract_parameters`
+
+## `extract_benefits`
+
+### `eco_interp`
+
+## `extract_money`
+
+## `capitalize`
 
 

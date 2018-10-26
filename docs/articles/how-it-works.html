@@ -134,14 +134,7 @@
 <a href="#extract_data" class="anchor"></a><code>extract_data</code>
 </h2>
 <p>Takes the following form:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">extract_data</span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">data =</span> tree_data, <span class="co"># or a path to a CSV</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">common_col =</span> <span class="st">"common_field_name"</span>, </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">botanical_col =</span> <span class="st">"botanical_field_name"</span>, </a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">dbh_col =</span> <span class="st">"dbh_field_name"</span>, </a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="dt">region =</span> <span class="st">"region_code"</span>, </a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  unit <span class="st">"in"</span> <span class="co"># or cm for centimeters</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  )</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">extract_data</span>(data, common_col, botanical_col, dbh_col, region, unit)</a></code></pre></div>
 <p>The first thing it checks is whether or not <code>data</code> is a <code>data.frame</code> using <code>inherits</code> (i.e. is <code>data.frame</code> a class which <code>data</code> inherits?). If it is, it’s converted to a <code>data.table</code> and if it’s not, it’s assumed to be a CSV and imported with <code>fread</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ifelse</span>(</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">test =</span> <span class="kw">inherits</span>(data, <span class="st">"data.frame"</span>),</a>
@@ -195,6 +188,41 @@
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw">return</span>(output)</a></code></pre></div>
 <p><strong>Unfinished, to be continued…</strong></p>
 </div>
+<div id="extract_matches" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extract_matches" class="anchor"></a><code>extract_matches</code>
+</h2>
+<div id="string_dist" class="section level3">
+<h3 class="hasAnchor">
+<a href="#string_dist" class="anchor"></a><code>string_dist</code>
+</h3>
+</div>
+</div>
+<div id="extract_parameters" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extract_parameters" class="anchor"></a><code>extract_parameters</code>
+</h2>
+</div>
+<div id="extract_benefits" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extract_benefits" class="anchor"></a><code>extract_benefits</code>
+</h2>
+<div id="eco_interp" class="section level3">
+<h3 class="hasAnchor">
+<a href="#eco_interp" class="anchor"></a><code>eco_interp</code>
+</h3>
+</div>
+</div>
+<div id="extract_money" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extract_money" class="anchor"></a><code>extract_money</code>
+</h2>
+</div>
+<div id="capitalize" class="section level2">
+<h2 class="hasAnchor">
+<a href="#capitalize" class="anchor"></a><code>capitalize</code>
+</h2>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -203,6 +231,11 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#extract_data"><code>extract_data</code></a></li>
+      <li><a href="#extract_matches"><code>extract_matches</code></a></li>
+      <li><a href="#extract_parameters"><code>extract_parameters</code></a></li>
+      <li><a href="#extract_benefits"><code>extract_benefits</code></a></li>
+      <li><a href="#extract_money"><code>extract_money</code></a></li>
+      <li><a href="#capitalize"><code>capitalize</code></a></li>
       </ul>
 </div>
       </div>
