@@ -44,11 +44,11 @@ extract_data(
   )
 ```
 
-The first thing it checks is whether or not `data` is an object. If it is, it's converted to a `data.table` and if it's not, it's assumed to be a CSV and imported with `fread`:
+The first thing it checks is whether or not `data` is a `data.frame` using `inherits` (i.e. is `data.frame` a class which `data` inherits?). If it is, it's converted to a `data.table` and if it's not, it's assumed to be a CSV and imported with `fread`:
 
 ```r
 ifelse(
-  test = is.object(data),
+  test = inherits(data, "data.frame"),
   yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
   no = trees <- data.table::fread(data)
 )
@@ -60,7 +60,7 @@ Next, any rows that are missing a common or botanical name are discarded:
 trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 ```
 
-Next, the datasets are saved as `data.table`'s and the money dataset is filtered by region, `melt`ed to convert from wide to long and selects the variables we need:
+Next, all required datasets are saved as `data.table`'s and the money dataset is filtered by region, `melt`ed to convert from wide to long and selects the variables we need:
 
 ```r
 benefits <- data.table::as.data.table(treeco::benefits)
@@ -71,7 +71,7 @@ money    <- data.table::melt(money, id.vars = c("region_code", "region_name"))
 money    <- money[, c("variable", "value")]
 ```
 
-Next, the names of the trees dataset are set to keep everything consistent from this point going forward:
+Next, the names of the trees dataset are set to keep naming consistent from this point going forward:
 
 ```r
 data.table::setnames(trees, botanical_col, "botanical_name")
@@ -104,7 +104,7 @@ benefits <- benefits[benefits$species_region == region]
 species <- species[species$species_region == region]
 ```
 
-Next, if the users assigns `unit = "cm"`, the DBH values will not be converted to centimeters, if no argument is given `unit` defaults to inches and converts DBH values to centimeters:
+Next, if the users assigns `unit = "cm"`, the DBH values will not be converted to centimeters, if no argument is given `unit` defaults to inches and converts DBH values to centimeters. This is required because i-Tree uses centimeters:
 
 ```r
 ifelse(
@@ -127,12 +127,6 @@ output <- list(
 return(output)
 ```
 
-## `extract_matches`
-
-**unfinished**
-
-Takes the following form:
-
-`extract_matches <- function(tree_data, species_data, n)`
+**Unfinished, to be continued...**
 
 

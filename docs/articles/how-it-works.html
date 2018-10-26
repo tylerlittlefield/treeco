@@ -142,22 +142,22 @@
 <a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="dt">region =</span> <span class="st">"region_code"</span>, </a>
 <a class="sourceLine" id="cb1-7" data-line-number="7">  unit <span class="st">"in"</span> <span class="co"># or cm for centimeters</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">  )</a></code></pre></div>
-<p>The first thing it checks is whether or not <code>data</code> is an object. If it is, it’s converted to a <code>data.table</code> and if it’s not, it’s assumed to be a CSV and imported with <code>fread</code>:</p>
+<p>The first thing it checks is whether or not <code>data</code> is a <code>data.frame</code> using <code>inherits</code> (i.e. is <code>data.frame</code> a class which <code>data</code> inherits?). If it is, it’s converted to a <code>data.table</code> and if it’s not, it’s assumed to be a CSV and imported with <code>fread</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ifelse</span>(</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">test =</span> <span class="kw">is.object</span>(data),</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">test =</span> <span class="kw">inherits</span>(data, <span class="st">"data.frame"</span>),</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">yes =</span> trees &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">as.data.table</span>(data, <span class="dt">keep.rownames =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">no =</span> trees &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">fread</span>(data)</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 <p>Next, any rows that are missing a common or botanical name are discarded:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">trees &lt;-<span class="st"> </span>trees[<span class="op">!</span><span class="kw">with</span>(trees, <span class="kw">is.na</span>(trees[[common_col]]) <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(trees[[botanical_col]])), ]</a></code></pre></div>
-<p>Next, the datasets are saved as <code>data.table</code>’s and the money dataset is filtered by region, <code>melt</code>ed to convert from wide to long and selects the variables we need:</p>
+<p>Next, all required datasets are saved as <code>data.table</code>’s and the money dataset is filtered by region, <code>melt</code>ed to convert from wide to long and selects the variables we need:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">benefits &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">as.data.table</span>(treeco<span class="op">::</span>benefits)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">species  &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">as.data.table</span>(treeco<span class="op">::</span>species)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">money    &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">as.data.table</span>(treeco<span class="op">::</span>money)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">money    &lt;-<span class="st"> </span>money[money<span class="op">$</span>region_code <span class="op">==</span><span class="st"> </span>region, ]</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">money    &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">melt</span>(money, <span class="dt">id.vars =</span> <span class="kw">c</span>(<span class="st">"region_code"</span>, <span class="st">"region_name"</span>))</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">money    &lt;-<span class="st"> </span>money[, <span class="kw">c</span>(<span class="st">"variable"</span>, <span class="st">"value"</span>)]</a></code></pre></div>
-<p>Next, the names of the trees dataset are set to keep everything consistent from this point going forward:</p>
+<p>Next, the names of the trees dataset are set to keep naming consistent from this point going forward:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">data.table<span class="op">::</span><span class="kw">setnames</span>(trees, botanical_col, <span class="st">"botanical_name"</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">data.table<span class="op">::</span><span class="kw">setnames</span>(trees, common_col, <span class="st">"common_name"</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">data.table<span class="op">::</span><span class="kw">setnames</span>(trees, dbh_col, <span class="st">"dbh_val"</span>)</a></code></pre></div>
@@ -178,7 +178,7 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">trees &lt;-<span class="st"> </span>trees[, .SD, .SDcol =<span class="st"> </span><span class="kw">c</span>(<span class="st">"rn"</span>, <span class="st">"common_name"</span>, <span class="st">"botanical_name"</span>, <span class="st">"dbh_val"</span>)][trees<span class="op">$</span>dbh_val <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">benefits &lt;-<span class="st"> </span>benefits[benefits<span class="op">$</span>species_region <span class="op">==</span><span class="st"> </span>region]</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">species &lt;-<span class="st"> </span>species[species<span class="op">$</span>species_region <span class="op">==</span><span class="st"> </span>region]</a></code></pre></div>
-<p>Next, if the users assigns <code>unit = "cm"</code>, the DBH values will not be converted to centimeters, if no argument is given <code>unit</code> defaults to inches and converts DBH values to centimeters:</p>
+<p>Next, if the users assigns <code>unit = "cm"</code>, the DBH values will not be converted to centimeters, if no argument is given <code>unit</code> defaults to inches and converts DBH values to centimeters. This is required because i-Tree uses centimeters:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ifelse</span>(</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">test =</span> unit <span class="op">==</span><span class="st"> "in"</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">yes =</span> trees<span class="op">$</span>dbh_val &lt;-<span class="st"> </span>trees<span class="op">$</span>dbh_val <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>,</a>
@@ -193,14 +193,7 @@
 <a class="sourceLine" id="cb9-6" data-line-number="6">)</a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw">return</span>(output)</a></code></pre></div>
-</div>
-<div id="extract_matches" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extract_matches" class="anchor"></a><code>extract_matches</code>
-</h2>
-<p><strong>unfinished</strong></p>
-<p>Takes the following form:</p>
-<p><code>extract_matches &lt;- function(tree_data, species_data, n)</code></p>
+<p><strong>Unfinished, to be continued…</strong></p>
 </div>
   </div>
 
@@ -210,7 +203,6 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#extract_data"><code>extract_data</code></a></li>
-      <li><a href="#extract_matches"><code>extract_matches</code></a></li>
       </ul>
 </div>
       </div>

@@ -2,7 +2,7 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
 
   # Might need to remove NA's first? Given the keep.rownames=TRUE?
   ifelse(
-    test = is.object(data),
+    test = inherits(data, "data.frame"),
     yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
     no = trees <- data.table::fread(data)
   )
