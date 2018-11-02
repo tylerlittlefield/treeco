@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// cpp_capitalize
+std::vector<std::string> cpp_capitalize(std::vector<std::string> strings);
+RcppExport SEXP _treeco_cpp_capitalize(SEXP stringsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type strings(stringsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_capitalize(strings));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_trimws
 CharacterVector cpp_trimws(CharacterVector x, const char* which);
 RcppExport SEXP _treeco_cpp_trimws(SEXP xSEXP, SEXP whichSEXP) {
@@ -30,6 +41,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_treeco_cpp_capitalize", (DL_FUNC) &_treeco_cpp_capitalize, 1},
     {"_treeco_cpp_trimws", (DL_FUNC) &_treeco_cpp_trimws, 2},
     {"_treeco_timesTwo", (DL_FUNC) &_treeco_timesTwo, 1},
     {NULL, NULL, 0}
