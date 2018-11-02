@@ -1,29 +1,19 @@
 extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit) {
 
-  # Might need to remove NA's first? Given the keep.rownames=TRUE?
   ifelse(
     test = inherits(data, "data.frame"),
     yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
     no = trees <- data.table::fread(data)
   )
 
-  # Remove NA's if an in common or botanical col
-  # discarded_records <- dim(trees)[1] - dim(trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ])[1]
-  #
-  # warning_message <- paste0(discarded_records, " records were discarded due to missing common or botanical names. Please use eco_guess to resolve these missing values.")
-  #
-  # if(discarded_records > 0)
-  #   warning(warning_message, call. = FALSE)
-
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 
-  # trees  <- data.table::fread(data, select = c(common_col, botanical_col, dbh_col))
   benefits <- data.table::as.data.table(treeco::benefits)
-  species  <- data.table::as.data.table(treeco::species)
-  money    <- data.table::as.data.table(treeco::money)
-  money    <- money[money$region_code == region, ]
-  money    <- data.table::melt(money, id.vars = c("region_code", "region_name"))
-  money    <- money[, c("variable", "value")]
+  species <- data.table::as.data.table(treeco::species)
+  money <- data.table::as.data.table(treeco::money)
+  money <- money[money$region_code == region, ]
+  money <- data.table::melt(money, id.vars = c("region_code", "region_name"))
+  money <- money[, c("variable", "value")]
 
   data.table::setnames(trees, botanical_col, "botanical_name")
   data.table::setnames(trees, common_col, "common_name")

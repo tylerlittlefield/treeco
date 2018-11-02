@@ -128,7 +128,7 @@ I have a couple ideas for the future of treeco:
 1. Add reporting features similar to i-Tree by utilizing Rmarkdown.
 2. A more verbose `eco_run_all` to tell the user how many records were matched.
 3. Utilize the `sf` package for mapping and other applications like guessing the users region.
-4. Add additional benefits. I'm leaning towards adding an arugment `expanded` to include additional benefits.
+4. Add additional benefits. I'm leaning towards adding an argument `expanded` to include additional benefits.
 5. Warn the user if the benefits will take more time than expected to calculate the benefits.
 
 Any criticism, issues, enhancements are encouraged and can be filed [here](https://github.com/tyluRp/treeco/issues).
