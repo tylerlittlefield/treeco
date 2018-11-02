@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// cpp_trimws
+CharacterVector cpp_trimws(CharacterVector x, const char* which);
+RcppExport SEXP _treeco_cpp_trimws(SEXP xSEXP, SEXP whichSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const char* >::type which(whichSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_trimws(x, which));
+    return rcpp_result_gen;
+END_RCPP
+}
 // timesTwo
 NumericVector timesTwo(NumericVector x);
 RcppExport SEXP _treeco_timesTwo(SEXP xSEXP) {
@@ -18,6 +30,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_treeco_cpp_trimws", (DL_FUNC) &_treeco_cpp_trimws, 2},
     {"_treeco_timesTwo", (DL_FUNC) &_treeco_timesTwo, 1},
     {NULL, NULL, 0}
 };
