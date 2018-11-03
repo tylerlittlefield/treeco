@@ -6,4 +6,5 @@ capitalize <- function(x) {
   )
 
   return(var)
+
 }

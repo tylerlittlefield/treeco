@@ -120,9 +120,17 @@ output <- list(
 return(output)
 ```
 
-**Unfinished, to be continued...**
-
 ## `extract_matches`
+
+Takes the following form:
+
+```r
+extract_matches(tree_data, species_data, n)
+```
+
+This function tries to guess i-Trees species codes given `n` which dictates how strict the matching will be. A higher value of `n` (i.e. 0.8) will extract matches that are 80% similar. I typically use that range as it often grabs the correct species codes without loosing too many records in the inventory.
+
+
 
 ### `string_dist`
 

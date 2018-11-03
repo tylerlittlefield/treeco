@@ -8,11 +8,11 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 
   benefits <- data.table::as.data.table(treeco::benefits)
-  species  <- data.table::as.data.table(treeco::species)
-  money    <- data.table::as.data.table(treeco::money)
-  money    <- money[money$region_code == region, ]
-  money    <- data.table::melt(money, id.vars = c("region_code", "region_name"))
-  money    <- money[, c("variable", "value")]
+  species <- data.table::as.data.table(treeco::species)
+  money <- data.table::as.data.table(treeco::money)
+  money <- money[money$region_code == region, ]
+  money <- data.table::melt(money, id.vars = c("region_code", "region_name"))
+  money <- money[, c("variable", "value")]
 
   data.table::setnames(trees, botanical_col, "botanical_name")
   data.table::setnames(trees, common_col, "common_name")
