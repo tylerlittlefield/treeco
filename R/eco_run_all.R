@@ -34,14 +34,14 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
 
   '%nin%' <- Negate('%in%')
 
-  if(n > 1){
+  if(n > 1) {
     warning("n > 1, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
     n <- 0.8
-  }
-  if(n < 0){
+  } else if(n < 0) {
     warning("n < 0, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
     n <- 0.8
   }
+
   if(unit %nin% c("in", "cm"))
     stop("Incorrect value given to unit parameter. Please use 'in' or 'cm'.")
 
