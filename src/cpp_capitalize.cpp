@@ -15,7 +15,6 @@ std::vector<std::string> cpp_capitalize(std::vector<std::string> strings) {
 
 }
 
-
 // See: https://stackoverflow.com/questions/23712366/
 // The R code will be automatically run after the compilation.
 //

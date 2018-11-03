@@ -9,7 +9,3 @@ cpp_trimws <- function(x, which = "both") {
     .Call(`_treeco_cpp_trimws`, x, which)
 }
 
-timesTwo <- function(x) {
-    .Call(`_treeco_timesTwo`, x)
-}
-
