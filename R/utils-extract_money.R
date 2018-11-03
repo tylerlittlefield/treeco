@@ -1,3 +1,26 @@
+#' Finds the conversion value to transform benefits to dollars
+#' @param x Money data
+#' @param pattern Pattern to match benefit type
+find_conversion <- function(x, pattern) {
+  x[grepl(pattern, x$variable)][["value"]]
+}
+
+#' Creates dollars column that multiplies conversion value
+#' @param x Tree data
+#' @param pattern Pattern to match benefit type
+#' @param conversion Conversion value
+dollars <- function(x, pattern, conversion) {
+
+  benefit = NULL
+  benefit_value = NULL
+
+  x[grepl(pattern, benefit), "dollars" := benefit_value * conversion]
+
+}
+
+#' Extracts money benefits
+#' @param tree_data Tree dataset
+#' @param money_data Money dataset
 extract_money <- function(tree_data, money_data) {
 
   # To avoid notes about global variables
@@ -6,30 +29,30 @@ extract_money <- function(tree_data, money_data) {
   benefit = NULL
   benefit_value = NULL
 
-  elec_money <- money_data[grepl("electricity", money_data$variable)][["value"]]
-  gas_money  <- money_data[grepl("natural_gas", money_data$variable)][["value"]]
-  h20_money  <- money_data[grepl("h20_gal", money_data$variable)][["value"]]
-  co2_money  <- money_data[grepl("co2", money_data$variable)][["value"]]
-  o3_money   <- money_data[grepl("o3_lb", money_data$variable)][["value"]]
-  nox_money  <- money_data[grepl("nox_lb", money_data$variable)][["value"]]
-  pm10_money <- money_data[grepl("pm10_lb", money_data$variable)][["value"]]
-  sox_money  <- money_data[grepl("sox_lb", money_data$variable)][["value"]]
-  voc_money  <- money_data[grepl("voc_lb", money_data$variable)][["value"]]
+  elec_money <- find_conversion(money_data, "electricity")
+  gas_money  <- find_conversion(money_data, "natural_gas")
+  h20_money  <- find_conversion(money_data, "h20_gal")
+  co2_money  <- find_conversion(money_data, "co2")
+  o3_money   <- find_conversion(money_data, "o3_lb")
+  nox_money  <- find_conversion(money_data, "nox_lb")
+  pm10_money <- find_conversion(money_data, "pm10_lb")
+  sox_money  <- find_conversion(money_data, "sox_lb")
+  voc_money  <- find_conversion(money_data, "voc_lb")
 
   tree_data[grepl("lb", unit), "benefit_value" := benefit_value * 2.20462]
   tree_data[grepl("gal", unit), "benefit_value" := benefit_value * 264.172052]
 
-  tree_data[grepl("electricity", benefit), "dollars" := benefit_value * elec_money]
-  tree_data[grepl("natural gas", benefit), "dollars" := benefit_value * gas_money]
-  tree_data[grepl("hydro interception", benefit), "dollars" := benefit_value * h20_money]
-  tree_data[grepl("co2 ", benefit), "dollars" := benefit_value * co2_money]
-  tree_data[grepl("aq ozone dep", benefit), "dollars" := benefit_value * o3_money]
-  tree_data[grepl("aq nox", benefit), "dollars" := benefit_value * nox_money]
-  tree_data[grepl("aq pm10", benefit), "dollars" := benefit_value * pm10_money]
-  tree_data[grepl("aq sox", benefit), "dollars" := benefit_value * sox_money]
-  tree_data[grepl("voc", benefit), "dollars" := benefit_value * voc_money]
+  dollars(tree_data, "electricity", elec_money)
+  dollars(tree_data, "natural gas", gas_money)
+  dollars(tree_data, "hydro interception", h20_money)
+  dollars(tree_data, "co2", co2_money)
+  dollars(tree_data, "aq ozone dep", o3_money)
+  dollars(tree_data, "aq nox", nox_money)
+  dollars(tree_data, "aq pm10", pm10_money)
+  dollars(tree_data, "aq sox", sox_money)
+  dollars(tree_data, "voc", voc_money)
 
-  tree_data$dollars       <- abs(round(tree_data$dollars, 2))
+  tree_data$dollars <- abs(round(tree_data$dollars, 2))
   tree_data$benefit_value <- round(tree_data$benefit_value, 4)
 
   return(tree_data)
