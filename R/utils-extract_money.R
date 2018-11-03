@@ -10,12 +10,9 @@ find_conversion <- function(x, pattern) {
 #' @param pattern Pattern to match benefit type
 #' @param conversion Conversion value
 dollars <- function(x, pattern, conversion) {
-
   benefit = NULL
   benefit_value = NULL
-
   x[grepl(pattern, benefit), "dollars" := benefit_value * conversion]
-
 }
 
 #' Extracts money benefits
