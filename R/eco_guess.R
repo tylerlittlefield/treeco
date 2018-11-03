@@ -48,9 +48,9 @@ eco_guess <- function(x, guess) {
   species$scientific_name <- gsub('[[:punct:]]+', '', species$scientific_name)
 
   # Trim any white space.
-  x$key_var <- trimws(x$key_var, "both")
-  species$common_name <- trimws(species$common_name, "both")
-  species$scientific_name <- trimws(species$scientific_name, "both")
+  x$key_var <- cpp_trimws(x$key_var, "both")
+  species$common_name <- cpp_trimws(species$common_name, "both")
+  species$scientific_name <- cpp_trimws(species$scientific_name, "both")
 
   x_unique <- unique(x)
 
@@ -74,7 +74,7 @@ eco_guess <- function(x, guess) {
     output <- output$botanical_name
     }
 
-  output <- capitalize(output)
+  output <- cpp_capitalize(output)
 
   return(output)
 

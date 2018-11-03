@@ -34,14 +34,14 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
 
   '%nin%' <- Negate('%in%')
 
-  if(n > 1){
+  if(n > 1) {
     warning("n > 1, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
     n <- 0.8
-  }
-  if(n < 0){
+  } else if(n < 0) {
     warning("n < 0, please use a number from 0-1. Using 0.8, finding matches that are 80% similar.", call. = FALSE)
     n <- 0.8
   }
+
   if(unit %nin% c("in", "cm"))
     stop("Incorrect value given to unit parameter. Please use 'in' or 'cm'.")
 
@@ -102,11 +102,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_final <- trees[trees_unique, allow.cartesian=TRUE]
 
   # i-Tree requires centimeters so converting back to inches
-  ifelse(
-    test = unit == "in",
-    yes = trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2),
-    no = trees
-    )
+  if(unit == "in") trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2)
 
   # Set key as 'id' to get the data sorted by 'id'
   data.table::setkey(trees_final, "id")
@@ -116,8 +112,8 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_final <- trees_final[, .SD, .SDcols = tree_vars]
 
   # Capitalize the first word of common name
-  trees_final$common_name <- capitalize(trees_final[["common_name"]])
-  trees_final$botanical_name <- capitalize(trees_final[["botanical_name"]])
+  trees_final$common_name <- cpp_capitalize(trees_final[["common_name"]])
+  trees_final$botanical_name <- cpp_capitalize(trees_final[["botanical_name"]])
 
   # Rename the 'dbh_val' var to just 'dbh'
   data.table::setnames(trees_final, "dbh_val", "dbh")
