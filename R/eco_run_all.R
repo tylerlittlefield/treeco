@@ -102,11 +102,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   trees_final <- trees[trees_unique, allow.cartesian=TRUE]
 
   # i-Tree requires centimeters so converting back to inches
-  ifelse(
-    test = unit == "in",
-    yes = trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2),
-    no = trees
-    )
+  if(unit == "in") trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2)
 
   # Set key as 'id' to get the data sorted by 'id'
   data.table::setkey(trees_final, "id")
