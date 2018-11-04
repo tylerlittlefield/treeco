@@ -58,7 +58,6 @@ eco_run_all(
   dbh_col = "Girth",                # dbh field
   region = "PiedmtCLT",             # region code
   n = 0.99,                         # optional, threshold for species guessing
-  print_time = TRUE                 # optional, print elapsed time
   ) %>% as_tibble()
 #> # A tibble: 465 x 9
 #>       id botanical  common   dbh benefit_value benefit unit  dollars rn   
@@ -103,10 +102,10 @@ treeco::eco_run("Common fig", 20, "InlEmpCLM")
 One issue with eco benefits is that they all rely on i-Tree’s
 `master_species_list` which is a list of 3,000+ species, therefore a
 users data needs to fit this list in order to extract benefits. For
-example, “Fig tree” doesn’t match i-Tree’s “Common fig”. So far, there
-really isn’t a great solution to this. For now, `treeco` guesses the
-species code on the fly by quantifying the “similarity”, anything below
-90% similar is immediately discarded.
+example, “Commn fig” doesn’t match i-Tree’s “Common fig” because of the
+typo. So far, there really isn’t a great solution to this. For now,
+`treeco` guesses the species code on the fly by quantifying the
+“similarity”, anything below 90% similar is immediately discarded.
 
 For example, if we misspell “Common fig” as “Commn fig”:
 
