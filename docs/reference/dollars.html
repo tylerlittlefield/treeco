@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • treeco</title>
+<title>Creates dollars column that multiplies conversion value — dollars • treeco</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Creates dollars column that multiplies conversion value — dollars" />
+
+<meta property="og:description" content="Creates dollars column that multiplies conversion value" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -59,7 +61,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -114,47 +116,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/tyluRp/treeco/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Creates dollars column that multiplies conversion value</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tyluRp/treeco/blob/master/R/utils-extract_money.R'><code>R/utils-extract_money.R</code></a></small>
+    <div class="hidden name"><code>dollars.Rd</code></div>
     </div>
 
-    <div id="treeco-0-0-1-9000" class="section level1">
-<h1 class="page-header">
-<a href="#treeco-0-0-1-9000" class="anchor"></a>treeco 0.0.1.9000</h1>
-<ul>
-<li>Added <code>pkgdown</code> support.</li>
-<li>Fixes bug where <code>eco_guess</code> only guessed unique values of <code>x</code>, this meant a user with duplicates would have issues assigning <code>x</code> to a <code>data.frame</code> as their lengths would differ.</li>
-<li>Added threshold for guessing in <code>eco_run_all</code>, 0.8 is the default value.</li>
-<li>Converted <code>message</code> to <code>warning</code> in <code>eco_guess</code> when <code>x</code> vector is coerced from <code>factor</code> to <code>character</code>.</li>
-<li>Added warnings to <code>eco_run_all</code> for cases where <code>n</code> &gt; 1 or <code>n</code> &lt; 0. If this happens, <code>n</code> defaults to 0.8.</li>
-<li>Added tests for warnings where threshold doesn’t make sense and where factors converted to character.</li>
-<li>Modified <code>eco_guess</code> to make it faster. This function takes a vector, converts it to a <code>data.table</code>, and does all the matching on unique values only. Then joins the missing field to the original (non unique) <code>data.table</code> and returns a vector containing values for the missing field.</li>
-<li>The utility function <code>extract_data</code> now preserves the original rownames as a column <code>rn</code> using the <code>keep.rownames = TRUE</code> argument in <code>as.data.table</code>. This allows users to join additional variables back to the benefits dataframe. Especially important given this type of data is usually spatial. There is still the issue of reading data as the <code>fread</code> function isn’t preserving rownames. Will come back to that at some point.</li>
-<li>Added <a href="http://r-pkgs.had.co.nz/vignettes.html"><code>Vignettes</code></a>.</li>
-<li>Added first vignette, getting started article.</li>
-<li>Using RMarkdown to generate README.md</li>
-<li>Added unit parameter for rare cases where user data measures DBH in centimeters instead of inches.</li>
-</ul>
-</div>
-    <div id="treeco-0-0-0-9000" class="section level1">
-<h1 class="page-header">
-<a href="#treeco-0-0-0-9000" class="anchor"></a>treeco 0.0.0.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>Creates dollars column that multiplies conversion value</p>
+    
+    </div>
 
+    <pre class="usage"><span class='fu'>dollars</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='no'>conversion</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Tree data</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>Pattern to match benefit type</p></td>
+    </tr>
+    <tr>
+      <th>conversion</th>
+      <td><p>Conversion value</p></td>
+    </tr>
+    </table>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#treeco-0-0-1-9000">0.0.1.9000</a></li>
-        <li><a href="#treeco-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
+  </div>
 </div>
 
       <footer>

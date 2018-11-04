@@ -1,23 +1,13 @@
-#' Finds the conversion value to transform benefits to dollars
-#' @param x Money data
-#' @param pattern Pattern to match benefit type
 find_conversion <- function(x, pattern) {
   x[grepl(pattern, x$variable)][["value"]]
 }
 
-#' Creates dollars column that multiplies conversion value
-#' @param x Tree data
-#' @param pattern Pattern to match benefit type
-#' @param conversion Conversion value
 dollars <- function(x, pattern, conversion) {
   benefit = NULL
   benefit_value = NULL
   x[grepl(pattern, benefit), "dollars" := benefit_value * conversion]
 }
 
-#' Extracts money benefits
-#' @param tree_data Tree dataset
-#' @param money_data Money dataset
 extract_money <- function(tree_data, money_data) {
 
   # To avoid notes about global variables
