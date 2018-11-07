@@ -59,19 +59,19 @@ eco_run_all(
   region = "PiedmtCLT",             # region code
   n = 0.99,                         # optional, threshold for species guessing
   ) %>% as_tibble()
-#> # A tibble: 465 x 9
-#>       id botanical  common   dbh benefit_value benefit unit  dollars rn   
-#>    <int> <chr>      <chr>  <dbl>         <dbl> <chr>   <chr>   <dbl> <chr>
-#>  1     1 Prunus se… Black…   8.3        0.0776 aq nox… lb       0.51 1    
-#>  2     1 Prunus se… Black…   8.3        0.026  aq nox… lb       0.17 1    
-#>  3     1 Prunus se… Black…   8.3        0.0556 aq ozo… lb       0.36 1    
-#>  4     1 Prunus se… Black…   8.3        0.015  aq pm1… lb       0.04 1    
-#>  5     1 Prunus se… Black…   8.3        0.0633 aq pm1… lb       0.16 1    
-#>  6     1 Prunus se… Black…   8.3        0.165  aq sox… lb       0.32 1    
-#>  7     1 Prunus se… Black…   8.3        0.0119 aq sox… lb       0.02 1    
-#>  8     1 Prunus se… Black…   8.3        0.0146 aq voc… lb       0.09 1    
-#>  9     1 Prunus se… Black…   8.3       -0.338  bvoc    lb       2.12 1    
-#> 10     1 Prunus se… Black…   8.3       30.3    co2 av… lb       0.23 1    
+#> # A tibble: 465 x 8
+#>    botanical    common     dbh benefit_value benefit   unit  dollars rn   
+#>    <chr>        <chr>    <dbl>         <dbl> <chr>     <chr>   <dbl> <chr>
+#>  1 Prunus sero… Black c…   8.3        0.0776 aq nox a… lb       0.51 1    
+#>  2 Prunus sero… Black c…   8.3        0.026  aq nox d… lb       0.17 1    
+#>  3 Prunus sero… Black c…   8.3        0.0556 aq ozone… lb       0.36 1    
+#>  4 Prunus sero… Black c…   8.3        0.015  aq pm10 … lb       0.04 1    
+#>  5 Prunus sero… Black c…   8.3        0.0633 aq pm10 … lb       0.16 1    
+#>  6 Prunus sero… Black c…   8.3        0.165  aq sox a… lb       0.32 1    
+#>  7 Prunus sero… Black c…   8.3        0.0119 aq sox d… lb       0.02 1    
+#>  8 Prunus sero… Black c…   8.3        0.0146 aq voc a… lb       0.09 1    
+#>  9 Prunus sero… Black c…   8.3       -0.338  bvoc      lb       2.12 1    
+#> 10 Prunus sero… Black c…   8.3       30.3    co2 avoi… lb       0.23 1    
 #> # ... with 455 more rows
 ```
 

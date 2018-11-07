@@ -117,19 +117,19 @@
 <a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="dt">region =</span> <span class="st">"PiedmtCLT"</span>,             <span class="co"># region code</span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15">  <span class="dt">n =</span> <span class="fl">0.99</span>,                         <span class="co"># optional, threshold for species guessing</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16">  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; # A tibble: 465 x 9</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;       id botanical  common   dbh benefit_value benefit unit  dollars rn   </span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  1     1 Prunus se… Black…   8.3        0.0776 aq nox… lb       0.51 1    </span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  2     1 Prunus se… Black…   8.3        0.026  aq nox… lb       0.17 1    </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  3     1 Prunus se… Black…   8.3        0.0556 aq ozo… lb       0.36 1    </span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  4     1 Prunus se… Black…   8.3        0.015  aq pm1… lb       0.04 1    </span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  5     1 Prunus se… Black…   8.3        0.0633 aq pm1… lb       0.16 1    </span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  6     1 Prunus se… Black…   8.3        0.165  aq sox… lb       0.32 1    </span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  7     1 Prunus se… Black…   8.3        0.0119 aq sox… lb       0.02 1    </span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  8     1 Prunus se… Black…   8.3        0.0146 aq voc… lb       0.09 1    </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  9     1 Prunus se… Black…   8.3       -0.338  bvoc    lb       2.12 1    </span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 10     1 Prunus se… Black…   8.3       30.3    co2 av… lb       0.23 1    </span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; # A tibble: 465 x 8</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;    botanical    common     dbh benefit_value benefit   unit  dollars rn   </span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  1 Prunus sero… Black c…   8.3        0.0776 aq nox a… lb       0.51 1    </span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  2 Prunus sero… Black c…   8.3        0.026  aq nox d… lb       0.17 1    </span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  3 Prunus sero… Black c…   8.3        0.0556 aq ozone… lb       0.36 1    </span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  4 Prunus sero… Black c…   8.3        0.015  aq pm10 … lb       0.04 1    </span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  5 Prunus sero… Black c…   8.3        0.0633 aq pm10 … lb       0.16 1    </span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  6 Prunus sero… Black c…   8.3        0.165  aq sox a… lb       0.32 1    </span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  7 Prunus sero… Black c…   8.3        0.0119 aq sox d… lb       0.02 1    </span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  8 Prunus sero… Black c…   8.3        0.0146 aq voc a… lb       0.09 1    </span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  9 Prunus sero… Black c…   8.3       -0.338  bvoc      lb       2.12 1    </span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 10 Prunus sero… Black c…   8.3       30.3    co2 avoi… lb       0.23 1    </span></a>
 <a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
 </div>
 <div id="more-examples" class="section level2">

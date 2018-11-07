@@ -108,7 +108,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   data.table::setkey(trees_final, "id")
 
   # Grab the variables we need
-  tree_vars <- c("id", "botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars", "rn")
+  tree_vars <- c("botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars", "rn")
   trees_final <- trees_final[, .SD, .SDcols = tree_vars]
 
   # Capitalize the first word of common name
