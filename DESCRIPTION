@@ -13,12 +13,11 @@ URL: https://treeco.netlify.com/,
      https://github.com/tyluRp/treeco
 BugReports: https://github.com/tyluRp/treeco/issues
 Depends: 
-    R (>= 3.1.0)
+    R (>= 3.2)
 Imports: 
     data.table,
     stats,
-    utils,
-    Rcpp
+    utils
 Suggests: 
     covr,
     testthat,
@@ -31,5 +30,3 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 VignetteBuilder: knitr
-LinkingTo: 
-    Rcpp

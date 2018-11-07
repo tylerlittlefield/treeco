@@ -116,22 +116,21 @@
 <a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="dt">dbh_col =</span> <span class="st">"Girth"</span>,                <span class="co"># dbh field</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="dt">region =</span> <span class="st">"PiedmtCLT"</span>,             <span class="co"># region code</span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15">  <span class="dt">n =</span> <span class="fl">0.99</span>,                         <span class="co"># optional, threshold for species guessing</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">  <span class="dt">print_time =</span> <span class="ot">TRUE</span>                 <span class="co"># optional, print elapsed time</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()</a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; # A tibble: 465 x 9</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;       id botanical  common   dbh benefit_value benefit unit  dollars rn   </span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  1     1 Prunus se… Black…   8.3        0.0776 aq nox… lb       0.51 1    </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  2     1 Prunus se… Black…   8.3        0.026  aq nox… lb       0.17 1    </span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  3     1 Prunus se… Black…   8.3        0.0556 aq ozo… lb       0.36 1    </span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  4     1 Prunus se… Black…   8.3        0.015  aq pm1… lb       0.04 1    </span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  5     1 Prunus se… Black…   8.3        0.0633 aq pm1… lb       0.16 1    </span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  6     1 Prunus se… Black…   8.3        0.165  aq sox… lb       0.32 1    </span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  7     1 Prunus se… Black…   8.3        0.0119 aq sox… lb       0.02 1    </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  8     1 Prunus se… Black…   8.3        0.0146 aq voc… lb       0.09 1    </span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt;  9     1 Prunus se… Black…   8.3       -0.338  bvoc    lb       2.12 1    </span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; 10     1 Prunus se… Black…   8.3       30.3    co2 av… lb       0.23 1    </span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-16" data-line-number="16">  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; # A tibble: 465 x 9</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;       id botanical  common   dbh benefit_value benefit unit  dollars rn   </span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  1     1 Prunus se… Black…   8.3        0.0776 aq nox… lb       0.51 1    </span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  2     1 Prunus se… Black…   8.3        0.026  aq nox… lb       0.17 1    </span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  3     1 Prunus se… Black…   8.3        0.0556 aq ozo… lb       0.36 1    </span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  4     1 Prunus se… Black…   8.3        0.015  aq pm1… lb       0.04 1    </span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  5     1 Prunus se… Black…   8.3        0.0633 aq pm1… lb       0.16 1    </span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  6     1 Prunus se… Black…   8.3        0.165  aq sox… lb       0.32 1    </span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  7     1 Prunus se… Black…   8.3        0.0119 aq sox… lb       0.02 1    </span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  8     1 Prunus se… Black…   8.3        0.0146 aq voc… lb       0.09 1    </span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  9     1 Prunus se… Black…   8.3       -0.338  bvoc    lb       2.12 1    </span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 10     1 Prunus se… Black…   8.3       30.3    co2 av… lb       0.23 1    </span></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
 </div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor">
@@ -154,7 +153,7 @@
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 13:  Common fig  20      189.2000        electricity  kwh   38.12</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 14:  Common fig  20      834.7837 hydro interception  gal    4.59</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 15:  Common fig  20     -179.4561        natural gas   lb    1.20</span></a></code></pre></div>
-<p>One issue with eco benefits is that they all rely on i-Tree’s <code>master_species_list</code> which is a list of 3,000+ species, therefore a users data needs to fit this list in order to extract benefits. For example, “Fig tree” doesn’t match i-Tree’s “Common fig”. So far, there really isn’t a great solution to this. For now, <code>treeco</code> guesses the species code on the fly by quantifying the “similarity”, anything below 90% similar is immediately discarded.</p>
+<p>One issue with eco benefits is that they all rely on i-Tree’s <code>master_species_list</code> which is a list of 3,000+ species, therefore a users data needs to fit this list in order to extract benefits. For example, “Commn fig” doesn’t match i-Tree’s “Common fig” because of the typo. So far, there really isn’t a great solution to this. For now, <code>treeco</code> guesses the species code on the fly by quantifying the “similarity”, anything below 90% similar is immediately discarded.</p>
 <p>For example, if we misspell “Common fig” as “Commn fig”:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">treeco<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/treeco/topics/eco_run">eco_run</a></span>(<span class="st">"Commn fig"</span>, <span class="dv">20</span>, <span class="st">"InlEmpCLM"</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Species given: [commn fig]</span></a>
