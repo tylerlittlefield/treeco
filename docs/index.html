@@ -89,7 +89,7 @@
 </h1></div>
 
 <p><img src="reference/figures/co2_plot.png" align="center"></p>
-<p>The goal of <code>treeco</code> is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from OpenStreetMaps <a href="https://github.com/OpenTreeMap/otm-ecoservice"><code>otm-ecoservice</code></a> repository which was (probably) ripped from <a href="https://www.itreetools.org/">i-Tree</a>’s Eco or Streets software. A single tree is represented by 15 rows and 9 columns as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, <code>treeco</code> utilizes the <a href="https://github.com/Rdatatable/data.table"><code>data.table</code></a> package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation.</p>
+<p>The goal of <code>treeco</code> is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from OpenStreetMaps <a href="https://github.com/OpenTreeMap/otm-ecoservice"><code>otm-ecoservice</code></a> repository which was (probably) ripped from <a href="https://www.itreetools.org/">i-Tree</a>’s Eco or Streets software. A single tree is represented by 15 rows and 8 columns as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, <code>treeco</code> utilizes the <a href="https://github.com/Rdatatable/data.table"><code>data.table</code></a> package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -120,16 +120,16 @@
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; # A tibble: 465 x 8</span></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;    botanical    common     dbh benefit_value benefit   unit  dollars rn   </span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  1 Prunus sero… Black c…   8.3        0.0776 aq nox a… lb       0.51 1    </span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  2 Prunus sero… Black c…   8.3        0.026  aq nox d… lb       0.17 1    </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  3 Prunus sero… Black c…   8.3        0.0556 aq ozone… lb       0.36 1    </span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  4 Prunus sero… Black c…   8.3        0.015  aq pm10 … lb       0.04 1    </span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  5 Prunus sero… Black c…   8.3        0.0633 aq pm10 … lb       0.16 1    </span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  6 Prunus sero… Black c…   8.3        0.165  aq sox a… lb       0.32 1    </span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  7 Prunus sero… Black c…   8.3        0.0119 aq sox d… lb       0.02 1    </span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  8 Prunus sero… Black c…   8.3        0.0146 aq voc a… lb       0.09 1    </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  9 Prunus sero… Black c…   8.3       -0.338  bvoc      lb       2.12 1    </span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 10 Prunus sero… Black c…   8.3       30.3    co2 avoi… lb       0.23 1    </span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  1 prunus sero… black c…   8.3        0.0776 aq nox a… lb       0.51 1    </span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  2 prunus sero… black c…   8.3        0.026  aq nox d… lb       0.17 1    </span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  3 prunus sero… black c…   8.3        0.0556 aq ozone… lb       0.36 1    </span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  4 prunus sero… black c…   8.3        0.015  aq pm10 … lb       0.04 1    </span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  5 prunus sero… black c…   8.3        0.0633 aq pm10 … lb       0.16 1    </span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  6 prunus sero… black c…   8.3        0.165  aq sox a… lb       0.32 1    </span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  7 prunus sero… black c…   8.3        0.0119 aq sox d… lb       0.02 1    </span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  8 prunus sero… black c…   8.3        0.0146 aq voc a… lb       0.09 1    </span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  9 prunus sero… black c…   8.3       -0.338  bvoc      lb       2.12 1    </span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 10 prunus sero… black c…   8.3       30.3    co2 avoi… lb       0.23 1    </span></a>
 <a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
 </div>
 <div id="more-examples" class="section level2">
