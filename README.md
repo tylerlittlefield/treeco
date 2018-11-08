@@ -19,7 +19,7 @@ from OpenStreetMaps
 [`otm-ecoservice`](https://github.com/OpenTreeMap/otm-ecoservice)
 repository which was (probably) ripped from
 [i-Tree](https://www.itreetools.org/)’s Eco or Streets software. A
-single tree is represented by 15 rows and 9 columns as there are 15
+single tree is represented by 15 rows and 8 columns as there are 15
 benefits calculated for every tree. Since tree inventories can be rather
 large, `treeco` utilizes the
 [`data.table`](https://github.com/Rdatatable/data.table) package for
@@ -62,16 +62,16 @@ eco_run_all(
 #> # A tibble: 465 x 8
 #>    botanical    common     dbh benefit_value benefit   unit  dollars rn   
 #>    <chr>        <chr>    <dbl>         <dbl> <chr>     <chr>   <dbl> <chr>
-#>  1 Prunus sero… Black c…   8.3        0.0776 aq nox a… lb       0.51 1    
-#>  2 Prunus sero… Black c…   8.3        0.026  aq nox d… lb       0.17 1    
-#>  3 Prunus sero… Black c…   8.3        0.0556 aq ozone… lb       0.36 1    
-#>  4 Prunus sero… Black c…   8.3        0.015  aq pm10 … lb       0.04 1    
-#>  5 Prunus sero… Black c…   8.3        0.0633 aq pm10 … lb       0.16 1    
-#>  6 Prunus sero… Black c…   8.3        0.165  aq sox a… lb       0.32 1    
-#>  7 Prunus sero… Black c…   8.3        0.0119 aq sox d… lb       0.02 1    
-#>  8 Prunus sero… Black c…   8.3        0.0146 aq voc a… lb       0.09 1    
-#>  9 Prunus sero… Black c…   8.3       -0.338  bvoc      lb       2.12 1    
-#> 10 Prunus sero… Black c…   8.3       30.3    co2 avoi… lb       0.23 1    
+#>  1 prunus sero… black c…   8.3        0.0776 aq nox a… lb       0.51 1    
+#>  2 prunus sero… black c…   8.3        0.026  aq nox d… lb       0.17 1    
+#>  3 prunus sero… black c…   8.3        0.0556 aq ozone… lb       0.36 1    
+#>  4 prunus sero… black c…   8.3        0.015  aq pm10 … lb       0.04 1    
+#>  5 prunus sero… black c…   8.3        0.0633 aq pm10 … lb       0.16 1    
+#>  6 prunus sero… black c…   8.3        0.165  aq sox a… lb       0.32 1    
+#>  7 prunus sero… black c…   8.3        0.0119 aq sox d… lb       0.02 1    
+#>  8 prunus sero… black c…   8.3        0.0146 aq voc a… lb       0.09 1    
+#>  9 prunus sero… black c…   8.3       -0.338  bvoc      lb       2.12 1    
+#> 10 prunus sero… black c…   8.3       30.3    co2 avoi… lb       0.23 1    
 #> # ... with 455 more rows
 ```
 

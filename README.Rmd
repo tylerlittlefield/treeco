@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 <img src="man/figures/co2_plot.png" align="center"/>
 
-The goal of `treeco` is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from OpenStreetMaps [`otm-ecoservice`](https://github.com/OpenTreeMap/otm-ecoservice) repository which was (probably) ripped from [i-Tree](https://www.itreetools.org/)'s Eco or Streets software. A single tree is represented by 15 rows and 9 columns as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, `treeco` utilizes the [`data.table`](https://github.com/Rdatatable/data.table) package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation. 
+The goal of `treeco` is to provide R users a tool for calculating the eco benefits of trees. All data used to calculate benefits is ripped from OpenStreetMaps [`otm-ecoservice`](https://github.com/OpenTreeMap/otm-ecoservice) repository which was (probably) ripped from [i-Tree](https://www.itreetools.org/)'s Eco or Streets software. A single tree is represented by 15 rows and 8 columns as there are 15 benefits calculated for every tree. Since tree inventories can be rather large, `treeco` utilizes the [`data.table`](https://github.com/Rdatatable/data.table) package for speed. All calculations are done on unique species/dbh pairs to avoid redundant computation. 
 
 ## Installation
 

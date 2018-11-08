@@ -120,8 +120,10 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
   trees_final <- trees_final[, .SD, .SDcols = tree_vars]
 
   # Capitalize the first word of common name
-  trees_final$common_name <- capitalize(trees_final[["common_name"]])
-  trees_final$botanical_name <- capitalize(trees_final[["botanical_name"]])
+  # NOTE: Not doing this at the moment, it speeds up inventories > 1,000,000
+  # by ~10 seconds...
+  # trees_final$common_name <- capitalize(trees_final[["common_name"]])
+  # trees_final$botanical_name <- capitalize(trees_final[["botanical_name"]])
 
   # Rename the 'dbh_val' var to just 'dbh'
   setnames(trees_final, "dbh_val", "dbh")
