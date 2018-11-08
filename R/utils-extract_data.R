@@ -1,17 +1,18 @@
+#' @importFrom data.table as.data.table fread melt setnames
 extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit) {
 
   # If it's a dataframe, convert it to a table. Otherwise, we assume it's a csv.
   ifelse(test = inherits(data, "data.frame"),
-         yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
-         no = trees <- data.table::fread(data))
+         yes = trees <- as.data.table(data, keep.rownames = TRUE),
+         no = trees <- fread(data))
 
   # Remove anycases where common/botanical fields are NA
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 
   # Convert data.frames to data.tables
-  benefits <- data.table::as.data.table(treeco::benefits)
-  species <- data.table::as.data.table(treeco::species)
-  money <- data.table::as.data.table(treeco::money)
+  benefits <- as.data.table(treeco::benefits)
+  species <- as.data.table(treeco::species)
+  money <- as.data.table(treeco::money)
 
   # Filter data.tables by region
   money <- money[money$region_code == region, ]
@@ -19,13 +20,13 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
   species <- species[species$species_region == region]
 
   # Melt the money data.table for future grepls when extract money data
-  money <- data.table::melt(money, id.vars = c("region_code", "region_name"))
+  money <- melt(money, id.vars = c("region_code", "region_name"))
   money <- money[, c("variable", "value")]
 
   # Set names of trees data.table for consistency
-  data.table::setnames(trees, botanical_col, "botanical_name")
-  data.table::setnames(trees, common_col, "common_name")
-  data.table::setnames(trees, dbh_col, "dbh_val")
+  setnames(trees, botanical_col, "botanical_name")
+  setnames(trees, common_col, "common_name")
+  setnames(trees, dbh_col, "dbh_val")
 
   # Coerce fields to correct data types
   trees$botanical_name <- as.character(trees$botanical_name)

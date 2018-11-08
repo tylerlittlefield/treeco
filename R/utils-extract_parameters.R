@@ -1,3 +1,4 @@
+#' @importFrom stats na.omit
 extract_parameters <- function(tree_data) {
 
   # Grab the dbh values from the users tree data. Also grab the dbh ranges
@@ -11,7 +12,7 @@ extract_parameters <- function(tree_data) {
   z <- abs(outer(dbh_values, dbh_ranges, `-`))
 
   # Remove any NAs in the users tree data, if any
-  tree_data   <- stats::na.omit(tree_data)
+  tree_data   <- na.omit(tree_data)
 
   # Rowwise, find the position of the minimum value of z
   tree_data$a <- unlist(apply(z, 1, which.min))
@@ -22,7 +23,7 @@ extract_parameters <- function(tree_data) {
   z[z == apply(z, 1, min)] <- Inf
 
   # Grab the position of second minimum
-  tree_data$b     <- unlist(apply(z, 1, which.min))
+  tree_data$b <- unlist(apply(z, 1, which.min))
 
   # Now grab the parellel minimum of the two positions. This insures that we
   # don't store incorrect values in x1 and x2. See the example below for a more

@@ -1,6 +1,5 @@
-#-------------------------------------------------------------------------------
-# Extract matches function
-#-------------------------------------------------------------------------------
+#' @importFrom stats na.omit
+#' @importFrom data.table setnames
 extract_matches <- function(tree_data, species_data, n) {
 
   # To avoid notes about global variables
@@ -18,14 +17,14 @@ extract_matches <- function(tree_data, species_data, n) {
 
   # Extract unique common names, convert to lower case, remove punctuation
   unique_commons <- unique(trees[, "common_name"])
-  unique_commons <- stats::na.omit(unique_commons)
+  unique_commons <- na.omit(unique_commons)
   unique_commons$common_name <- tolower(unique_commons$common_name)
   unique_commons$common_name <- gsub('[[:punct:]]+', '', unique_commons$common_name)
   unique_commons$common_name <- trimws(unique_commons$common_name, "both") # Save for end?
 
   # Extract unique botanical names, conver to lower case, remove punctuation
   unique_botanicals <- unique(trees[, "botanical_name"])
-  unique_botanicals <- stats::na.omit(unique_botanicals)
+  unique_botanicals <- na.omit(unique_botanicals)
   unique_botanicals$botanical_name <- tolower(unique_botanicals$botanical_name)
   unique_botanicals$botanical_name <- gsub('[[:punct:]]+', '', unique_botanicals$botanical_name)
   unique_botanicals$botanical_name <- trimws(unique_botanicals$botanical_name, "both") # Save for end?
@@ -77,12 +76,12 @@ extract_matches <- function(tree_data, species_data, n) {
   trees_unique <- trees[, .SD, .SDcols = tree_vars]
   trees_unique <- unique(trees_unique, by = c("common_name_m", "dbh_val"))
 
-  data.table::setnames(trees, "common_name_m", "common_name")
-  data.table::setnames(trees, "botanical_name_m", "botanical_name")
-  data.table::setnames(trees_unique, "common_name_m", "common_name")
-  data.table::setnames(trees_unique, "botanical_name_m", "botanical_name")
+  setnames(trees, "common_name_m", "common_name")
+  setnames(trees, "botanical_name_m", "botanical_name")
+  setnames(trees_unique, "common_name_m", "common_name")
+  setnames(trees_unique, "botanical_name_m", "botanical_name")
 
-  trees <- trees[!duplicated(trees$rn), ] # fix this, shouldn't have to do this
+  trees <- trees[!duplicated(trees$rn), ]                      # fix this, shouldn't have to do this
   trees_unique <- trees_unique[!duplicated(trees_unique$rn), ] # fix this, shouldn't have to do this
 
   output <- list(trees = trees, trees_unique = trees_unique)

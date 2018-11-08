@@ -13,7 +13,7 @@
 #'
 #' eco_run("red maple", 15, "PacfNWLOG")
 #'
-#' @import data.table
+#' @importFrom  data.table as.data.table melt setnames setkey
 #' @export
 eco_run <- function(common, dbh, region) {
 
@@ -27,15 +27,15 @@ eco_run <- function(common, dbh, region) {
   species_val <- species_guess$spp_value_assignment
   species_common_guess <- species_guess$common_name
 
-  tree     <- data.table::data.table(common_name = species_common_guess,
+  tree     <- data.table(common_name = species_common_guess,
                                      dbh_val = dbh,
                                      region = region,
                                      stringsAsFactors = FALSE)
-  benefits <- data.table::as.data.table(treeco::benefits)
-  species  <- data.table::as.data.table(treeco::species)
-  money    <- data.table::as.data.table(treeco::money)
+  benefits <- as.data.table(treeco::benefits)
+  species  <- as.data.table(treeco::species)
+  money    <- as.data.table(treeco::money)
   money    <- money[money$region_code == region, ]                               # Filter currency dataset by region
-  money    <- data.table::melt(money, id.vars = c("region_code", "region_name")) # Melt the dataset to 'tidy' format
+  money    <- melt(money, id.vars = c("region_code", "region_name")) # Melt the dataset to 'tidy' format
   money    <- money[, c("variable", "value")]                                    # Select the variables we need
 
   benefits <- benefits[benefits$species_region == region]                        # Extract benefits within user defined region
@@ -47,8 +47,8 @@ eco_run <- function(common, dbh, region) {
 
   benefits <- benefits[benefits$species_code == species_val]
 
-  data.table::setkey(tree, "spp_value")
-  data.table::setkey(benefits, "species_code")
+  setkey(tree, "spp_value")
+  setkey(benefits, "species_code")
 
   tree <- tree[benefits, allow.cartesian=TRUE]
 
@@ -114,13 +114,13 @@ eco_run <- function(common, dbh, region) {
   tree$dollars <- abs(round(tree$dollars, 2))
   tree$benefit_value <- round(tree$benefit_value, 4)
 
-  data.table::setkey(tree, NULL)
+  setkey(tree, NULL)
 
   tree$dbh_val <- round(tree$dbh_val * 0.393701, 2)
 
   tree_vars <- c("common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars")
   tree <- tree[, .SD, .SDcols = tree_vars]
-  data.table::setnames(tree, "dbh_val", "dbh")
+  setnames(tree, "dbh_val", "dbh")
   tree$common_name <- paste0(toupper(substr(tree$common_name, 1, 1)), substr(tree$common_name, 2, nchar(tree$common_name)))
 
   return(tree)

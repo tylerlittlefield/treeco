@@ -26,7 +26,10 @@
 #' # Run the benefits
 #' eco_run_all(trees, "common_name", "botanical_name", "Girth", "PiedmtCLT")
 #'
-#' @import data.table
+#' @importFrom data.table setkey setnames
+#' @importFrom utils capture.output
+#' @importFrom stats na.omit
+#'
 #' @export
 eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
                         n = 0.8, unit = "in", print_time = NULL) {
@@ -65,9 +68,9 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
   trees_unique <- matches$trees_unique
 
   # Set keys to join data to benefit data
-  data.table::setkey(trees_unique, "spp_value_assignment")
-  data.table::setkey(benefits, "species_code")
-  data.table::setkey(trees, "spp_value_assignment")
+  setkey(trees_unique, "spp_value_assignment")
+  setkey(benefits, "species_code")
+  setkey(trees, "spp_value_assignment")
 
   # Join the data
   trees_unique <- trees_unique[benefits, allow.cartesian=TRUE]
@@ -92,16 +95,16 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
   trees <- trees[, .SD, .SDcols = tree_vars]
 
   # Remove any NA values
-  trees_unique <- stats::na.omit(trees_unique)
-  trees <- stats::na.omit(trees)
+  trees_unique <- na.omit(trees_unique)
+  trees <- na.omit(trees)
 
   # Extract the money benefits
   trees_unique <- extract_money(trees_unique, money)
 
   # Set keys to join the unique trees (which has had all the stuff done to it)
   # and join to the original/full dataset
-  data.table::setkey(trees, "common_name", "dbh_val", "benefit")
-  data.table::setkey(trees_unique, "common_name", "dbh_val", "benefit")
+  setkey(trees, "common_name", "dbh_val", "benefit")
+  setkey(trees_unique, "common_name", "dbh_val", "benefit")
 
   # Join the data, store as a separate object called 'trees_final'
   trees_final <- trees[trees_unique, allow.cartesian=TRUE]
@@ -110,7 +113,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
   if(unit == "in") trees_final$dbh_val <- round(trees_final$dbh_val * 0.393701, 2)
 
   # Set key as 'id' to get the data sorted by 'id'
-  data.table::setkey(trees_final, "id")
+  setkey(trees_final, "id")
 
   # Grab the variables we need
   tree_vars <- c("botanical_name", "common_name", "dbh_val", "benefit_value", "benefit", "unit", "dollars", "rn")
@@ -121,15 +124,15 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
   trees_final$botanical_name <- capitalize(trees_final[["botanical_name"]])
 
   # Rename the 'dbh_val' var to just 'dbh'
-  data.table::setnames(trees_final, "dbh_val", "dbh")
-  data.table::setnames(trees_final, "common_name", "common")
-  data.table::setnames(trees_final, "botanical_name", "botanical")
+  setnames(trees_final, "dbh_val", "dbh")
+  setnames(trees_final, "common_name", "common")
+  setnames(trees_final, "botanical_name", "botanical")
 
   end_time <- Sys.time()
   elapsed_time <- end_time - start_time
 
   if(isTRUE(print_time)) {
-    et <- utils::capture.output(elapsed_time);
+    et <- capture.output(elapsed_time);
     message(et);
     attr(trees_final, "elapsed_time") <- elapsed_time
   }

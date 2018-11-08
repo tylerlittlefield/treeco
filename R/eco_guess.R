@@ -13,6 +13,9 @@
 #'
 #' eco_guess("pinus eldarica", "common")
 #'
+#' @importFrom data.table data.table
+#' @importFrom stats na.omit complete.cases
+#'
 #' @export
 eco_guess <- function(x, guess) {
 
@@ -26,8 +29,8 @@ eco_guess <- function(x, guess) {
 
   ifelse(
     test = guess == "common",
-    yes = x <- data.table::data.table("botanical_name" = x, "key_var" = x),
-    no = x <- data.table::data.table("common_name" = x, "key_var" = x)
+    yes = x <- data.table("botanical_name" = x, "key_var" = x),
+    no = x <- data.table("common_name" = x, "key_var" = x)
     )
 
   species <- unique(treeco::species[c("common_name", "scientific_name")])
@@ -39,8 +42,8 @@ eco_guess <- function(x, guess) {
   species$scientific_name <- tolower(species$scientific_name)
 
   # Remove NA's from them both.
-  x <- stats::na.omit(x)
-  species <- species[stats::complete.cases(species), ]
+  x <- na.omit(x)
+  species <- species[complete.cases(species), ]
 
   # Remove punctuation.
   x$key_var <- gsub('[[:punct:]]+', '', x$key_var)
