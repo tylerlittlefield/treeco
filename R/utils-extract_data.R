@@ -5,34 +5,49 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
          yes = trees <- data.table::as.data.table(data, keep.rownames = TRUE),
          no = trees <- data.table::fread(data))
 
+  # Remove anycases where common/botanical fields are NA
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 
+  # Convert data.frames to data.tables
   benefits <- data.table::as.data.table(treeco::benefits)
   species <- data.table::as.data.table(treeco::species)
   money <- data.table::as.data.table(treeco::money)
+
+  # Filter data.tables by region
   money <- money[money$region_code == region, ]
+  benefits <- benefits[benefits$species_region == region]
+  species <- species[species$species_region == region]
+
+  # Melt the money data.table for future grepls when extract money data
   money <- data.table::melt(money, id.vars = c("region_code", "region_name"))
   money <- money[, c("variable", "value")]
 
+  # Set names of trees data.table for consistency
   data.table::setnames(trees, botanical_col, "botanical_name")
   data.table::setnames(trees, common_col, "common_name")
   data.table::setnames(trees, dbh_col, "dbh_val")
 
+  # Coerce fields to correct data types
   trees$botanical_name <- as.character(trees$botanical_name)
   trees$common_name <- as.character(trees$common_name)
   trees$dbh_val <- as.numeric(trees$dbh_val)
 
-  # Assert that the region parameter exists.
+  # Stop if the given region code doesn't exist
   stopifnot(region %in% unique(treeco::money$region_code))
 
-  trees <- trees[, .SD, .SDcol = c("rn", "common_name", "botanical_name", "dbh_val")][trees$dbh_val > 0]
-  benefits <- benefits[benefits$species_region == region]
-  species <- species[species$species_region == region]
+  # Select the tree values we care about
+  tree_vars <- c("rn", "common_name", "botanical_name", "dbh_val")
+  trees <- trees[, .SD, .SDcol = tree_vars][trees$dbh_val > 0]
 
+  # If unit == "in" (default) conver to centimeters due to i-Tree's usage of
+  # centimeters, else keep the dbh value as we assume the user gave "cm" for
+  # the unit arg. This is lazy and should probably confirm they gave "cm".
   ifelse(test = unit == "in",
          yes = trees$dbh_val <- trees$dbh_val * 2.54,
          no = trees)
 
+  # Store all of the prepped data.tables in a list to be stored as individual
+  # objects in eco_run_all function
   output <- list(trees = trees,
                  benefits = benefits,
                  species = species,

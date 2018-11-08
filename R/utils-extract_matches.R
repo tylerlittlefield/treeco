@@ -11,8 +11,6 @@ extract_matches <- function(tree_data, species_data, n) {
   botanical_name = NULL
   botanical_name_m = NULL
 
-  message("Gathering species matches...")
-
   trees <- tree_data
   species <- species_data
 
@@ -40,7 +38,7 @@ extract_matches <- function(tree_data, species_data, n) {
   species$botanical_name_m <- gsub('[[:punct:]]+', '', species$botanical_name_m)
   species$botanical_name_m <- trimws(species$botanical_name_m, "both") # Save for end?
 
-  vec <- unlist(lapply(unique_commons$common_name, function(x) which.max(string_dist(x, species$common_name_m))))
+  vec <- sapply(unique_commons$common_name, function(x) which.max(string_dist(x, species$common_name_m)), USE.NAMES = FALSE)
 
   unique_commons$common_name_m <- species[vec,][["common_name_m"]]
   unique_commons$botanical_name_m <- species[vec,][["botanical_name_m"]]
@@ -50,7 +48,7 @@ extract_matches <- function(tree_data, species_data, n) {
 
   species <- species[species$common_name_m %nin% unique_commons_1$common_name_m, ]
 
-  vec <- unlist(lapply(unique_botanicals$botanical_name, function(x) which.max(string_dist(x, species$botanical_name_m))))
+  vec <- sapply(unique_botanicals$botanical_name, function(x) which.max(string_dist(x, species$botanical_name_m)), USE.NAMES = FALSE)
 
   unique_botanicals$botanical_name_m <- species[vec,][["botanical_name_m"]]
   unique_botanicals$common_name_m <- species[vec,][["common_name_m"]]

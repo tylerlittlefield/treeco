@@ -28,7 +28,8 @@
 #'
 #' @import data.table
 #' @export
-eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.8, unit = "in", print_time = NULL) {
+eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
+                        n = 0.8, unit = "in", print_time = NULL) {
 
   start_time <- Sys.time()
 
@@ -54,6 +55,8 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   species <- tree_data$species
   money <- tree_data$money
 
+  message("Gathering species matches...")
+
   # Extract the species matches with a similarity score > 80% by default
   matches <- extract_matches(tree_data = trees, species_data = species, n = n)
 
@@ -69,6 +72,8 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
   # Join the data
   trees_unique <- trees_unique[benefits, allow.cartesian=TRUE]
   trees <- trees[benefits, allow.cartesian=TRUE]
+
+  message("Gathering interpolation parameters...")
 
   # Extract x, x1, x2, y1, y2 values for interpolation function
   trees_unique <- extract_parameters(trees_unique)
@@ -127,7 +132,7 @@ eco_run_all <- function(data, common_col, botanical_col, dbh_col, region, n = 0.
     et <- utils::capture.output(elapsed_time);
     message(et);
     attr(trees_final, "elapsed_time") <- elapsed_time
-    }
+  }
 
   return(trees_final)
 }
