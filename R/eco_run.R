@@ -22,6 +22,8 @@ eco_run <- function(common, dbh, region) {
   benefit_value = NULL
   unit = NULL
   benefit = NULL
+  .SD = NULL
+  `:=` = NULL
 
   species_guess <- guess_common(common, region)
   species_val <- species_guess$spp_value_assignment

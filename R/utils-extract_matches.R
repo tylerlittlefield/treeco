@@ -9,6 +9,8 @@ extract_matches <- function(tree_data, species_data, n) {
   sim = NULL
   botanical_name = NULL
   botanical_name_m = NULL
+  .SD = NULL
+  `:=` = NULL
 
   trees <- tree_data
   species <- species_data

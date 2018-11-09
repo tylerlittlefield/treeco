@@ -3,6 +3,8 @@ find_conversion <- function(x, pattern) {
 }
 
 dollars <- function(x, pattern, conversion) {
+  `:=` = NULL
+
   benefit = NULL
   benefit_value = NULL
   x[grepl(pattern, benefit), "dollars" := benefit_value * conversion]
@@ -15,6 +17,7 @@ extract_money <- function(tree_data, money_data) {
   unit = NULL
   benefit = NULL
   benefit_value = NULL
+  `:=` = NULL
 
   elec_money <- find_conversion(money_data, "electricity")
   gas_money  <- find_conversion(money_data, "natural_gas")

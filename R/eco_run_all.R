@@ -34,6 +34,8 @@
 eco_run_all <- function(data, common_col, botanical_col, dbh_col, region,
                         n = 0.8, unit = "in", print_time = NULL) {
 
+  .SD = NULL
+
   start_time <- Sys.time()
 
   '%nin%' <- Negate('%in%')

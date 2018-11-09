@@ -1,6 +1,8 @@
 #' @importFrom data.table as.data.table fread melt setnames
 extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit) {
 
+  .SD = NULL
+
   # If it's a dataframe, convert it to a table. Otherwise, we assume it's a csv.
   ifelse(test = inherits(data, "data.frame"),
          yes = trees <- as.data.table(data, keep.rownames = TRUE),
