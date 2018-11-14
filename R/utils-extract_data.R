@@ -4,9 +4,15 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
   .SD = NULL
 
   # If it's a dataframe, convert it to a table. Otherwise, we assume it's a csv.
-  ifelse(test = inherits(data, "data.frame"),
-         yes = trees <- as.data.table(data, keep.rownames = TRUE),
-         no = trees <- fread(data))
+  # ifelse(test = inherits(data, "data.frame"),
+  #        yes = trees <- as.data.table(data, keep.rownames = TRUE),
+  #        no = trees <- fread(data))
+  if(inherits(data, "data.frame")) {
+    trees <- as.data.table(data, keep.rownames = TRUE)
+  } else {
+    trees <- fread(data)
+    setnames(trees, "V1", "rn")
+  }
 
   # Remove anycases where common/botanical fields are NA
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]

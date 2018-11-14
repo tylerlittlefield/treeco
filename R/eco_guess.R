@@ -77,8 +77,6 @@ eco_guess <- function(x, guess) {
     output <- output$botanical_name
     }
 
-  output <- capitalize(output)
-
   return(output)
 
 }
