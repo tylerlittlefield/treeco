@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: r-apt:trusty
+  image: rstudio
   commands:
   - R -e 'install.packages(c("devtools", "git2r", "httr", "usethis"))' -e 'devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE)'
   - R CMD build .
