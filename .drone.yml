@@ -1,0 +1,9 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+image: r-base
+commands:
+  - R -e 'install.package(c("data.table"))'
+  - R CMD build .
