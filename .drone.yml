@@ -5,5 +5,5 @@ steps:
 - name: test
   image: r-base
   commands:
-  - R -e 'install.package(c("data.table"))'
+  - R -e 'install.packages(c("data.table"))'
   - R CMD build .
