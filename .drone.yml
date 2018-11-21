@@ -5,5 +5,5 @@ steps:
 - name: test
   image: rocker/tidyverse
   commands:
-  - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat", "rmarkdown", "dplyr", "tibble"))'
+  - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat", "rmarkdown", "dplyr", "tibble", "rcmdcheck"))' -e 'rcmdcheck::rcmdcheck()'
   - R CMD build .
