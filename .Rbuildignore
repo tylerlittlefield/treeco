@@ -5,4 +5,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^\.drone\.yml$
 ^README\.Rmd$
