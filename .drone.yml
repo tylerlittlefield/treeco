@@ -7,4 +7,4 @@ steps:
   commands:
   - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat", "rmarkdown", "dplyr", "tibble", "rcmdcheck"))'
   - R CMD build .
-  - R CMD check treeco_0.0.1.9000.tar.gz
+  - R CMD check treeco_0.0.1.9000.tar.gz --no-manual
