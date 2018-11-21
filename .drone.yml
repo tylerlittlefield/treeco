@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: rstudio
+  image: r-base
   commands:
-  - R -e 'install.packages(c("devtools", "git2r", "httr", "usethis"))' -e 'devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE)'
+  - R -e 'system("sudo apt-get install libcurl4-openssl-dev")' -e 'install.packages(c("devtools", "git2r", "httr", "usethis"))' -e 'devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE)'
   - R CMD build .
