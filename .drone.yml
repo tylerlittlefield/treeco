@@ -5,5 +5,5 @@ steps:
 - name: test
   image: r-base
   commands:
-  - R -e 'install.packages(c("devtools"))' -e 'devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE)'
+  - R -e 'install.packages(c("devtools", "git2r", "httr", "usethis"))' -e 'devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE)'
   - R CMD build .
