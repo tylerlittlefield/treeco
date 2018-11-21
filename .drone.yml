@@ -5,5 +5,5 @@ steps:
 - name: test
   image: r-base
   commands:
-  - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat"))'
+  - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat", "rmarkdown", "dplyr", "tibble"))'
   - R CMD build .
