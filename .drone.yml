@@ -5,5 +5,5 @@ steps:
 - name: test
   image: r-base
   commands:
-  - R -e 'install.packages("curl")' -e 'remotes::install_deps(".", dependencies = TRUE)'
+  - R -e 'remotes::install_deps(".", dependencies = TRUE)'
   - R CMD build .
