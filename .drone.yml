@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: r-base
+  image: rocker/tidyverse
   commands:
   - R -e 'install.packages(c("data.table", "knitr", "covr", "testthat", "rmarkdown", "dplyr", "tibble"))'
   - R CMD build .
