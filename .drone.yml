@@ -5,5 +5,5 @@ steps:
 - name: test
   image: r-base
   commands:
-  - R -e 'install.packages(c("devtools"));if (!all(c("devtools") %in% installed.packages())) { q(status = 1, save = "no")}; deps <- devtools::dev_package_deps(dependencies = NA);devtools::install_deps(dependencies = TRUE);if (!all(deps$package %in% installed.packages())) { message("missing: ", paste(setdiff(deps$package, installed.packages()), collapse=", ")); q(status = 1, save = "no")}'
+  - R -e 'install.packages("devtools"); devtools::install_deps(dependencies = TRUE)'
   - R CMD build .
