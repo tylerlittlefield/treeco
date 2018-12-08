@@ -138,5 +138,5 @@ If you are missing a field, you can use `eco_guess` to try and find it:
 ``` r
 x <- c("common fig", "red maple", "fir")
 treeco::eco_guess(x, "botanical")
-#> [1] "Ficus carica" "Acer rubrum"  "Abies spp"
+#> [1] "ficus carica" "acer rubrum"  "abies spp"
 ```

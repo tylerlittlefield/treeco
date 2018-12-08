@@ -1,3 +1,16 @@
 template:
   params:
     ganalytics: UA-106175087-2
+
+reference:
+- title: Functions
+  contents:
+  - eco_guess
+  - eco_run
+  - eco_run_all
+- title: Datasets
+  desc: Three datasets that are essential to calculating eco benefits.
+  contents:
+  - benefits
+  - money
+  - species
