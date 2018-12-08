@@ -13,7 +13,7 @@
   \item{type}{Tree type}
   \item{assignment}{Another tree code for linking trees to benefits}
   \item{rating}{Percent species rating}
-  \item{price_sq_in}{to be determined...}
+  \item{price_sq_in}{Price per square inch}
   \item{palm_trunk_cost_ft}{Palm trunk cost per feet}
   \item{replacement_cost}{Tree replacement cost}
   \item{t_ar_sq_inches}{to be determined...}

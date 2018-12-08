@@ -7,10 +7,10 @@
 \format{A data frame with 62,775 rows and 6 variables:
 \describe{
   \item{code}{This is the "spp_value_assignment" and acts as a key linking trees to their appropriate benefit values.}
-  \item{dbh}{DBH Measured in centimeters.}
   \item{region}{The region code representing a specific region.}
   \item{benefit}{The type of benefit.}
   \item{unit}{The unit of measurement for a benefit type.}
+  \item{dbh}{DBH Measured in centimeters.}
   \item{value}{The value associated with the benefit.}
   ...
 }}
