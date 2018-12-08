@@ -1,6 +1,6 @@
 context("test-eco_run_all")
 
-species <- treeco::species
+species <- treeco:::species
 unique_species <- unique(species$scientific_name)
 unique_species_sample <- sample(unique_species, size = 50)
 species <- rep(unique_species_sample, length.out = 10)

@@ -4,7 +4,7 @@ guess_common <- function(common, region) {
   common <- tolower(common)
 
   # Load species data
-  df <- treeco::species
+  df <- species
 
   # Grab variables we need
   df <- df[c("spp_value_assignment", "common_name", "species_region")]

@@ -1,3 +1,6 @@
+# treeco 0.1.0.9000
+* All datasets have been restructured and are more 'tidy'. Old datasets were the same as sysdata. Also, if users have the `tibble` package loaded, the datasets will return tibbles.
+
 # treeco 0.0.1.9000
 
 * Added `pkgdown` support.

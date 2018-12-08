@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeco</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@
       <h1>Introduction to treeco</h1>
                         <h4 class="author">Tyler Littlefield</h4>
             
-            <h4 class="date">2018-12-07</h4>
+            <h4 class="date">2018-12-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tyluRp/treeco/blob/master/vignettes/treeco.Rmd"><code>vignettes/treeco.Rmd</code></a></small>
       <div class="hidden name"><code>treeco.Rmd</code></div>
@@ -125,35 +125,34 @@
 <h2 class="hasAnchor">
 <a href="#guessing-a-missing-name-field" class="anchor"></a>Guessing a missing name field</h2>
 <p>Given the data we have, we can’t extract the benefits, we’re missing too many fields. Fortunately, there is some info we can use in the docs, type <code><a href="https://www.rdocumentation.org/packages/datasets/topics/trees">?trees</a></code> in the R console to take a look. We see that these are Black Cherry trees. After some googling, I find that these trees were collected in the Allegheny National Forest in Pennsylvania. I’m going to add the common name as a field <em>common</em> and add a row number field <em>rn</em>. More on why <em>rn</em> is added later.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">trees &lt;-<span class="st"> </span>trees <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">common =</span> <span class="st">"black cherry tree"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tibble/topics/rownames">rownames_to_column</a></span>(<span class="st">"rn"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; # A tibble: 31 x 5</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;    rn    Girth Height Volume common           </span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;            </span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  1 1       8.3     70   10.3 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  2 2       8.6     65   10.3 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  3 3       8.8     63   10.2 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  4 4      10.5     72   16.4 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  5 5      10.7     81   18.8 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  6 6      10.8     83   19.7 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  7 7      11       66   15.6 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  8 8      11       75   18.2 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  9 9      11.1     80   22.6 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; 10 10     11.2     75   19.9 black cherry tree</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; # ... with 21 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(treeco)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">trees &lt;-<span class="st"> </span>trees <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">common =</span> <span class="st">"black cherry tree"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tibble/topics/rownames">rownames_to_column</a></span>(<span class="st">"rn"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; # A tibble: 31 x 5</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;    rn    Girth Height Volume common           </span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;            </span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  1 1       8.3     70   10.3 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  2 2       8.6     65   10.3 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  3 3       8.8     63   10.2 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  4 4      10.5     72   16.4 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  5 5      10.7     81   18.8 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  6 6      10.8     83   19.7 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  7 7      11       66   15.6 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  8 8      11       75   18.2 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  9 9      11.1     80   22.6 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; 10 10     11.2     75   19.9 black cherry tree</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; # ... with 21 more rows</span></a></code></pre></div>
 <p>Now all that’s left is to identify the botanical name for a Black Cherry tree. This is required because all benefits rely on a 3,000+ <em>master species list</em> created by <a href="https://www.itreetools.org/">i-Tree</a>.</p>
 <p>Since R is very strict, the value “black common tree” will not match i-Tree’s “Black cherry tree” because of the capital “B”. Even worse, i-Tree might call it “Black cherry” and omit the word “tree” which makes the link between the two that much more difficult to identify. The best treeco can do is quantify the similarity between the users data and that master species list and then link the most similar record found in i-Tree. It first does this for the common name field and then the botanical and this is why both fields are required, to maximize the number of matches. This is where <code>eco_guess</code> plays a role, for example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(treeco)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"common fig"</span>, <span class="st">"Commn FIG"</span>, <span class="st">"RED MAPLE"</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(x, <span class="st">"botanical"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [1] "ficus carica" "ficus carica" "acer rubrum"</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"common fig"</span>, <span class="st">"Commn FIG"</span>, <span class="st">"RED MAPLE"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(x, <span class="st">"botanical"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [1] "ficus carica" "ficus carica" "acer rubrum"</span></a></code></pre></div>
 <p>And for the trees dataset, I can do something like:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">trees &lt;-<span class="st"> </span>trees <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">botanical =</span> <span class="kw"><a href="../reference/eco_guess.html">eco_guess</a></span>(common, <span class="st">"botanical"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -173,14 +172,27 @@
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 10 10     11.2     75   19.9 black cherry tree prunus serotina</span></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; # ... with 21 more rows</span></a></code></pre></div>
 <p>Finally, we need to identify the region code for Pennsylvania. I don’t have a great way of doing this. Adding a function for identifying the region code via zipcode, state, city, etc. is on my list. For now, you can use Davey Tree’s <a href="http://www.treebenefits.com/calculator/">tree benefit calculator</a> to figure out the region and then take a look at the money dataset for the code:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">money <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(region_name <span class="op">==</span><span class="st"> "Northeast"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(region_code)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 1</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;   region_code</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;   &lt;chr&gt;      </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 1 NoEastXXX</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tmoney</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 144 x 4</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    region    region_name               conversion                   value</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;                     &lt;chr&gt;                        &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 CaNCCoJBK Northern California Coast electricity_kwh_to_currency 0.132 </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 CenFlaXXX Central Florida           electricity_kwh_to_currency 0.132 </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 GulfCoCHS Coastal Plain             electricity_kwh_to_currency 0.0934</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 InlEmpCLM Inland Empire             electricity_kwh_to_currency 0.201 </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 InlValMOD Inland Valleys            electricity_kwh_to_currency 0.117 </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 InterWABQ Interior West             electricity_kwh_to_currency 0.0788</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 LoMidWXXX Lower Midwest             electricity_kwh_to_currency 0.068 </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 MidWstMSP Midwest                   electricity_kwh_to_currency 0.0759</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 NMtnPrFNL North                     electricity_kwh_to_currency 0.636 </span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 NoEastXXX Northeast                 electricity_kwh_to_currency 0.140 </span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # ... with 134 more rows</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">tmoney <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(region_name <span class="op">==</span><span class="st"> "Northeast"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span>(region) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="st">  </span>.[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; [1] "NoEastXXX"</span></a></code></pre></div>
 </div>
 <div id="calculating-the-benefits" class="section level2">
 <h2 class="hasAnchor">
@@ -191,32 +203,33 @@
 <li>Guess the common/botanical field if either is missing</li>
 <li>Calculate the benefits</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">my_trees &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eco_run_all.html">eco_run_all</a></span>(</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">data =</span> trees, </a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">common_col =</span> <span class="st">"common"</span>, </a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">botanical_col =</span> <span class="st">"botanical"</span>, </a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="dt">dbh_col =</span> <span class="st">"Girth"</span>, </a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="dt">region =</span> <span class="st">"NoEastXXX"</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Gathering species matches...</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Gathering interpolation parameters...</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; Interpolating benefits...</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; # A tibble: 465 x 8</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt;    botanical    common     dbh benefit_value benefit   unit  dollars rn   </span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt;  1 prunus sero… black c…   8.3        0.277  aq nox a… lb       1.27 1    </span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt;  2 prunus sero… black c…   8.3        0.067  aq nox d… lb       0.31 1    </span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt;  3 prunus sero… black c…   8.3        0.154  aq ozone… lb       0.71 1    </span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt;  4 prunus sero… black c…   8.3        0.0183 aq pm10 … lb       0.15 1    </span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt;  5 prunus sero… black c…   8.3        0.075  aq pm10 … lb       0.62 1    </span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt;  6 prunus sero… black c…   8.3        0.123  aq sox a… lb       0.43 1    </span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt;  7 prunus sero… black c…   8.3        0.0262 aq sox d… lb       0.09 1    </span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt;  8 prunus sero… black c…   8.3        0.0112 aq voc a… lb       0.03 1    </span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt;  9 prunus sero… black c…   8.3        0      bvoc      lb       0    1    </span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; 10 prunus sero… black c…   8.3       84.4    co2 avoi… lb       0.28 1    </span></a>
-<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">my_trees &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/eco_run_all.html">eco_run_all</a></span>(</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">data =</span> trees, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="dt">common_col =</span> <span class="st">"common"</span>, </a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="dt">botanical_col =</span> <span class="st">"botanical"</span>, </a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="dt">dbh_col =</span> <span class="st">"Girth"</span>, </a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="dt">region =</span> <span class="st">"NoEastXXX"</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Gathering species matches...</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; Gathering interpolation parameters...</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; Interpolating benefits...</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; # A tibble: 465 x 8</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt;    botanical    common     dbh benefit_value benefit   unit  dollars rn   </span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt;  1 prunus sero… black c…   8.3        0.277  aq nox a… lb       1.27 1    </span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt;  2 prunus sero… black c…   8.3        0.067  aq nox d… lb       0.31 1    </span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt;  3 prunus sero… black c…   8.3        0.154  aq ozone… lb       0.71 1    </span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt;  4 prunus sero… black c…   8.3        0.0183 aq pm10 … lb       0.15 1    </span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt;  5 prunus sero… black c…   8.3        0.075  aq pm10 … lb       0.62 1    </span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt;  6 prunus sero… black c…   8.3        0.123  aq sox a… lb       0.43 1    </span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt;  7 prunus sero… black c…   8.3        0.0262 aq sox d… lb       0.09 1    </span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt;  8 prunus sero… black c…   8.3        0.0112 aq voc a… lb       0.03 1    </span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt;  9 prunus sero… black c…   8.3        0      bvoc      lb       0    1    </span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; 10 prunus sero… black c…   8.3       84.4    co2 avoi… lb       0.28 1    </span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt; # ... with 455 more rows</span></a></code></pre></div>
 <p>Notice that the <em>height</em> and <em>volume</em> fields are missing. This is because <code>eco_run_all</code> strips the input data of everything except what it needs: the row number, common name, botanical name, and dbh field. It does this in an effort to keep the data small. Not too long ago, <code>eco_run_all</code> took 2 and half minutes to calculate the benefits for 400,000 trees. It now takes a couple seconds depending on how unique the data is. The removal of unneeded data is why I add a field <em>rn</em> at the beginning, to preserve the row number and link it to the benefits dataset <code>my_trees</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">trees <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(rn, Height, Volume) <span class="op">%&gt;%</span><span class="st"> </span></a>

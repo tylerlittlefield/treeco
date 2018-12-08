@@ -33,9 +33,9 @@ eco_run <- function(common, dbh, region) {
                                      dbh_val = dbh,
                                      region = region,
                                      stringsAsFactors = FALSE)
-  benefits <- as.data.table(treeco::benefits)
-  species  <- as.data.table(treeco::species)
-  money    <- as.data.table(treeco::money)
+  benefits <- as.data.table(benefits)
+  species  <- as.data.table(species)
+  money    <- as.data.table(money)
   money    <- money[money$region_code == region, ]                               # Filter currency dataset by region
   money    <- melt(money, id.vars = c("region_code", "region_name")) # Melt the dataset to 'tidy' format
   money    <- money[, c("variable", "value")]                                    # Select the variables we need

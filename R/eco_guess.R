@@ -33,7 +33,7 @@ eco_guess <- function(x, guess) {
     no = x <- data.table("common_name" = x, "key_var" = x)
     )
 
-  species <- unique(treeco::species[c("common_name", "scientific_name")])
+  species <- unique(species[c("common_name", "scientific_name")])
 
   # Lower case for user data and species master list in hopes it improve the
   # guessing.

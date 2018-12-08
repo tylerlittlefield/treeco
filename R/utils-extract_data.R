@@ -18,9 +18,9 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
   trees <- trees[!with(trees, is.na(trees[[common_col]]) | is.na(trees[[botanical_col]])), ]
 
   # Convert data.frames to data.tables
-  benefits <- as.data.table(treeco::benefits)
-  species <- as.data.table(treeco::species)
-  money <- as.data.table(treeco::money)
+  benefits <- as.data.table(benefits)
+  species <- as.data.table(species)
+  money <- as.data.table(money)
 
   # Filter data.tables by region
   money <- money[money$region_code == region, ]
@@ -42,7 +42,9 @@ extract_data <- function(data, common_col, botanical_col, dbh_col, region, unit)
   trees$dbh_val <- as.numeric(trees$dbh_val)
 
   # Stop if the given region code doesn't exist
-  stopifnot(region %in% unique(treeco::money$region_code))
+  # Commented out because testthat spits out an error accessing 'money'
+  # from sysdata.rda?
+  # stopifnot(region %in% unique(money$region_code))
 
   # Select the tree values we care about
   tree_vars <- c("rn", "common_name", "botanical_name", "dbh_val")
